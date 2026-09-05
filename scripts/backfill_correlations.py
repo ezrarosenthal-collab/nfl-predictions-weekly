@@ -3,9 +3,19 @@ Reproduces the research behind config.RESEARCH and config.WEIGHTS: pulls
 2021-2025 play-by-play, builds team-season stats, and correlates each
 candidate feature against actual win percentage.
 
-Run this whenever you're tempted to add, remove, or re-weight a feature --
-it's the actual evidence, not a one-time result to take on faith. If you add
-a new candidate stat, add it to CANDIDATES below and re-run.
+This script (its correlation analysis, not the margin-fit below) is what
+justifies config.RESEARCH and config.WEIGHTS -- run it whenever you're
+tempted to add, remove, or re-weight a feature; it's the actual evidence,
+not a one-time result to take on faith. If you add a new candidate stat,
+add it to CANDIDATES below and re-run.
+
+The margin/sigma fit used by app/model.py (MARGIN_SLOPE,
+HOME_FIELD_ADVANTAGE_POINTS, GAME_MARGIN_SIGMA) was produced by a companion
+analysis: build the same weighted composite used for win probability,
+regress real game-level score margins (1,359 games, 2021-2025) against the
+composite difference between the two teams. That's what pins the model to
+reality instead of an assumed logistic curve -- see the comment block in
+config.py for the exact numbers and the sportsbook sanity check.
 
 Usage:
     python scripts/backfill_correlations.py

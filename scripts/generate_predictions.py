@@ -26,8 +26,19 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app import data_pipeline, features, model, odds, overrides as overrides_mod, qb_watch, schedule  # noqa: E402
+from app.qb_meta import QB_META  # noqa: E402
 
 BLEND_K = 4.0  # see features.blend_team_stats -- games needed to reach a 50/50 blend
+
+
+def _snapshot_fields(stats: dict) -> dict:
+    """The subset of raw team stats shown in the season-stats snapshot table."""
+    fields = [
+        "ppg", "papg", "off_epa_per_play", "def_epa_per_play", "epa_margin",
+        "turnover_margin", "off_explosive_rate", "def_explosive_rate",
+        "third_down_pct", "redzone_td_rate", "cpoe", "sack_rate_allowed", "int_rate",
+    ]
+    return {f: round(stats[f], 4) if stats.get(f) is not None else None for f in fields}
 
 
 def _build_baseline_team_stats(season: int, week: int):
@@ -105,6 +116,13 @@ def build_week_predictions(season: int, week: int) -> dict:
             "away_score_est": pred.away_score_est,
             "feature_breakdown": pred.feature_breakdown,
             "market": odds.get_game_odds(g),
+            # Raw stats for every game (not just ones with a manual
+            # override) so the site can always show the full season-stats
+            # snapshot table and QB info, not just the researched games.
+            "home_stats": _snapshot_fields(stats_by_team[home]),
+            "away_stats": _snapshot_fields(stats_by_team[away]),
+            "home_qb": QB_META.get(home),
+            "away_qb": QB_META.get(away),
         }
         pred_dict = overrides_mod.apply_override(pred_dict, season, week, away, home, override_map)
 

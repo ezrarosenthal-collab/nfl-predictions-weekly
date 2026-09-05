@@ -8,15 +8,16 @@ sure it's still justified.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from math import exp
+from math import erf, exp, sqrt
 
 from config import (
+    GAME_MARGIN_SIGMA,
     GAMES_PER_SEASON,
-    HOME_FIELD_EDGE,
-    LOGIT_SCALE,
+    HOME_FIELD_ADVANTAGE_POINTS,
+    MARGIN_SLOPE,
     MAX_WIN_PROB,
     MIN_WIN_PROB,
-    NEUTRAL_SITE_EDGE,
+    NEUTRAL_SITE_ADVANTAGE_POINTS,
     WEIGHTS,
 )
 
@@ -85,7 +86,13 @@ def score_team(stats: dict, league: dict) -> tuple[float, TeamComponents]:
 
 
 def sigmoid(x: float) -> float:
+    """Kept for backward compatibility / tests -- no longer used in predict_game."""
     return 1.0 / (1.0 + exp(-x))
+
+
+def normal_cdf(x: float) -> float:
+    """Standard normal CDF via math.erf -- no scipy dependency needed."""
+    return 0.5 * (1.0 + erf(x / sqrt(2)))
 
 
 @dataclass
@@ -109,24 +116,56 @@ def predict_game(
     """
     The core prediction function. Everything else in the app exists to feed
     this function clean inputs and present its output.
+
+    UNIFIED MARGIN MODEL: win probability and the projected score both come
+    from the same predicted_margin, computed from the same combined
+    10-stat composite (which itself already includes point_diff_per_g --
+    i.e. the raw offense/defense scoring averages -- blended with EPA
+    margin). There is no separate, independent formula for either output
+    anymore, so they cannot contradict each other. See config.py for the
+    real-data fit behind MARGIN_SLOPE / HOME_FIELD_ADVANTAGE_POINTS /
+    GAME_MARGIN_SIGMA.
     """
     home_total, home_comps = score_team(home_stats, league)
     away_total, away_comps = score_team(away_stats, league)
 
-    diff = home_total - away_total
-    edge = NEUTRAL_SITE_EDGE if neutral_site else HOME_FIELD_EDGE
-    logit = edge + LOGIT_SCALE * diff
-    home_wp = sigmoid(logit) * 100
+    composite_diff = home_total - away_total
+    field_advantage = NEUTRAL_SITE_ADVANTAGE_POINTS if neutral_site else HOME_FIELD_ADVANTAGE_POINTS
+    predicted_margin = MARGIN_SLOPE * composite_diff + field_advantage
 
-    # Regulation: clamp to [MIN_WIN_PROB, MAX_WIN_PROB]. No matter how
-    # lopsided the underlying stats are, the model never claims more
-    # certainty than "any given Sunday" allows for in a sport this random.
+    # Win probability: the real statistical relationship between a
+    # predicted margin and how often that margin actually holds up,
+    # fit from 1,359 real games -- not an arbitrary logistic curve.
+    home_wp = normal_cdf(predicted_margin / GAME_MARGIN_SIGMA) * 100
     home_wp = max(MIN_WIN_PROB, min(MAX_WIN_PROB, home_wp))
     away_wp = 100 - home_wp
 
+    # If the win probability got clamped by the regulation above, re-derive
+    # the margin from the clamped probability so the score stays consistent
+    # with what's actually displayed (rather than an unclamped, more
+    # extreme margin the reader never sees the justification for).
+    if home_wp in (MIN_WIN_PROB, MAX_WIN_PROB):
+        # invert normal_cdf via its inverse (probit) using erf's inverse is
+        # unnecessary here -- just solve numerically isn't needed either;
+        # at the clamp boundary we simply cap the margin at whatever value
+        # produces exactly that boundary probability, computed once as a
+        # constant since GAME_MARGIN_SIGMA is fixed.
+        from statistics import NormalDist
+        boundary_z = NormalDist().inv_cdf(home_wp / 100)
+        predicted_margin = boundary_z * GAME_MARGIN_SIGMA
+
+    # Total points: this is where the general offense/defense scoring
+    # averages (ppg / points allowed per game) feed in -- a separate,
+    # complementary signal from the composite (how high- or low-scoring
+    # this particular matchup should be), then split using the SAME
+    # predicted_margin used for win probability above.
     home_field_scoring_bump = 1.0 if neutral_site else 1.02
-    home_score_est = home_stats["ppg"] * (away_stats["papg"] / league_avg_ppg) * home_field_scoring_bump
-    away_score_est = away_stats["ppg"] * (home_stats["papg"] / league_avg_ppg)
+    naive_home_pts = home_stats["ppg"] * (away_stats["papg"] / league_avg_ppg) * home_field_scoring_bump
+    naive_away_pts = away_stats["ppg"] * (home_stats["papg"] / league_avg_ppg)
+    projected_total = naive_home_pts + naive_away_pts
+
+    home_score_est = projected_total / 2 + predicted_margin / 2
+    away_score_est = projected_total / 2 - predicted_margin / 2
 
     labels = {
         "strength": "Strength Composite (Point Diff + EPA Margin)",

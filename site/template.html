@@ -84,6 +84,17 @@
   .feat-bar-mid { position:absolute; left:50%; top:-3px; bottom:-3px; width:1px; background:var(--text-faint); }
   .feat-bar-fill { position:absolute; top:0; bottom:0; border-radius:4px; }
   .feat-favors { font-size:10.5px; font-weight:700; width:34px; text-align:right; }
+  .snap-header-row { display:grid; grid-template-columns:1fr 2fr 1fr; padding:6px 0; border-bottom:1px solid var(--border); margin-bottom:2px; }
+  .snap-team-header { font-size:11px; font-weight:700; font-family:'Archivo Narrow',sans-serif; }
+  .snap-stat-header { font-size:10px; color:var(--text-dimmer); text-align:center; text-transform:uppercase; }
+  .snap-row { display:grid; grid-template-columns:1fr 2fr 1fr; padding:5px 0; font-size:11.5px; border-bottom:1px solid var(--border-alt); }
+  .snap-val { font-variant-numeric:tabular-nums; }
+  .snap-label { color:var(--text-dim); text-align:center; font-size:10.5px; }
+  .qb-row { display:flex; gap:12px; }
+  .qb-block { flex:1; }
+  .qb-name { font-size:12.5px; font-weight:700; display:block; }
+  .qb-rate { font-size:11px; color:var(--text-dim); }
+  .qb-note { font-size:11px; color:var(--text-dim); line-height:1.5; margin-top:4px; }
   footer { text-align:center; font-size:11px; color:var(--text-faint); padding:20px 20px 30px; line-height:1.6; max-width:760px; margin:0 auto; }
 </style>
 </head>
@@ -129,6 +140,52 @@ function renderCard(g, i) {
       <div class="bet-line-row"><span class="bet-line-label">Market:</span><span class="bet-line-val">spread ${g.market.spread_line ?? '—'} · ML ${g.market.moneyline_home??'—'}/${g.market.moneyline_away??'—'} · O/U ${g.market.total_line??'—'}${market.home?` · fair-odds ${g.home_team} ${market.home.toFixed(0)}% / ${g.away_team} ${market.away.toFixed(0)}%`:''}</span></div>
       <p class="bet-reasoning">${esc(g.bet.note)}</p></div>` : '';
 
+  // Season stats snapshot -- shown for every game, not just researched ones
+  let snapshotHtml = '';
+  if (g.home_stats && g.away_stats) {
+    const hs = g.home_stats, as_ = g.away_stats;
+    const rows = [
+      ["Points / Game", as_.ppg, hs.ppg, true],
+      ["Points Allowed / Game", as_.papg, hs.papg, false],
+      ["Offensive EPA / Play", as_.off_epa_per_play, hs.off_epa_per_play, true],
+      ["Defensive EPA / Play Allowed", as_.def_epa_per_play, hs.def_epa_per_play, false],
+      ["EPA Margin", as_.epa_margin, hs.epa_margin, true],
+      ["Turnover Margin", as_.turnover_margin, hs.turnover_margin, true],
+      ["Explosive Play Rate (Off)", as_.off_explosive_rate*100, hs.off_explosive_rate*100, true],
+      ["Explosive Plays Allowed (Def)", as_.def_explosive_rate*100, hs.def_explosive_rate*100, false],
+      ["Third Down Conversion %", as_.third_down_pct*100, hs.third_down_pct*100, true],
+      ["Red Zone TD Rate", as_.redzone_td_rate*100, hs.redzone_td_rate*100, true],
+      ["Completion % Over Expected", as_.cpoe, hs.cpoe, true],
+      ["Sack Rate Allowed", as_.sack_rate_allowed*100, hs.sack_rate_allowed*100, false],
+      ["INT Rate", as_.int_rate*100, hs.int_rate*100, false],
+    ];
+    const rowsHtml = rows.map(([label, av, hv, higherBetter]) => {
+      const awayWins = higherBetter ? av > hv : av < hv;
+      const fmt = (n) => Math.abs(n) < 1 ? n.toFixed(3) : n.toFixed(1);
+      return `<div class="snap-row">
+        <span class="snap-val" style="font-weight:${awayWins?700:400};color:${awayWins?g.away_color:'var(--text-dim)'}">${awayWins?'● ':''}${fmt(av)}</span>
+        <span class="snap-label">${esc(label)}</span>
+        <span class="snap-val" style="text-align:right;font-weight:${!awayWins?700:400};color:${!awayWins?g.home_color:'var(--text-dim)'}">${fmt(hv)}${!awayWins?' ●':''}</span>
+      </div>`;
+    }).join('');
+    snapshotHtml = `<div class="sub-panel"><div class="sub-panel-title">Season Stats Snapshot — Who Wins Each Category</div>
+      <div class="snap-header-row"><span class="snap-team-header" style="color:${g.away_color}">${g.away_team}</span><span class="snap-stat-header">Stat</span><span class="snap-team-header" style="color:${g.home_color};text-align:right">${g.home_team}</span></div>
+      ${rowsHtml}</div>`;
+  }
+
+  // QB comparison -- shown for every game
+  let qbHtml = '';
+  if (g.home_qb || g.away_qb) {
+    const qbBlock = (qb, color) => qb ? `<div class="qb-block">
+        <span class="qb-name" style="color:${color}">${esc(qb.name)}</span>
+        <span class="qb-rate">${qb.rate.toFixed(1)} rating</span>
+        ${qb.note ? `<p class="qb-note">${esc(qb.note)}</p>` : ''}
+      </div>` : '<div class="qb-block"></div>';
+    qbHtml = `<div class="sub-panel"><div class="sub-panel-title">Quarterbacks</div>
+      <div class="qb-row">${qbBlock(g.away_qb, g.away_color)}${qbBlock(g.home_qb, g.home_color)}</div></div>`;
+  }
+
+
   return `<div class="game-card">
     <button class="card-header" onclick="toggleCard(${i})">
       <div class="teams-row">
@@ -160,6 +217,8 @@ function renderCard(g, i) {
       ${qbWatchHtml}
       ${contextHtml}
       <div class="sub-panel"><div class="sub-panel-title">Feature Breakdown</div>${featRows}</div>
+      ${qbHtml}
+      ${snapshotHtml}
     </div>
   </div>`;
 }

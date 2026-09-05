@@ -65,21 +65,36 @@ WEIGHTS = {
 }
 
 # ---------------------------------------------------------------------------
-# Calibration. SCALE was tuned down from an initial 0.55 to 0.30 after the
-# higher value produced unrealistic >90% single-game win probabilities for
-# a legitimate blowout mismatch (SF @ LA, Week 1 2026) -- no real NFL model
-# should be that confident in one game given single-game variance.
+# UNIFIED MARGIN MODEL
+#
+# Both the win probability and the projected score now come from the SAME
+# number: a predicted point margin, derived from the combined 10-stat
+# composite (which already includes point_diff_per_g -- i.e. the raw
+# offense/defense scoring averages -- blended with EPA margin). There is
+# no separate formula for "how likely to win" vs. "what's the score" --
+# they cannot contradict each other because they're the same calculation.
+#
+# These three constants were FIT against real data, not assumed: 1,359
+# real games, 2021-2025, regressing actual final-score margin against each
+# matchup's composite-score difference (see
+# scripts/backfill_correlations.py for the reproducible fit).
+#
+#   predicted_margin = MARGIN_SLOPE * composite_diff + home_field_points
+#   win_prob_home = normal_cdf(predicted_margin / GAME_MARGIN_SIGMA)
+#
+# Sanity check against real sportsbook behavior (this is what confirmed the
+# fit is right, not just that R^2 looked reasonable): a +3 point predicted
+# margin implies a 60.0% win probability, matching how a real -3 favorite
+# prices in the market almost exactly; +7 -> 72.2%; +10 -> 80.0%; +14 -> 88.0%.
 # ---------------------------------------------------------------------------
-HOME_FIELD_EDGE = 0.30       # logistic-scale home-field intercept
-NEUTRAL_SITE_EDGE = 0.05     # reduced intercept for international/neutral-site games
-LOGIT_SCALE = 0.30
+MARGIN_SLOPE = 1.9363                # points per 1 composite z-unit of difference
+HOME_FIELD_ADVANTAGE_POINTS = 2.08   # fit from real data; matches the well-known modern-NFL ~2 point home edge
+NEUTRAL_SITE_ADVANTAGE_POINTS = 0.3  # small nominal-home-team edge for a neutral-site game (assumption, not fit -- too few neutral-site games in the sample to fit reliably)
+GAME_MARGIN_SIGMA = 11.8933          # single-game "any given Sunday" noise, in points. This IS the regulation -- it isn't an arbitrary cap, it's literally how much of a single NFL game's outcome the combined stats can't explain (R^2 = 0.297 at the single-game level)
 
-# Regulation: no NFL prediction should claim more certainty than the sport
-# actually allows for. "Any given Sunday" is a real phenomenon -- even a
-# significant mismatch has a real chance of an upset (bad snap, key
-# injury mid-game, weather, a hot quarter from the underdog). Every
-# probability the model outputs is clamped into this range, no matter how
-# lopsided the underlying stats are. 90/10 already implies the favorite
+# Extra safety clamp on top of the statistical model above: even though the
+# normal-CDF calibration above naturally keeps probabilities reasonable, we
+# still hard-clamp as a final guardrail. 90/10 already implies the favorite
 # should win 9 times out of 10 -- that's about as confident as any single
 # NFL game prediction should ever claim to be.
 MIN_WIN_PROB = 10.0

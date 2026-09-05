@@ -109,3 +109,56 @@ def test_feature_breakdown_sums_reasonably():
     pred = predict_game(home, away, LEAGUE, league_avg_ppg=22.9)
     strength_row = next(f for f in pred.feature_breakdown if f["key"] == "strength")
     assert strength_row["favors"] == "home"
+
+
+def test_win_probability_and_score_can_never_contradict_each_other():
+    """
+    Regression test for a real bug: the win probability model and the
+    score-projection model used to be computed independently, so a team
+    could show a HIGHER win probability while being projected to score
+    FEWER points than its opponent -- which makes no sense and was caught
+    by a user looking at DAL @ NYG (NYG 52% to win, but Dallas somehow
+    projected to outscore them). Both numbers are now derived from the
+    same predicted_margin, so they can no longer disagree.
+    """
+    # Construct two teams where the win-probability drivers (turnover
+    # margin, ball security) favor AWAY, but raw scoring average alone
+    # would favor HOME -- exactly the shape of the bug that was found.
+    home = _dummy_team(team="HOME", ppg=27.0, papg=24.0, point_diff_per_g=3.0,
+                        epa_margin=0.02, turnover_margin=-5, int_rate=0.035)
+    away = _dummy_team(team="AWAY", ppg=24.0, papg=25.0, point_diff_per_g=-1.0,
+                        epa_margin=0.03, turnover_margin=6, int_rate=0.010)
+    pred = predict_game(home, away, LEAGUE, league_avg_ppg=22.9, neutral_site=False)
+
+    if pred.home_win_prob > pred.away_win_prob:
+        assert pred.home_score_est >= pred.away_score_est, (
+            f"HOME has higher win prob ({pred.home_win_prob}%) but a lower "
+            f"projected score ({pred.home_score_est} vs {pred.away_score_est}) -- "
+            f"this is the exact contradiction that must never happen."
+        )
+    else:
+        assert pred.away_score_est >= pred.home_score_est, (
+            f"AWAY has higher win prob ({pred.away_win_prob}%) but a lower "
+            f"projected score ({pred.away_score_est} vs {pred.home_score_est}) -- "
+            f"this is the exact contradiction that must never happen."
+        )
+
+
+def test_margin_calibration_matches_real_market_behavior():
+    """
+    The unified margin model's constants were fit against 1,359 real games
+    (2021-2025). This locks in the sanity check that confirmed the fit is
+    right: a real predicted margin of +3 points should imply roughly a 60%
+    win probability -- matching how an actual -3 favorite prices in real
+    sportsbook markets -- not some arbitrary number.
+    """
+    from app.model import normal_cdf
+    from config import GAME_MARGIN_SIGMA
+
+    wp_at_plus3 = normal_cdf(3 / GAME_MARGIN_SIGMA) * 100
+    wp_at_plus7 = normal_cdf(7 / GAME_MARGIN_SIGMA) * 100
+    wp_at_plus10 = normal_cdf(10 / GAME_MARGIN_SIGMA) * 100
+
+    assert 57 < wp_at_plus3 < 63, f"a +3 margin should be ~60% (real-market-like), got {wp_at_plus3:.1f}%"
+    assert 69 < wp_at_plus7 < 75, f"a +7 margin should be ~72% (real-market-like), got {wp_at_plus7:.1f}%"
+    assert 77 < wp_at_plus10 < 83, f"a +10 margin should be ~80% (real-market-like), got {wp_at_plus10:.1f}%"

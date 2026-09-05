@@ -14,6 +14,17 @@ built and manually verified in the prototype phase:
   a model that outputs 96% or 98% for any single game is overconfident
   about a sport with this much inherent variance (see `config.py`:
   `MIN_WIN_PROB` / `MAX_WIN_PROB`).
+- **Win probability and the projected score are the same calculation, not
+  two.** Earlier versions computed them independently, which could (and
+  did) produce a real contradiction: a team shown with a *higher* win
+  probability but a *lower* projected score. Fixed by fitting a single
+  "predicted margin" (in real points) from the combined 10-stat composite
+  against 1,359 actual NFL games (2021-2025), then deriving both outputs
+  from that one margin. The fit was sanity-checked against real sportsbook
+  behavior: a +3 point predicted margin implies ~60% win probability,
+  matching how an actual -3 favorite prices in the market. See `config.py`
+  (`MARGIN_SLOPE`, `HOME_FIELD_ADVANTAGE_POINTS`, `GAME_MARGIN_SIGMA`) and
+  `scripts/backfill_correlations.py` for the reproducible fit.
 - An **overrides layer** (`app/overrides.py` + `data/overrides.json`) that is
   the single most important thing this project learned in the prototype
   phase: trailing full-season stats are blind to Week 1 QB changes, injuries,

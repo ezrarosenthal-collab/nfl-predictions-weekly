@@ -31,7 +31,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from config import MAX_WIN_PROB, MIN_WIN_PROB
+from config import GAME_MARGIN_SIGMA, MAX_WIN_PROB, MIN_WIN_PROB
 
 DEFAULT_OVERRIDES_PATH = Path(__file__).resolve().parent.parent / "data" / "overrides.json"
 
@@ -78,6 +78,20 @@ def apply_override(prediction: dict, season: int, week: int, away: str, home: st
             home_wp = max(MIN_WIN_PROB, min(MAX_WIN_PROB, float(ov["final_override_home_wp"])))
             prediction["home_win_prob"] = home_wp
             prediction["away_win_prob"] = round(100 - home_wp, 1)
+
+            # Critical: the score projection must be recomputed too, or an
+            # override can reintroduce the exact "higher win% but lower
+            # score" contradiction the raw model was fixed to avoid. Keep
+            # the total points from the original model estimate, but
+            # re-split it using the margin implied by the *overridden* win
+            # probability -- using the same real, fitted margin/probability
+            # relationship as the model itself (see config.GAME_MARGIN_SIGMA),
+            # not an arbitrary conversion constant.
+            from statistics import NormalDist
+            projected_total = prediction["home_score_est"] + prediction["away_score_est"]
+            implied_margin = NormalDist().inv_cdf(home_wp / 100) * GAME_MARGIN_SIGMA
+            prediction["home_score_est"] = round(projected_total / 2 + implied_margin / 2, 1)
+            prediction["away_score_est"] = round(projected_total / 2 - implied_margin / 2, 1)
         if ov.get("bet"):
             prediction["bet"] = ov["bet"]
 
