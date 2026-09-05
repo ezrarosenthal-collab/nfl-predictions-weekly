@@ -1,0 +1,65 @@
+{
+  "_comment": "Hand-edit this weekly. See app/overrides.py for how it's applied.",
+  "games": [
+    {
+      "season": 2026, "week": 1, "away": "NE", "home": "SEA",
+      "final_override_home_wp": 50,
+      "context": "Super Bowl LX rematch. NE traded for A.J. Brown + Romeo Doubs and rebuilt the interior O-line; SEA lost RB Kenneth Walker III (SB MVP) and OC Klint Kubiak. Those roughly cancel out.",
+      "bet": {"pick": "New England +3.5", "confidence": 2, "note": "Market has SEA at 62% fair odds; this model has it at 50/50 after adjustment. Value is on the underdog getting points."}
+    },
+    {
+      "season": 2026, "week": 1, "away": "SF", "home": "LA",
+      "final_override_home_wp": 81,
+      "context": "Rams traded for Myles Garrett + Trent McDuffie and got Aaron Donald out of retirement. SF travels with Kittle, Bosa, and Mike Evans all working back from injury, plus a rotational DL already ruled out.",
+      "bet": {"pick": "LA Rams -3.5", "confidence": 4, "note": "Highest-confidence pick of the week."}
+    },
+    {
+      "season": 2026, "week": 1, "away": "TB", "home": "CIN",
+      "final_override_home_wp": 70,
+      "context": "Joe Burrow missed 9 games in 2025 to a toe injury requiring surgery -- trailing stats include a large Burrow-less stretch. Bengals also traded for DT Dexter Lawrence and overhauled the defense.",
+      "bet": {"pick": "Cincinnati -3.5", "confidence": 3, "note": "Healthy Burrow argues for a bigger gap than the raw model shows."}
+    },
+    {
+      "season": 2026, "week": 1, "away": "BAL", "home": "IND",
+      "final_override_home_wp": 38,
+      "context": "Both starting QBs missed major 2025 time to injury -- Lamar Jackson (multiple games) and Daniel Jones (season-ending Achilles). Baltimore also fired John Harbaugh for Jesse Minter.",
+      "bet": {"pick": "Baltimore ML", "confidence": 3, "note": "Healthy Jackson makes Baltimore a different team than its 2025 numbers show."}
+    },
+    {
+      "season": 2026, "week": 1, "away": "CLE", "home": "JAX",
+      "final_override_home_wp": 92,
+      "context": "Cleveland traded away Myles Garrett, their best defensive player, to the Rams -- makes an already-bad team on the numbers worse, not better.",
+      "bet": {"pick": "Jacksonville -7.5", "confidence": 3, "note": "Model was already very confident; losing Garrett widens the real gap further."}
+    },
+    {
+      "season": 2026, "week": 1, "away": "ARI", "home": "LAC",
+      "final_override_home_wp": 88,
+      "context": "Arizona cut Kyler Murray for the season (foot injury) and fired the offensive staff -- Jacoby Brissett starts under a brand-new HC. Trailing stats still include Murray's healthy play.",
+      "bet": {"pick": "Pass on this specific line", "confidence": 2, "note": "Market's -10.5 already prices the QB change accurately -- no edge to exploit."}
+    },
+    {
+      "season": 2026, "week": 1, "away": "MIA", "home": "LV",
+      "final_override_home_wp": 60,
+      "context": "Both teams have brand-new starting QBs and new head coaches: Tua Tagovailoa signed with Atlanta (Miami now starts Malik Willis); Las Vegas installed Kirk Cousins under new HC Klint Kubiak.",
+      "bet": {"pick": "Pass", "confidence": 1, "note": "Too much roster turnover on both sides to trust either number."}
+    },
+    {
+      "season": 2026, "week": 1, "away": "GB", "home": "MIN",
+      "final_override_home_wp": 55,
+      "context": "Minnesota's 2025 stats reflect a broken QB situation -- they've since installed Kyler Murray (cut by Arizona) as starter over J.J. McCarthy.",
+      "bet": {"pick": "Minnesota ML", "confidence": 2, "note": "Raw model favors GB heavily purely because MIN's old QB situation was so bad."}
+    },
+    {
+      "season": 2026, "week": 1, "away": "WAS", "home": "PHI",
+      "final_override_home_wp": 70,
+      "context": "Jayden Daniels missed 10 games in 2025 (knee/hamstring/elbow) and was shut down in December -- Washington's 5-12 trailing record reflects a team without its franchise QB for most of the year.",
+      "bet": {"pick": "Washington +5.5", "confidence": 2, "note": "Model's 84% for Philly is largely an artifact of Daniels' missed time."}
+    },
+    {
+      "season": 2026, "week": 1, "away": "DEN", "home": "KC",
+      "final_override_home_wp": 58,
+      "context": "Patrick Mahomes tore his ACL/LCL in December 2025 and missed the rest of the season -- KC's trailing stats include a backup-QB stretch. Bo Nix is also returning from offseason ankle surgery.",
+      "bet": {"pick": "Kansas City ML", "confidence": 2, "note": "With Mahomes healthy, KC is better than the raw model's 40% suggests."}
+    }
+  ]
+}

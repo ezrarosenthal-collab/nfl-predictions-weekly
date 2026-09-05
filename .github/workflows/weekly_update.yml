@@ -1,0 +1,42 @@
+name: Weekly NFL predictions update
+
+# This is what makes the site fully automatic, for free, forever:
+# GitHub Actions runs this on a schedule (no server to pay for or maintain),
+# regenerates predictions for whatever week the schedule.py auto-detector
+# says is current, renders the HTML, and commits it -- which GitHub Pages
+# then serves automatically.
+
+on:
+  schedule:
+    # Every Tuesday at 13:00 UTC = 8:00/9:00 AM Eastern (depending on DST),
+    # a few hours after Monday Night Football has ended and final scores
+    # have posted to nflverse.
+    - cron: "0 13 * * 2"
+  workflow_dispatch: {}  # lets you trigger it manually from the Actions tab too
+
+permissions:
+  contents: write
+
+jobs:
+  update-predictions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run weekly pipeline (auto-detects current week)
+        run: python scripts/weekly_pipeline.py --season 2026
+
+      - name: Commit and push updated site
+        run: |
+          git config user.name "nfl-predictions-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/ docs/
+          git diff --staged --quiet || git commit -m "Auto-update predictions ($(date -u +%Y-%m-%d))"
+          git push
