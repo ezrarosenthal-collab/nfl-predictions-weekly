@@ -121,6 +121,44 @@ Leonard (the Achilles injury), and **CIN** switching to a healthy Joe
 Burrow from Jacoby Flacco — exactly the class of change that required
 manual research for Week 1 2026. This part is real and free.
 
+## Track record: grading predictions against real results (`.github/workflows/grade_predictions.yml`)
+
+Checks real final scores against what was predicted, at six specific
+points during the week (not just once) so the site's record updates
+right after each slate finishes, not a full week later:
+
+- Wednesday midnight ET (Week 1's Wednesday-night opener specifically)
+- Thursday midnight ET, after Thursday Night Football
+- Sunday 5:00 PM ET, after the early Sunday slate
+- Sunday 8:00 PM ET, after the late Sunday slate
+- Sunday midnight ET, after Sunday Night Football
+- Monday midnight ET, after Monday Night Football — the final game of the week
+
+**Known limitation, stated plainly:** GitHub Actions cron only runs in
+UTC with no daylight-saving awareness. These six times are correct for
+EDT (the offset in effect for the September-October part of the season).
+Once the US switches to EST in early November, every one of these fires
+one hour later than intended until the UTC hours in the workflow file are
+manually adjusted by -1. There's no timezone-aware alternative in GitHub
+Actions' schedule syntax.
+
+**The team accuracy ranking's exact rule** (this was corrected once
+already, worth being precise about): every team involved in a
+correctly-predicted game is credited identically — if the model correctly
+predicts Jaguars over Browns, BOTH the Jaguars and the Browns show 1-0.
+This ranks how reliable the model has been *for games involving that
+team*, not that team's actual win-loss record. Verified with a real
+example graded against the actual 2025 season, and locked in with
+dedicated tests in `tests/test_track_record.py`, not just eyeballed.
+
+The record ticker appears at the top of the site once at least one game
+has been graded, and tapping it opens a popup with the full breakdown
+(overall record, by week, and the team rankings) — built with
+`app/track_record.py`, safe to run as many times a day as the schedule
+above does, since it always rebuilds the record from scratch rather than
+incrementing a running total (so a game checked multiple times never gets
+double-counted).
+
 ### What it honestly can't catch — and why that's a hard limit, not a bug
 
 The Week 1 2026 research also required things no free, code-only detector

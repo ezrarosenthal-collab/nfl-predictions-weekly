@@ -65,11 +65,21 @@ def _baseline_footer_text(baseline: dict) -> str:
     )
 
 
+def _load_track_record(season: int) -> dict | None:
+    path = Path(__file__).resolve().parent.parent / "data" / f"track_record_{season}.json"
+    if not path.exists():
+        return None
+    with open(path) as f:
+        return json.load(f)
+
+
 def render(predictions_path: Path, output_path: Path | None = None) -> Path:
     with open(predictions_path) as f:
         predictions = json.load(f)
 
     predictions["games"] = enrich_games(predictions)
+    predictions["track_record"] = _load_track_record(predictions["season"])
+    predictions["team_names"] = TEAM_META
 
     template = TEMPLATE_PATH.read_text()
     season, week = predictions["season"], predictions["week"]

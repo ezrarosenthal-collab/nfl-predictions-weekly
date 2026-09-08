@@ -1,0 +1,68 @@
+name: Grade predictions against final scores
+
+# Checks real final scores against what was predicted, at the specific
+# times requested -- right after each slate of games wraps up during the
+# week, not just once on Tuesday. Safe to run this often: the grading
+# logic always rebuilds the full record from scratch (see
+# app/track_record.py), so there's no risk of double-counting a game that
+# gets checked more than once, which will happen by design here.
+#
+# Schedule (all times Eastern, converted to UTC assuming EDT / UTC-4,
+# which is correct for the September-October portion of the season):
+#   - Wed  12:00 AM ET (after a Wednesday night game, e.g. Week 1's
+#     Wed-night opener) -> Thu 04:00 UTC
+#   - Thu  12:00 AM ET (after Thursday Night Football)      -> Fri 04:00 UTC
+#   - Sun   5:00 PM ET (after the early Sunday slate)        -> Sun 21:00 UTC
+#   - Sun   8:00 PM ET (after the late Sunday slate)         -> Mon 00:00 UTC
+#   - Sun  12:00 AM ET (after Sunday Night Football)         -> Mon 04:00 UTC
+#   - Mon  12:00 AM ET (after Monday Night Football)         -> Tue 04:00 UTC
+#
+# IMPORTANT CAVEAT: GitHub Actions cron only runs in UTC and has no
+# concept of Eastern Time or daylight saving. These times are correct for
+# EDT. Once daylight saving ends (~early November 2026) and the US
+# switches to EST, every one of these will fire one hour later than the
+# intended Eastern time until the UTC hours below are manually adjusted
+# by -1. This is a known limitation, not an oversight -- there is no
+# timezone-aware option in GitHub Actions' schedule syntax.
+
+on:
+  schedule:
+    - cron: "0 4 * * 4"   # Wed midnight ET -> Thu 04:00 UTC (Week 1's Wednesday game only; harmless no-op other weeks)
+    - cron: "0 4 * * 5"   # Thu midnight ET -> Fri 04:00 UTC (after TNF)
+    - cron: "0 21 * * 0"  # Sun 5:00 PM ET  -> Sun 21:00 UTC (after early slate)
+    - cron: "0 0 * * 1"   # Sun 8:00 PM ET  -> Mon 00:00 UTC (after late slate)
+    - cron: "0 4 * * 1"   # Sun midnight ET -> Mon 04:00 UTC (after SNF)
+    - cron: "0 4 * * 2"   # Mon midnight ET -> Tue 04:00 UTC (after MNF, final game of the week)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pandas requests
+
+      - name: Grade predictions against final scores
+        run: python scripts/grade_predictions.py --season 2026
+
+      - name: Re-render site with updated track record
+        run: |
+          WEEK=$(python -c "import sys; sys.path.insert(0,'.'); from app.schedule import current_week; print(current_week(2026))")
+          python scripts/render_html.py --season 2026 --week $WEEK
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name "nfl-predictions-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/ docs/
+          git diff --staged --quiet || git commit -m "Grade predictions ($(date -u +%Y-%m-%dT%H:%M))"
+          git diff --staged --quiet || git push
