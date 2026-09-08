@@ -2,9 +2,15 @@
 The hourly job. Deliberately lightweight: it does NOT re-download play-by-
 play data or recompute the model (that's the Tuesday job's work, and
 re-pulling ~20MB of data 24x a day for no reason would be wasteful). It
-just checks ESPN's injury report for each game's two starting QBs and, if
-either shows a concerning status, attaches an alert to that game's entry in
-the already-generated predictions file, then re-renders the page.
+just checks the official injury report for every team in this week's
+games -- every position, not just QB -- and, if anything concerning is
+listed, attaches it to that game's entry in the already-generated
+predictions file, then re-renders the page.
+
+This prints a line for every team it checks (not just when something is
+found), specifically so the coverage is visible in the Action's log --
+you should be able to count 32 team-checks (16 games x 2) in a normal
+full week, or fewer on a bye week.
 
 Usage:
     python scripts/hourly_injury_check.py --season 2026
@@ -39,20 +45,41 @@ def main():
     with open(predictions_path) as f:
         predictions = json.load(f)
 
+    print(f"[hourly_injury_check] Checking {len(predictions['games'])} games "
+          f"({len(predictions['games']) * 2} teams) for week {week}...")
+
     changed = False
+    teams_checked = 0
     for g in predictions["games"]:
         for side, team_key in (("home", "home_team"), ("away", "away_team")):
             team = g[team_key]
-            qb = QB_META.get(team)
-            if not qb:
-                continue
-            alert = injury_watch.get_qb_injury_alert(team, qb["name"], args.season, week)
-            field = f"{side}_qb_injury_alert"
-            if g.get(field) != alert:
-                g[field] = alert
+            teams_checked += 1
+
+            # Full report, every position -- not just the named starting QB.
+            team_alerts = injury_watch.get_team_injury_report(team, args.season, week)
+            field = f"{side}_team_injuries"
+            if g.get(field) != team_alerts:
+                g[field] = team_alerts
                 changed = True
-                if alert:
-                    print(f"[hourly_injury_check] ALERT for {team} ({g['away_team']} @ {g['home_team']}): {alert}")
+
+            if team_alerts:
+                print(f"[hourly_injury_check]   {team} ({g['away_team']} @ {g['home_team']}): "
+                      f"{len(team_alerts)} flagged -- " + "; ".join(team_alerts))
+            else:
+                print(f"[hourly_injury_check]   {team} ({g['away_team']} @ {g['home_team']}): clear")
+
+            # Keep the QB-specific alert too -- this is the one that matters
+            # for the model's overrides workflow (a QB change is what
+            # actually invalidates the trailing-stat prediction).
+            qb = QB_META.get(team)
+            if qb:
+                qb_alert = injury_watch.get_qb_injury_alert(team, qb["name"], args.season, week)
+                qb_field = f"{side}_qb_injury_alert"
+                if g.get(qb_field) != qb_alert:
+                    g[qb_field] = qb_alert
+                    changed = True
+
+    print(f"[hourly_injury_check] Checked {teams_checked} teams total.")
 
     if not changed:
         print("[hourly_injury_check] No injury-status changes found this run.")

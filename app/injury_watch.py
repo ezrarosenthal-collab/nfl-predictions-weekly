@@ -72,3 +72,34 @@ def get_qb_injury_alert(team: str, current_starter_name: str, season: int, week:
             detail = f" ({', '.join(detail_parts)})" if detail_parts else ""
             return f"{row['full_name']} listed as {status}{detail} on this week's official injury report."
     return None
+
+
+def get_team_injury_report(team: str, season: int, week: int) -> list[str]:
+    """
+    Every player on this team's official injury report for the week with a
+    concerning status, at ANY position -- not just the QB. This is the
+    broader "check every starter, every position" view: nflverse's injury
+    dataset already includes every position a team is required to report,
+    so this doesn't need a separate depth chart to know who to check.
+
+    Returns a list of human-readable strings, one per flagged player,
+    e.g. ["Christian Barmore (DT) listed as Questionable (Knee)..."].
+    Empty list if nothing concerning is on the report for this team/week.
+    """
+    try:
+        injuries = fetch_injuries(season)
+    except Exception:  # noqa: BLE001
+        logger.exception("Failed to fetch injury report for %s", season)
+        return []
+
+    team_injuries = injuries[(injuries["team"] == team) & (injuries["week"] == week)]
+
+    alerts = []
+    for _, row in team_injuries.iterrows():
+        status = row.get("report_status")
+        if isinstance(status, str) and status.lower() in CONCERNING_STATUSES:
+            detail_parts = [p for p in (row.get("report_primary_injury"), row.get("report_secondary_injury")) if isinstance(p, str)]
+            detail = f" ({', '.join(detail_parts)})" if detail_parts else ""
+            position = row.get("position") or "?"
+            alerts.append(f"{row['full_name']} ({position}) listed as {status}{detail}")
+    return alerts

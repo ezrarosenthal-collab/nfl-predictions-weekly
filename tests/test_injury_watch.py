@@ -6,7 +6,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from app.injury_watch import CONCERNING_STATUSES, get_qb_injury_alert  # noqa: E402
+from app.injury_watch import CONCERNING_STATUSES, get_qb_injury_alert, get_team_injury_report  # noqa: E402
 
 FAKE_INJURIES = pd.DataFrame([
     {"season": 2026, "team": "PHI", "week": 1, "position": "QB", "full_name": "Tanner McKee",
@@ -62,3 +62,29 @@ def test_empty_starter_name_returns_none():
 
 def test_concerning_statuses_are_lowercase_for_case_insensitive_matching():
     assert all(s == s.lower() for s in CONCERNING_STATUSES)
+
+
+def test_team_injury_report_includes_all_positions_not_just_qb():
+    multi_position = pd.concat([FAKE_INJURIES, pd.DataFrame([
+        {"season": 2026, "team": "PHI", "week": 1, "position": "WR", "full_name": "Test Receiver",
+         "report_status": "Doubtful", "report_primary_injury": "Ankle", "report_secondary_injury": None},
+        {"season": 2026, "team": "PHI", "week": 1, "position": "OT", "full_name": "Test Tackle",
+         "report_status": "Out", "report_primary_injury": "Knee", "report_secondary_injury": None},
+    ])], ignore_index=True)
+    with patch("app.injury_watch.fetch_injuries", return_value=multi_position):
+        alerts = get_team_injury_report("PHI", 2026, 1)
+    assert len(alerts) == 3  # McKee (QB) + Receiver (WR) + Tackle (OT)
+    assert any("WR" in a for a in alerts)
+    assert any("OT" in a for a in alerts)
+
+
+def test_team_injury_report_excludes_non_concerning_statuses():
+    with patch("app.injury_watch.fetch_injuries", return_value=FAKE_INJURIES):
+        alerts = get_team_injury_report("GB", 2026, 1)  # Jordan Love has no report_status
+    assert alerts == []
+
+
+def test_team_injury_report_fetch_failure_returns_empty_list():
+    with patch("app.injury_watch.fetch_injuries", side_effect=Exception("network down")):
+        alerts = get_team_injury_report("KC", 2026, 1)
+    assert alerts == []

@@ -140,7 +140,20 @@ function renderCard(g, i) {
   const contextHtml = g.context ? `<div class="callout-card"><strong>Context:</strong> ${esc(g.context)}</div>` : '';
   const qbWatchHtml = g.qb_watch ? `<div class="qb-watch-card"><strong>🤖 Auto-detected:</strong> ${esc(g.qb_watch)}</div>` : '';
   const injuryAlerts = [g.away_qb_injury_alert && `${g.away_team}: ${g.away_qb_injury_alert}`, g.home_qb_injury_alert && `${g.home_team}: ${g.home_qb_injury_alert}`].filter(Boolean);
-  const injuryAlertHtml = injuryAlerts.length ? `<div class="injury-alert-card"><strong>🚨 Injury report update (checked hourly):</strong> ${injuryAlerts.map(esc).join(' · ')}</div>` : '';
+  const injuryAlertHtml = injuryAlerts.length ? `<div class="injury-alert-card"><strong>🚨 QB injury alert:</strong> ${injuryAlerts.map(esc).join(' · ')}</div>` : '';
+
+  // Full team injury report -- every position, not just QB
+  const awayTeamInj = g.away_team_injuries || [];
+  const homeTeamInj = g.home_team_injuries || [];
+  let fullInjuryHtml = '';
+  if (awayTeamInj.length || homeTeamInj.length) {
+    const listItems = (team, list) => list.map(a => `<li>${esc(a)}</li>`).join('');
+    fullInjuryHtml = `<div class="sub-panel"><div class="sub-panel-title">Injury Report (all positions, checked hourly)</div>
+      <div class="qb-row">
+        <div class="qb-block"><span class="qb-name" style="color:${g.away_color}">${g.away_team}</span>${awayTeamInj.length ? `<ul style="margin:6px 0 0;padding-left:16px;font-size:11px;color:var(--text-dim)">${listItems(g.away_team,awayTeamInj)}</ul>` : `<p class="qb-note">Nothing flagged</p>`}</div>
+        <div class="qb-block"><span class="qb-name" style="color:${g.home_color}">${g.home_team}</span>${homeTeamInj.length ? `<ul style="margin:6px 0 0;padding-left:16px;font-size:11px;color:var(--text-dim)">${listItems(g.home_team,homeTeamInj)}</ul>` : `<p class="qb-note">Nothing flagged</p>`}</div>
+      </div></div>`;
+  }
   const betHtml = g.bet ? `<div class="bet-card">
       <div class="bet-header"><span class="bet-verdict">${esc(g.bet.pick)}</span><div class="conf-meter">${confBars}</div></div>
       <div class="bet-line-row"><span class="bet-line-label">Market:</span><span class="bet-line-val">spread ${g.market.spread_line ?? '—'} · ML ${g.market.moneyline_home??'—'}/${g.market.moneyline_away??'—'} · O/U ${g.market.total_line??'—'}${market.home?` · fair-odds ${g.home_team} ${market.home.toFixed(0)}% / ${g.away_team} ${market.away.toFixed(0)}%`:''}</span></div>
@@ -225,6 +238,7 @@ function renderCard(g, i) {
       ${contextHtml}
       <div class="sub-panel"><div class="sub-panel-title">Feature Breakdown</div>${featRows}</div>
       ${qbHtml}
+      ${fullInjuryHtml}
       ${snapshotHtml}
     </div>
   </div>`;
