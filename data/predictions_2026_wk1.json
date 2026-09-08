@@ -613,10 +613,10 @@
       "market": {
         "spread_line": 7.0,
         "total_line": 49.5,
-        "moneyline_home": -305.0,
-        "moneyline_away": 245.0,
-        "fair_odds_home": 72.2,
-        "fair_odds_away": 27.8
+        "moneyline_home": -310.0,
+        "moneyline_away": 250.0,
+        "fair_odds_home": 72.6,
+        "fair_odds_away": 27.4
       },
       "home_stats": {
         "ppg": 28.2941,
@@ -1395,10 +1395,10 @@
       "market": {
         "spread_line": 9.5,
         "total_line": 47.5,
-        "moneyline_home": -485.0,
-        "moneyline_away": 370.0,
-        "fair_odds_home": 79.6,
-        "fair_odds_away": 20.4
+        "moneyline_home": -470.0,
+        "moneyline_away": 360.0,
+        "fair_odds_home": 79.1,
+        "fair_odds_away": 20.9
       },
       "home_stats": {
         "ppg": 21.6471,
