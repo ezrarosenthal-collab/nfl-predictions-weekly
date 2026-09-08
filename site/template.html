@@ -290,9 +290,13 @@ document.getElementById('app').innerHTML = DATA.games.map((g,i)=>renderCard(g,i)
 
 function initRecordTicker(){
   const rec = DATA.track_record;
-  if(!rec || rec.overall.total===0) return;
   const el = document.getElementById('record-ticker');
   el.style.display = 'flex';
+  if(!rec || rec.overall.total===0){
+    document.getElementById('record-ticker-title').textContent = 'Season record: not started yet';
+    document.getElementById('record-ticker-sub').textContent = 'Tap to see how this will look once games are graded';
+    return;
+  }
   const pct = Math.round((rec.overall.correct/rec.overall.total)*100);
   document.getElementById('record-ticker-title').textContent = `Season record: ${rec.overall.correct}-${rec.overall.total-rec.overall.correct}`;
   document.getElementById('record-ticker-sub').textContent = `${pct}% correct · tap for the full breakdown`;
@@ -300,7 +304,12 @@ function initRecordTicker(){
 function teamName(abbr){ return (DATA.team_names && DATA.team_names[abbr] && DATA.team_names[abbr].name) || abbr; }
 function openRecordModal(){
   const rec = DATA.track_record;
-  if(!rec) return;
+  if(!rec || rec.overall.total===0){
+    document.getElementById('record-modal-body').innerHTML =
+      `<div class="record-hero"><div class="record-hero-num">—</div><div class="record-hero-sub">No games graded yet — check back after Week 1 kicks off</div></div>`;
+    document.getElementById('record-modal').classList.add('open');
+    return;
+  }
   const pct = rec.overall.total ? Math.round((rec.overall.correct/rec.overall.total)*100) : 0;
   let html = `<div class="record-hero">
     <div class="record-hero-num">${rec.overall.correct}-${rec.overall.total-rec.overall.correct}</div>
