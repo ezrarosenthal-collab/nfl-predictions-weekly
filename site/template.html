@@ -75,6 +75,10 @@
   .bet-line-val { color:var(--bet-body); font-weight:600; }
   .bet-reasoning { font-size:12px; line-height:1.55; color:var(--bet-body); margin:0; }
   .callout-card { background:var(--callout-bg); border:1px solid var(--callout-border); border-radius:10px; padding:12px 14px; font-size:12px; line-height:1.6; color:var(--callout-text); margin-bottom:10px; }
+  .injury-alert-card { background:#2A1518; border:1px solid #5C2A2E; border-radius:10px; padding:12px 14px; font-size:12px; line-height:1.6; color:#F0A8AE; margin-bottom:10px; }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .injury-alert-card { background:#FBEAEA; border-color:#E8B8BC; color:#8A2E36; }
+  }
   .qb-watch-card { background:var(--auto-bg); border:1px solid var(--auto-border); border-radius:10px; padding:12px 14px; font-size:12px; line-height:1.6; color:var(--auto-text); margin-bottom:10px; }
   .sub-panel { background:var(--card-alt); border:1px solid var(--border-alt); border-radius:10px; padding:12px 14px; margin-bottom:10px; }
   .sub-panel-title { font-size:12.5px; font-weight:600; margin-bottom:10px; }
@@ -135,6 +139,8 @@ function renderCard(g, i) {
     `<div class="raw-model-note">Raw stat model (before context adjustment): ${g.home_team} ${g.raw_model_home_wp.toFixed(0)}% / ${g.away_team} ${g.raw_model_away_wp.toFixed(0)}%.</div>` : '';
   const contextHtml = g.context ? `<div class="callout-card"><strong>Context:</strong> ${esc(g.context)}</div>` : '';
   const qbWatchHtml = g.qb_watch ? `<div class="qb-watch-card"><strong>🤖 Auto-detected:</strong> ${esc(g.qb_watch)}</div>` : '';
+  const injuryAlerts = [g.away_qb_injury_alert && `${g.away_team}: ${g.away_qb_injury_alert}`, g.home_qb_injury_alert && `${g.home_team}: ${g.home_qb_injury_alert}`].filter(Boolean);
+  const injuryAlertHtml = injuryAlerts.length ? `<div class="injury-alert-card"><strong>🚨 Injury report update (checked hourly):</strong> ${injuryAlerts.map(esc).join(' · ')}</div>` : '';
   const betHtml = g.bet ? `<div class="bet-card">
       <div class="bet-header"><span class="bet-verdict">${esc(g.bet.pick)}</span><div class="conf-meter">${confBars}</div></div>
       <div class="bet-line-row"><span class="bet-line-label">Market:</span><span class="bet-line-val">spread ${g.market.spread_line ?? '—'} · ML ${g.market.moneyline_home??'—'}/${g.market.moneyline_away??'—'} · O/U ${g.market.total_line??'—'}${market.home?` · fair-odds ${g.home_team} ${market.home.toFixed(0)}% / ${g.away_team} ${market.away.toFixed(0)}%`:''}</span></div>
@@ -214,6 +220,7 @@ function renderCard(g, i) {
         ${rawNote}
       </div>
       ${betHtml}
+      ${injuryAlertHtml}
       ${qbWatchHtml}
       ${contextHtml}
       <div class="sub-panel"><div class="sub-panel-title">Feature Breakdown</div>${featRows}</div>

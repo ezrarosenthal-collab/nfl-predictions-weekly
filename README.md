@@ -138,3 +138,33 @@ news and produce `data/overrides.json` entries automatically — which is a
 real, buildable next step, but has a genuine ongoing API cost (unlike
 everything else in this repo, which is free). If you want that wired up,
 say so and it's a small addition to the same workflow file.
+
+## Hourly QB injury check (`.github/workflows/hourly_injury_check.yml`)
+
+Runs every hour, for free, and closes part of the gap described above: an
+**injury that hasn't happened yet** at Tuesday's weekly run can happen by
+Wednesday, and this catches it without waiting a full week.
+
+It checks ESPN's free, public (but **unofficial and undocumented**)
+sports API for each game's two currently-listed starting QBs
+(`app/qb_meta.py`) and flags it on the site if either shows a concerning
+injury status (Out, Doubtful, Questionable, IR). It's deliberately
+lightweight — it does not re-download play-by-play data or recompute the
+model, just checks injury status and patches the existing prediction.
+
+**Important limits, stated plainly:**
+- This only catches injuries to the QB *already listed* in `qb_meta.py`.
+  If a totally different, unlisted player suddenly starts, this has no way
+  to know to look for them — `qb_meta.py` still needs occasional manual
+  updates when a team's starter changes.
+- Because it's an unofficial API, ESPN can change its response format
+  without notice. `app/injury_watch.py` is written defensively (broad
+  error handling per team, multiple response-shape fallbacks) specifically
+  because of this, but the very first live run is the real test — see
+  SETUP.md for exactly how to check the Action's log output and confirm
+  it's actually working, not just running without crashing.
+- This could not be tested against live ESPN data before shipping: the
+  environment that built this only has network access to a small
+  allow-list of domains (github.com, pypi.org, etc.) and ESPN isn't on it.
+  GitHub Actions' runners have full internet access, so this is genuinely
+  untested against the live API until your first real run.
