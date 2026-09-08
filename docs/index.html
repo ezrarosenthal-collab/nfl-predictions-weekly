@@ -34,7 +34,9 @@
   body { margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; }
   .header { border-bottom:1px solid var(--border); background:var(--bg-alt); }
   .header-inner { max-width:760px; margin:0 auto; padding:20px; }
-  .brand { font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:22px; letter-spacing:.5px; }
+  .brand { display:flex; align-items:center; gap:14px; font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:34px; letter-spacing:.3px; }
+  .brand-mark { flex-shrink:0; filter:drop-shadow(0 0 10px color-mix(in srgb, var(--gold) 55%, transparent)); }
+  .brand-text { background:linear-gradient(90deg, var(--text) 0%, var(--gold) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .tag { margin-top:8px; font-size:12.5px; color:var(--text-dim); line-height:1.5; }
   .updated-badge { display:inline-block; margin-top:10px; padding:4px 10px; border-radius:20px; background:var(--auto-bg); border:1px solid var(--auto-border); color:var(--auto-text); font-size:11px; font-weight:600; }
   main { max-width:760px; margin:0 auto; padding:20px; }
@@ -50,7 +52,6 @@
   .game-card-trigger:hover .sb-row { filter:brightness(1.03); }
   .sb-topbar { padding:10px 20px; font-size:12px; color:var(--text-dimmer); background:var(--card-alt); }
   .sb-row { display:flex; justify-content:space-between; align-items:center; padding:16px 20px; }
-  .sb-row.favored { background:var(--border-alt); }
   .sb-team-abbr { font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:26px; line-height:1; }
   .sb-team-name { font-size:12.5px; color:var(--text-dimmer); margin-top:3px; }
   .sb-team-pct { font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:32px; }
@@ -141,13 +142,22 @@
 <body>
 <div class="header">
   <div class="header-inner">
-    <div class="brand">▰ DAILYPREDICTIONNFL</div>
+    <div class="brand">
+      <svg class="brand-mark" width="46" height="46" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="28" fill="var(--bg-alt)" stroke="var(--gold)" stroke-width="1.5"/>
+        <path d="M30,9 C43,9 50,20 50,30 C50,40 43,51 30,51 C17,51 10,40 10,30 C10,20 17,9 30,9 Z" fill="none" stroke="var(--text)" stroke-width="2"/>
+        <line x1="30" y1="21" x2="30" y2="39" stroke="var(--text)" stroke-width="2"/>
+        <line x1="26" y1="24" x2="34" y2="24" stroke="var(--text)" stroke-width="1.5"/>
+        <line x1="26" y1="28.5" x2="34" y2="28.5" stroke="var(--text)" stroke-width="1.5"/>
+        <line x1="26" y1="33" x2="34" y2="33" stroke="var(--text)" stroke-width="1.5"/>
+        <line x1="26" y1="37" x2="34" y2="37" stroke="var(--text)" stroke-width="1.5"/>
+        <polyline points="12,42 21,30 27,35 47,13" fill="none" stroke="var(--gold)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M40,13 L47,13 L47,20" fill="none" stroke="var(--gold)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-text">NFL Predictions</span>
+    </div>
     <div class="tag">Week 1 · 2026 Season · Auto-updated every Tuesday morning after Monday Night Football</div>
-<<<<<<< HEAD
-    <div class="updated-badge">🔄 Auto-updated 2026-09-08 19:03 UTC</div>
-=======
-    <div class="updated-badge">🔄 Auto-updated 2026-09-08 18:57 UTC</div>
->>>>>>> 0526bf47b94b07b90a741645533ec559333f53bf
+    <div class="updated-badge">🔄 Auto-updated 2026-09-08 19:15 UTC</div>
     <button class="record-ticker" id="record-ticker" onclick="openRecordModal()" style="display:none">
       <div class="record-ticker-left">
         <div>
@@ -264,17 +274,18 @@ function renderCard(g, i) {
 
 
   const favored = homeWp >= awayWp ? 'home' : 'away';
+  const rowTint = (color, isFavored) => `color-mix(in srgb, ${color} ${isFavored?18:7}%, var(--card) ${isFavored?82:93}%)`;
 
   return `<div class="game-card">
     <button class="game-card-trigger" onclick="toggleCard(${i})">
       <div class="sb-topbar">${esc(g.time_et||'')} · ${esc(g.location||'')}</div>
-      <div class="sb-row ${favored==='away'?'favored':''}">
+      <div class="sb-row" style="background:${rowTint(g.away_color, favored==='away')}">
         <div><div class="sb-team-abbr" style="color:${g.away_color}">${g.away_team}</div><div class="sb-team-name">${esc(g.away_name||'')}</div></div>
-        <div class="sb-team-pct ${favored==='away'?'':'dim'}" style="${favored==='away'?`color:${g.away_color}`:''}">${awayWp.toFixed(0)}%</div>
+        <div class="sb-team-pct" style="color:${g.away_color}">${awayWp.toFixed(0)}%</div>
       </div>
-      <div class="sb-row ${favored==='home'?'favored':''}">
+      <div class="sb-row" style="background:${rowTint(g.home_color, favored==='home')}">
         <div><div class="sb-team-abbr" style="color:${g.home_color}">${g.home_team}</div><div class="sb-team-name">${esc(g.home_name||'')}</div></div>
-        <div class="sb-team-pct ${favored==='home'?'':'dim'}" style="${favored==='home'?`color:${g.home_color}`:''}">${homeWp.toFixed(0)}%</div>
+        <div class="sb-team-pct" style="color:${g.home_color}">${homeWp.toFixed(0)}%</div>
       </div>
       <div class="sb-footer">
         <span>Projected ${g.away_score_est.toFixed(1)} – ${g.home_score_est.toFixed(1)} · O/U ${(g.away_score_est+g.home_score_est).toFixed(1)}</span>
@@ -296,18 +307,8 @@ function renderCard(g, i) {
 }
 function toggleCard(i){
   const b=document.getElementById(`body-${i}`), c=document.getElementById(`chev-${i}`);
-  const willOpen = !b.classList.contains('open');
-  // Auto-close every other open card first, so only one is expanded at a time.
-  document.querySelectorAll('.card-body.open').forEach(el => {
-    if (el !== b) {
-      el.classList.remove('open');
-      const otherIdx = el.id.replace('body-','');
-      const otherChev = document.getElementById(`chev-${otherIdx}`);
-      if (otherChev) otherChev.classList.remove('open');
-    }
-  });
-  b.classList.toggle('open', willOpen);
-  c.classList.toggle('open', willOpen);
+  const open = b.classList.contains('open');
+  b.classList.toggle('open', !open); c.classList.toggle('open', !open);
 }
 document.getElementById('app').innerHTML = DATA.games.map((g,i)=>renderCard(g,i)).join('');
 
