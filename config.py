@@ -12,6 +12,7 @@ validation script and confirming the new numbers still hold up.
 # ---------------------------------------------------------------------------
 NFLVERSE_PBP_URL = "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season}.csv.gz"
 NFLVERSE_GAMES_URL = "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv"
+NFLVERSE_INJURIES_URL = "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_{season}.csv"
 
 # ---------------------------------------------------------------------------
 # Feature set: the 10 stats validated against 5 years of real outcomes.

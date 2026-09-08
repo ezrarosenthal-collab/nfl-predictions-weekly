@@ -17,7 +17,7 @@ from functools import lru_cache
 import pandas as pd
 import requests
 
-from config import NFLVERSE_GAMES_URL, NFLVERSE_PBP_URL
+from config import NFLVERSE_GAMES_URL, NFLVERSE_INJURIES_URL, NFLVERSE_PBP_URL
 
 logger = logging.getLogger(__name__)
 
@@ -83,3 +83,19 @@ def get_week_games(season: int, week: int) -> pd.DataFrame:
         & (games["week"] == week)
         & (games["game_type"] == "REG")
     ].copy()
+
+
+@lru_cache(maxsize=4)
+def fetch_injuries(season: int) -> pd.DataFrame:
+    """
+    Official NFL weekly injury reports, published by nflverse from the same
+    data the league itself releases (report_status: Out/Doubtful/
+    Questionable). Same reliable GitHub-release delivery as pbp/games --
+    not a scraped or reverse-engineered API, so it isn't subject to the
+    bot-blocking that made ESPN's unofficial API a dead end for this
+    project (see app/injury_watch.py for that history).
+    """
+    url = NFLVERSE_INJURIES_URL.format(season=season)
+    logger.info("Fetching injury reports for %s from %s", season, url)
+    raw = _get(url)
+    return pd.read_csv(io.BytesIO(raw))

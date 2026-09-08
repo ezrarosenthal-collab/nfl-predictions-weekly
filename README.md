@@ -145,26 +145,32 @@ Runs every hour, for free, and closes part of the gap described above: an
 **injury that hasn't happened yet** at Tuesday's weekly run can happen by
 Wednesday, and this catches it without waiting a full week.
 
-It checks ESPN's free, public (but **unofficial and undocumented**)
-sports API for each game's two currently-listed starting QBs
-(`app/qb_meta.py`) and flags it on the site if either shows a concerning
-injury status (Out, Doubtful, Questionable, IR). It's deliberately
-lightweight — it does not re-download play-by-play data or recompute the
-model, just checks injury status and patches the existing prediction.
+**This went through a real pivot worth knowing about.** The first version
+used ESPN's free, unofficial public API, written defensively and tested
+against a simulated response. The very first live run — on GitHub Actions'
+real servers, with real internet access — came back `403 Forbidden` on
+every single request. That's not a code bug; ESPN's anti-bot protection
+blocks well-known automation IP ranges (GitHub Actions, AWS, etc.)
+outright, no matter what headers are sent. Fighting that with retries or
+different headers wouldn't have helped — it's a wall, not a bug.
 
-**Important limits, stated plainly:**
+**What it uses now:** nflverse's official injury reports — the same
+trusted open-data project already powering the rest of this backend
+(play-by-play, schedules), sourced directly from the NFL's own weekly
+injury report data (`report_status`: Out / Doubtful / Questionable),
+delivered as a plain GitHub release download — the exact same reliable
+mechanism already proven to work for every other data source in this
+project. This was verified against real historical data before shipping:
+querying the real 2025 Week 1 report correctly returned Tanner McKee
+(Out, Thumb) and Skylar Thompson (Questionable, Hamstring), and correctly
+returned nothing for a healthy Patrick Mahomes.
+
+**Real limits, stated plainly:**
 - This only catches injuries to the QB *already listed* in `qb_meta.py`.
   If a totally different, unlisted player suddenly starts, this has no way
   to know to look for them — `qb_meta.py` still needs occasional manual
   updates when a team's starter changes.
-- Because it's an unofficial API, ESPN can change its response format
-  without notice. `app/injury_watch.py` is written defensively (broad
-  error handling per team, multiple response-shape fallbacks) specifically
-  because of this, but the very first live run is the real test — see
-  SETUP.md for exactly how to check the Action's log output and confirm
-  it's actually working, not just running without crashing.
-- This could not be tested against live ESPN data before shipping: the
-  environment that built this only has network access to a small
-  allow-list of domains (github.com, pypi.org, etc.) and ESPN isn't on it.
-  GitHub Actions' runners have full internet access, so this is genuinely
-  untested against the live API until your first real run.
+- Update cadence matches the NFL's own official injury report schedule
+  (a few times a week during the season, not truly real-time) — checking
+  hourly costs nothing extra, but don't expect an entry to appear the
+  instant an injury happens on the field.

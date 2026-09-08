@@ -1,8 +1,9 @@
 name: Hourly QB injury check
 
-# Lightweight, runs every hour, checks ESPN's free (unofficial) injury data
-# for the currently-listed starting QB on each team in this week's games.
-# Does NOT re-download play-by-play or recompute the model -- see
+# Lightweight, runs every hour, checks the NFL's official injury reports
+# (via nflverse, the same source used for schedules/play-by-play) for the
+# currently-listed starting QB on each team in this week's games. Does NOT
+# re-download play-by-play or recompute the model -- see
 # scripts/hourly_injury_check.py for why that's intentional.
 
 on:

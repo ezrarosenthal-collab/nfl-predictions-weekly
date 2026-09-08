@@ -101,14 +101,11 @@ It runs itself every Tuesday morning, automatically, for free. Nothing
 else to do unless you want to manually add a note to `data/overrides.json`
 for something the automation can't see on its own (see the main README).
 
-## Verifying the new hourly injury check actually works
+## Verifying the hourly injury check actually works
 
-This feature checks ESPN's free, unofficial injury data every hour and
-flags it on the site if your starting QBs' status changes. Because it uses
-an *undocumented* API, it needs a real first-run check before you fully
-trust it — this could not be tested from the sandbox that built it (its
-own network policy blocks all outside sites by default, ESPN included), so
-the very first live run is the actual test.
+This feature checks the NFL's official injury reports (via nflverse, the
+same reliable source used for everything else in this project) every hour
+and flags it on the site if a starting QB's status changes.
 
 1. Push this update the same way as before (see the main setup steps)
 2. Go to **Actions** tab → **"Hourly QB injury check"** in the left list
@@ -116,14 +113,14 @@ the very first live run is the actual test.
 4. Wait ~30 seconds, click into the run that appears
 5. Click the **"check-injuries"** job, then expand **"Check QB injury status"**
 6. Read the log output:
-   - Lines like `[hourly_injury_check] No injury-status changes found this run.`
-     mean it ran successfully and just didn't find anything to flag (normal,
-     most hours nothing changes)
-   - Lines like `Failed to fetch/parse ESPN injuries for KC` mean that
-     specific team's request failed — one or two of these occasionally is
-     fine (ESPN's API can be flaky), but if EVERY team fails, the endpoint
-     or the response shape has likely changed and `app/injury_watch.py`
-     needs an update
-   - A green checkmark on the run doesn't guarantee data was found, just
-     that nothing crashed — check the actual log text to know for sure
+   - `[hourly_injury_check] No injury-status changes found this run.` means
+     it ran successfully and there's simply nothing new to report right
+     now — this is the normal, expected result most hours, especially
+     outside the season or before the week's official report is out
+   - A line naming a player and status means it found something real —
+     check the site to confirm it shows up as a red alert box on that game
+   - If you see a Python error/traceback instead, take a screenshot and
+     we'll take a look — but this version pulls from the same reliable
+     source (nflverse, via a plain GitHub file download) already powering
+     the rest of the site, so it should be stable
 

@@ -46,7 +46,7 @@ def main():
             qb = QB_META.get(team)
             if not qb:
                 continue
-            alert = injury_watch.get_qb_injury_alert(team, qb["name"])
+            alert = injury_watch.get_qb_injury_alert(team, qb["name"], args.season, week)
             field = f"{side}_qb_injury_alert"
             if g.get(field) != alert:
                 g[field] = alert
