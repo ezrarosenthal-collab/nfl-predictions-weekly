@@ -83,12 +83,12 @@
         }
       ],
       "market": {
-        "spread_line": 3.5,
+        "spread_line": 3.0,
         "total_line": 44.5,
-        "moneyline_home": -185.0,
-        "moneyline_away": 154.0,
-        "fair_odds_home": 62.2,
-        "fair_odds_away": 37.8
+        "moneyline_home": -170.0,
+        "moneyline_away": 142.0,
+        "fair_odds_home": 60.4,
+        "fair_odds_away": 39.6
       },
       "home_stats": {
         "ppg": 28.4118,
@@ -138,9 +138,7 @@
         "confidence": 2,
         "note": "Market has SEA at 62% fair odds; this model has it at 50/50 after adjustment. Value is on the underdog getting points."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "LA",
@@ -220,10 +218,10 @@
       "market": {
         "spread_line": 3.5,
         "total_line": 48.5,
-        "moneyline_home": -185.0,
-        "moneyline_away": 154.0,
-        "fair_odds_home": 62.2,
-        "fair_odds_away": 37.8
+        "moneyline_home": -192.0,
+        "moneyline_away": 160.0,
+        "fair_odds_home": 63.1,
+        "fair_odds_away": 36.9
       },
       "home_stats": {
         "ppg": 30.4706,
@@ -273,9 +271,7 @@
         "confidence": 4,
         "note": "Highest-confidence pick of the week."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "CAR",
@@ -353,12 +349,12 @@
         }
       ],
       "market": {
-        "spread_line": -2.5,
+        "spread_line": -3.0,
         "total_line": 47.5,
-        "moneyline_home": 124.0,
-        "moneyline_away": -148.0,
-        "fair_odds_home": 42.8,
-        "fair_odds_away": 57.2
+        "moneyline_home": 130.0,
+        "moneyline_away": -155.0,
+        "fair_odds_home": 41.7,
+        "fair_odds_away": 58.3
       },
       "home_stats": {
         "ppg": 18.2941,
@@ -404,9 +400,7 @@
       "raw_model_away_wp": 65.1,
       "context": null,
       "bet": null,
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "CIN",
@@ -539,9 +533,7 @@
         "confidence": 3,
         "note": "Healthy Burrow argues for a bigger gap than the raw model shows."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "DET",
@@ -621,10 +613,10 @@
       "market": {
         "spread_line": 7.0,
         "total_line": 49.5,
-        "moneyline_home": -310.0,
-        "moneyline_away": 250.0,
-        "fair_odds_home": 72.6,
-        "fair_odds_away": 27.4
+        "moneyline_home": -305.0,
+        "moneyline_away": 245.0,
+        "fair_odds_home": 72.2,
+        "fair_odds_away": 27.8
       },
       "home_stats": {
         "ppg": 28.2941,
@@ -670,9 +662,7 @@
       "raw_model_away_wp": 25.4,
       "context": null,
       "bet": null,
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "HOU",
@@ -752,10 +742,10 @@
       "market": {
         "spread_line": -1.5,
         "total_line": 44.5,
-        "moneyline_home": -102.0,
-        "moneyline_away": -118.0,
-        "fair_odds_home": 48.3,
-        "fair_odds_away": 51.7
+        "moneyline_home": -105.0,
+        "moneyline_away": -115.0,
+        "fair_odds_home": 48.9,
+        "fair_odds_away": 51.1
       },
       "home_stats": {
         "ppg": 23.7647,
@@ -801,9 +791,7 @@
       "raw_model_away_wp": 51.8,
       "context": null,
       "bet": null,
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "IND",
@@ -882,7 +870,7 @@
       ],
       "market": {
         "spread_line": -3.5,
-        "total_line": 48.5,
+        "total_line": 47.5,
         "moneyline_home": 145.0,
         "moneyline_away": -175.0,
         "fair_odds_home": 39.1,
@@ -936,9 +924,7 @@
         "confidence": 3,
         "note": "Healthy Jackson makes Baltimore a different team than its 2025 numbers show."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "JAX",
@@ -1016,12 +1002,12 @@
         }
       ],
       "market": {
-        "spread_line": 7.5,
+        "spread_line": 8.5,
         "total_line": 40.5,
-        "moneyline_home": -410.0,
-        "moneyline_away": 320.0,
-        "fair_odds_home": 77.2,
-        "fair_odds_away": 22.8
+        "moneyline_home": -440.0,
+        "moneyline_away": 340.0,
+        "fair_odds_home": 78.2,
+        "fair_odds_away": 21.8
       },
       "home_stats": {
         "ppg": 27.8824,
@@ -1071,9 +1057,7 @@
         "confidence": 3,
         "note": "Model was already very confident; losing Garrett widens the real gap further."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "PIT",
@@ -1153,10 +1137,10 @@
       "market": {
         "spread_line": 3.5,
         "total_line": 42.5,
-        "moneyline_home": -185.0,
-        "moneyline_away": 154.0,
-        "fair_odds_home": 62.2,
-        "fair_odds_away": 37.8
+        "moneyline_home": -180.0,
+        "moneyline_away": 150.0,
+        "fair_odds_home": 61.6,
+        "fair_odds_away": 38.4
       },
       "home_stats": {
         "ppg": 23.3529,
@@ -1202,9 +1186,7 @@
       "raw_model_away_wp": 39.7,
       "context": null,
       "bet": null,
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "TEN",
@@ -1284,10 +1266,10 @@
       "market": {
         "spread_line": 1.5,
         "total_line": 39.5,
-        "moneyline_home": -130.0,
-        "moneyline_away": 110.0,
-        "fair_odds_home": 54.3,
-        "fair_odds_away": 45.7
+        "moneyline_home": -125.0,
+        "moneyline_away": 105.0,
+        "fair_odds_home": 53.2,
+        "fair_odds_away": 46.8
       },
       "home_stats": {
         "ppg": 16.7059,
@@ -1333,9 +1315,7 @@
       "raw_model_away_wp": 29.4,
       "context": null,
       "bet": null,
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "LAC",
@@ -1413,12 +1393,12 @@
         }
       ],
       "market": {
-        "spread_line": 10.5,
-        "total_line": 46.5,
-        "moneyline_home": -600.0,
-        "moneyline_away": 440.0,
-        "fair_odds_home": 82.2,
-        "fair_odds_away": 17.8
+        "spread_line": 10.0,
+        "total_line": 47.5,
+        "moneyline_home": -500.0,
+        "moneyline_away": 380.0,
+        "fair_odds_home": 80.0,
+        "fair_odds_away": 20.0
       },
       "home_stats": {
         "ppg": 21.6471,
@@ -1468,9 +1448,7 @@
         "confidence": 2,
         "note": "Market's -10.5 already prices the QB change accurately -- no edge to exploit."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "LV",
@@ -1549,11 +1527,11 @@
       ],
       "market": {
         "spread_line": 3.5,
-        "total_line": 40.5,
-        "moneyline_home": -192.0,
-        "moneyline_away": 160.0,
-        "fair_odds_home": 63.1,
-        "fair_odds_away": 36.9
+        "total_line": 41.5,
+        "moneyline_home": -185.0,
+        "moneyline_away": 154.0,
+        "fair_odds_home": 62.2,
+        "fair_odds_away": 37.8
       },
       "home_stats": {
         "ppg": 14.1765,
@@ -1603,9 +1581,7 @@
         "confidence": 1,
         "note": "Too much roster turnover on both sides to trust either number."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "MIN",
@@ -1738,9 +1714,7 @@
         "confidence": 2,
         "note": "Raw model favors GB heavily purely because MIN's old QB situation was so bad."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "PHI",
@@ -1873,9 +1847,7 @@
         "confidence": 2,
         "note": "Model's 84% for Philly is largely an artifact of Daniels' missed time."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "NYG",
@@ -1953,12 +1925,12 @@
         }
       ],
       "market": {
-        "spread_line": -2.5,
+        "spread_line": -3.0,
         "total_line": 48.5,
-        "moneyline_home": 124.0,
-        "moneyline_away": -148.0,
-        "fair_odds_home": 42.8,
-        "fair_odds_away": 57.2
+        "moneyline_home": 136.0,
+        "moneyline_away": -162.0,
+        "fair_odds_home": 40.7,
+        "fair_odds_away": 59.3
       },
       "home_stats": {
         "ppg": 22.4118,
@@ -2004,9 +1976,7 @@
       "raw_model_away_wp": 47.9,
       "context": null,
       "bet": null,
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "KC",
@@ -2085,7 +2055,7 @@
       ],
       "market": {
         "spread_line": 3.0,
-        "total_line": 42.5,
+        "total_line": 43.5,
         "moneyline_home": -148.0,
         "moneyline_away": 124.0,
         "fair_odds_home": 57.2,
@@ -2139,9 +2109,7 @@
         "confidence": 2,
         "note": "With Mahomes healthy, KC is better than the raw model's 40% suggests."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     }
   ]
 }
