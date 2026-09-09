@@ -73,6 +73,14 @@ def _load_track_record(season: int) -> dict | None:
         return json.load(f)
 
 
+def _load_player_props(season: int, week: int) -> list | None:
+    path = Path(__file__).resolve().parent.parent / "data" / f"player_props_{season}_wk{week}.json"
+    if not path.exists():
+        return None
+    with open(path) as f:
+        return json.load(f)
+
+
 def render(predictions_path: Path, output_path: Path | None = None) -> Path:
     with open(predictions_path) as f:
         predictions = json.load(f)
@@ -80,6 +88,11 @@ def render(predictions_path: Path, output_path: Path | None = None) -> Path:
     predictions["games"] = enrich_games(predictions)
     predictions["track_record"] = _load_track_record(predictions["season"])
     predictions["team_names"] = TEAM_META
+    player_props_by_game = _load_player_props(predictions["season"], predictions["week"])
+    if player_props_by_game:
+        props_lookup = {(p["home_team"], p["away_team"]): p for p in player_props_by_game}
+        for g in predictions["games"]:
+            g["player_props"] = props_lookup.get((g["home_team"], g["away_team"]))
 
     template = TEMPLATE_PATH.read_text()
     season, week = predictions["season"], predictions["week"]

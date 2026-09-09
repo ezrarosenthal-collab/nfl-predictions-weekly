@@ -50,7 +50,16 @@
   .game-card { background:var(--card); border:1px solid var(--border); border-radius:16px; margin-bottom:10px; overflow:hidden; }
   .game-card-trigger { all:unset; box-sizing:border-box; display:block; width:100%; cursor:pointer; }
   .game-card-trigger:hover .sb-row { filter:brightness(1.03); }
-  .sb-topbar { padding:10px 20px; font-size:12px; color:var(--text-dimmer); background:var(--card-alt); }
+  .sb-topbar { padding:10px 20px; font-size:12px; color:var(--text-dimmer); background:var(--card-alt); display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  .props-trigger { all:unset; cursor:pointer; font-size:11px; font-weight:700; color:var(--gold); padding:4px 10px; border:1px solid var(--gold); border-radius:20px; flex-shrink:0; }
+  .props-team-col { flex:1; }
+  .props-team-header { font-size:12.5px; font-weight:700; margin-bottom:8px; }
+  .props-player-row { padding:8px 0; border-top:1px solid var(--border); }
+  .props-player-row:first-child { border-top:none; }
+  .props-player-name { font-size:12.5px; font-weight:600; }
+  .props-player-slot { font-size:10px; color:var(--text-dimmer); text-transform:uppercase; letter-spacing:.4px; }
+  .props-player-line { font-size:11.5px; color:var(--text-dim); margin-top:2px; }
+  .redzone-pick { display:flex; justify-content:space-between; padding:8px 12px; background:var(--card-alt); border-radius:8px; margin-bottom:6px; font-size:12px; }
   .sb-row { display:flex; justify-content:space-between; align-items:center; padding:16px 20px; }
   .sb-team-abbr { font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:26px; line-height:1; }
   .sb-team-name { font-size:12.5px; color:var(--text-dimmer); margin-top:3px; }
@@ -178,6 +187,15 @@
     <div id="record-modal-body"></div>
   </div>
 </div>
+<div class="modal-overlay" id="player-modal" onclick="if(event.target===this) closePlayerProps()">
+  <div class="modal-card">
+    <div class="modal-header">
+      <button class="modal-back" onclick="closePlayerProps()">←</button>
+      <div class="modal-title" id="player-modal-title">Key Players</div>
+    </div>
+    <div id="player-modal-body"></div>
+  </div>
+</div>
 <main id="app"></main>
 <footer>{{FOOTER}}</footer>
 <script>
@@ -277,8 +295,11 @@ function renderCard(g, i) {
   const rowTint = (color, isFavored) => `color-mix(in srgb, ${color} ${isFavored?18:7}%, var(--card) ${isFavored?82:93}%)`;
 
   return `<div class="game-card">
+    <div class="sb-topbar">
+      <span>${esc(g.time_et||'')} · ${g.location==='Neutral' ? 'Neutral site' : `${esc(g.home_name||g.home_team)} home`}</span>
+      ${g.player_props ? `<button class="props-trigger" onclick="openPlayerProps(${i})">Players</button>` : ''}
+    </div>
     <button class="game-card-trigger" onclick="toggleCard(${i})">
-      <div class="sb-topbar">${esc(g.time_et||'')} · ${esc(g.location||'')}</div>
       <div class="sb-row" style="background:${rowTint(g.away_color, favored==='away')}">
         <div><div class="sb-team-abbr" style="color:${g.away_color}">${g.away_team}</div><div class="sb-team-name">${esc(g.away_name||'')}</div></div>
         <div class="sb-team-pct" style="color:${g.away_color}">${awayWp.toFixed(0)}%</div>
@@ -366,6 +387,65 @@ function closeRecordModal(){
   document.getElementById('record-modal').classList.remove('open');
 }
 initRecordTicker();
+
+function slotLabel(slot){ return {rb1:'RB1', wr1:'WR1', wr2:'WR2', te1:'TE1'}[slot] || slot; }
+
+function playerRow(slot, p, color){
+  if(!p) return `<div class="props-player-row"><span class="props-player-slot">${slotLabel(slot)}</span><div class="props-player-line">No qualifying player found</div></div>`;
+  const stat = p.position === 'RB'
+    ? `${p.carries_per_g} carries/g · ${p.rush_yds_per_g} yds/g (season avg)`
+    : `${p.targets_per_g} targets/g · ${p.rec_yds_per_g} yds/g (season avg)`;
+  return `<div class="props-player-row">
+    <span class="props-player-slot">${slotLabel(slot)}</span>
+    <div class="props-player-name" style="color:${color}">${esc(p.player_display_name)}</div>
+    <div class="props-player-line">${stat}</div>
+    <div class="props-player-line">Projected this matchup: <strong>${p.projected_yards} yds</strong> (opponent allows ${p.opponent_allows_per_g}/g vs league avg ${p.league_avg_allowed_per_g}/g)</div>
+  </div>`;
+}
+
+function openPlayerProps(i){
+  const g = DATA.games[i];
+  const props = g.player_props;
+  if(!props) return;
+  document.getElementById('player-modal-title').textContent = `${g.away_team} @ ${g.home_team} — Key Players`;
+
+  let html = `<div class="modal-section-note">RB1/WR1/WR2/TE1 are each team's most-used player at that position last season — a real, data-driven starting point, not a live depth-chart check. A trade, injury, or new starter can make this out of date the same way it can for a team's quarterback (see the note on the game card if that's happened). Yardage projections adjust each player's season average for this specific opponent's real defense-vs-position numbers.</div>`;
+
+  html += `<div style="display:flex;gap:16px;margin-bottom:20px">
+    <div class="props-team-col"><div class="props-team-header" style="color:${g.away_color}">${g.away_team}</div>
+      ${['rb1','wr1','wr2','te1'].map(slot => playerRow(slot, props.away[slot], g.away_color)).join('')}
+    </div>
+    <div class="props-team-col"><div class="props-team-header" style="color:${g.home_color}">${g.home_team}</div>
+      ${['rb1','wr1','wr2','te1'].map(slot => playerRow(slot, props.home[slot], g.home_color)).join('')}
+    </div>
+  </div>`;
+
+  // Favorable red zone section: a qualitative signal, not a TD probability.
+  const allPlayers = [];
+  for(const side of ['home','away']){
+    const color = side==='home' ? g.home_color : g.away_color;
+    const team = side==='home' ? g.home_team : g.away_team;
+    for(const slot of ['rb1','wr1','wr2','te1']){
+      const p = props[side][slot];
+      if(p) allPlayers.push({...p, team, color, slot});
+    }
+  }
+  allPlayers.sort((a,b) => b.redzone_favorability - a.redzone_favorability);
+  const top = allPlayers.slice(0, 4);
+
+  html += `<div class="modal-section-title">Favorable Red Zone Matchups</div>
+    <div class="modal-section-note">Not a touchdown probability — touchdowns are too random game-to-game for that to be honest. This ranks players by their own scoring role combined with how many touchdowns their opponent allows at that position, as a "worth watching" signal.</div>`;
+  html += top.map(p => `<div class="redzone-pick">
+    <span style="color:${p.color};font-weight:600">${esc(p.player_display_name)} <span style="color:var(--text-dimmer);font-weight:400">(${p.team} ${slotLabel(p.slot)})</span></span>
+    <span style="color:var(--text-dim)">${p.td_per_g} TD/g</span>
+  </div>`).join('');
+
+  document.getElementById('player-modal-body').innerHTML = html;
+  document.getElementById('player-modal').classList.add('open');
+}
+function closePlayerProps(){
+  document.getElementById('player-modal').classList.remove('open');
+}
 </script>
 </body>
 </html>
