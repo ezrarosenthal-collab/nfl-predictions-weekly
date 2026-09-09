@@ -85,10 +85,10 @@
       "market": {
         "spread_line": 3.0,
         "total_line": 44.5,
-        "moneyline_home": -166.0,
-        "moneyline_away": 140.0,
-        "fair_odds_home": 60.0,
-        "fair_odds_away": 40.0
+        "moneyline_home": -170.0,
+        "moneyline_away": 142.0,
+        "fair_odds_home": 60.4,
+        "fair_odds_away": 39.6
       },
       "home_stats": {
         "ppg": 28.4118,
@@ -350,7 +350,7 @@
       ],
       "market": {
         "spread_line": -3.0,
-        "total_line": 47.5,
+        "total_line": 46.5,
         "moneyline_home": 136.0,
         "moneyline_away": -162.0,
         "fair_odds_home": 40.7,
