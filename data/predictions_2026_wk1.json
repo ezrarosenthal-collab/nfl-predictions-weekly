@@ -350,7 +350,7 @@
       ],
       "market": {
         "spread_line": -3.0,
-        "total_line": 46.5,
+        "total_line": 47.5,
         "moneyline_home": 136.0,
         "moneyline_away": -162.0,
         "fair_odds_home": 40.7,
@@ -480,10 +480,10 @@
       "market": {
         "spread_line": 3.5,
         "total_line": 50.5,
-        "moneyline_home": -205.0,
-        "moneyline_away": 170.0,
-        "fair_odds_home": 64.5,
-        "fair_odds_away": 35.5
+        "moneyline_home": -198.0,
+        "moneyline_away": 164.0,
+        "fair_odds_home": 63.7,
+        "fair_odds_away": 36.3
       },
       "home_stats": {
         "ppg": 24.3529,
@@ -1395,10 +1395,10 @@
       "market": {
         "spread_line": 9.5,
         "total_line": 47.5,
-        "moneyline_home": -520.0,
-        "moneyline_away": 390.0,
-        "fair_odds_home": 80.4,
-        "fair_odds_away": 19.6
+        "moneyline_home": -500.0,
+        "moneyline_away": 380.0,
+        "fair_odds_home": 80.0,
+        "fair_odds_away": 20.0
       },
       "home_stats": {
         "ppg": 21.6471,
@@ -1526,12 +1526,12 @@
         }
       ],
       "market": {
-        "spread_line": 3.5,
+        "spread_line": 3.0,
         "total_line": 40.5,
-        "moneyline_home": -185.0,
-        "moneyline_away": 154.0,
-        "fair_odds_home": 62.2,
-        "fair_odds_away": 37.8
+        "moneyline_home": -166.0,
+        "moneyline_away": 140.0,
+        "fair_odds_home": 60.0,
+        "fair_odds_away": 40.0
       },
       "home_stats": {
         "ppg": 14.1765,
@@ -2054,7 +2054,7 @@
         }
       ],
       "market": {
-        "spread_line": 2.5,
+        "spread_line": 3.0,
         "total_line": 43.5,
         "moneyline_home": -155.0,
         "moneyline_away": 130.0,
