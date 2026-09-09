@@ -43,10 +43,13 @@ def build_game_props(home: str, away: str, stats, defense_allowed: dict) -> dict
             if not player:
                 out[slot] = None
                 continue
+            if player.get("is_rookie"):
+                out[slot] = {**player, "position": "RB" if slot == "rb1" else ("TE" if slot == "te1" else "WR")}
+                continue
             position = "RB" if slot == "rb1" else ("TE" if slot == "te1" else "WR")
             proj = project_player_vs_opponent(player, position, opponent, defense_allowed)
             rz = redzone_favorability_score(player, position, opponent, defense_allowed)
-            out[slot] = {**player, "position": position, **proj, "redzone_favorability": rz}
+            out[slot] = {**player, "position": position, **(proj or {}), "redzone_favorability": rz}
         return out
 
     return {

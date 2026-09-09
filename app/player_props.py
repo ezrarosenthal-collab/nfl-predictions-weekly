@@ -2,25 +2,31 @@
 Player-level projections: RB1/WR1/WR2/TE1 per team, matched against that
 week's specific opponent's defense-vs-position performance.
 
-Honest scope, stated up front:
-- "RB1/WR1/WR2/TE1" here means "the player with the most usage at that
-  position last season" (carries for RB, targets for WR/TE) -- the same
-  data-driven starting point the team model uses for QBs (qb_meta.py), and
-  it has the exact same limitation: a trade, injury, or a rookie winning a
-  job over the offseason can make this stale, the same way Kyler Murray
-  moving to Minnesota made the trailing-stats QB assumption wrong for that
-  team. This is NOT continuously re-verified against current news -- it's
-  last season's real usage data, which is a reasonable starting point but
-  can drift out of date the same way team-level QB assumptions can.
-- Touchdown volume specifically is one of the least stable, highest-
-  variance stats in football even for a heavily-used player in a good
-  matchup -- see the "favorable red zone" scoring function below for how
-  that's handled honestly (a qualitative signal, not a false-precision
-  probability).
+The "who is this team's current RB1/WR1/WR2/TE1" question is answered by
+app/current_depth_charts.py -- a manually researched, individually
+verified snapshot (RotoWire + LeagueStation depth charts, cross-checked
+against real 2025 stats to classify each player as a rookie, a team
+change, or a returning starter). This replaced an earlier automated
+"most-used player last season" approach, which the manual research
+confirmed would have been meaningfully wrong in real cases -- e.g. it
+would have shown Kenneth Walker III as Seattle's RB1 using his 2025 Seahawks
+stats, when he actually signed with Kansas City this offseason, and
+Seattle's real current RB1 (Jadarian Price) is a rookie with no stats to
+show at all.
+
+Touchdown volume specifically is one of the least stable, highest-
+variance stats in football even for a heavily-used player in a good
+matchup -- see the "favorable red zone" scoring function below for how
+that's handled honestly (a qualitative signal, not a false-precision
+probability).
 """
 from __future__ import annotations
 
+import re
+
 import pandas as pd
+
+from app.current_depth_charts import DEPTH_CHART
 
 STATS_PLAYER_WEEK_URL = "https://github.com/nflverse/nflverse-data/releases/download/stats_player/stats_player_week_{season}.csv"
 
@@ -33,50 +39,76 @@ def fetch_player_stats_week(season: int) -> pd.DataFrame:
     return pd.read_csv(io.BytesIO(resp.content), low_memory=False)
 
 
+def _normalize_name(name: str) -> str:
+    name = str(name).lower()
+    name = re.sub(r"\b(jr|sr|ii|iii|iv)\.?\b", "", name)
+    name = re.sub(r"[^a-z ]", "", name)
+    return " ".join(name.split())
+
+
+def _player_season_line(stats: pd.DataFrame, player_name: str, position: str) -> dict | None:
+    """
+    Real 2025 per-game stats for a named player, regardless of which team
+    they were on that season -- used for players who changed teams in the
+    offseason. Returns None if the player has no 2025 stats at all (a
+    rookie or otherwise unproven at the NFL level).
+    """
+    stats = stats.dropna(subset=["player_display_name"])
+    norm_target = _normalize_name(player_name)
+    matches = stats[stats["player_display_name"].apply(_normalize_name) == norm_target]
+    matches = matches[matches["position"] == position]
+    if matches.empty:
+        return None
+
+    prior_team = sorted(matches["team"].unique())[-1]  # most recent team on file for that player
+    games = matches["week"].nunique()
+    row = {
+        "player_display_name": matches["player_display_name"].iloc[0],
+        "games": games,
+        "carries": matches["carries"].sum(),
+        "rushing_yards": matches["rushing_yards"].sum(),
+        "rushing_tds": matches["rushing_tds"].sum(),
+        "targets": matches["targets"].sum(),
+        "receptions": matches["receptions"].sum(),
+        "receiving_yards": matches["receiving_yards"].sum(),
+        "receiving_tds": matches["receiving_tds"].sum(),
+        "prior_team_2025": prior_team,
+    }
+    row["carries_per_g"] = round(row["carries"] / games, 1)
+    row["rush_yds_per_g"] = round(row["rushing_yards"] / games, 1)
+    row["targets_per_g"] = round(row["targets"] / games, 1)
+    row["rec_yds_per_g"] = round(row["receiving_yards"] / games, 1)
+    row["total_tds"] = row["rushing_tds"] + row["receiving_tds"]
+    row["td_per_g"] = round(row["total_tds"] / games, 2)
+    return row
+
+
 def get_skill_players(stats: pd.DataFrame, team: str) -> dict:
     """
-    Returns {rb1, wr1, wr2, te1}, each a dict of that player's season
-    per-game usage/production, or None if the team has no qualifying
-    player at that position in the data.
+    Returns {rb1, wr1, wr2, te1} using the manually researched current
+    depth chart (app/current_depth_charts.py), not automated trailing
+    usage. Each value is either:
+      - None if the team has no chart entry for that slot
+      - {"player_display_name": ..., "is_rookie": True} for a rookie/
+        unproven player with no 2025 stats to show
+      - a full stat dict (with "is_rookie": False and, if applicable,
+        "prior_team_2025" set to a DIFFERENT team) otherwise
     """
-    team_stats = stats[stats["team"] == team]
-
-    def top_player(position: str, sort_col: str, n: int = 1) -> list[dict]:
-        pos_df = team_stats[team_stats["position"] == position]
-        agg = pos_df.groupby("player_display_name").agg(
-            games=("week", "nunique"),
-            carries=("carries", "sum"), rushing_yards=("rushing_yards", "sum"), rushing_tds=("rushing_tds", "sum"),
-            targets=("targets", "sum"), receptions=("receptions", "sum"),
-            receiving_yards=("receiving_yards", "sum"), receiving_tds=("receiving_tds", "sum"),
-        ).reset_index()
-        agg = agg[agg["games"] >= 4]  # filter out one-off/practice-squad noise
-        if agg.empty:
-            return []
-        agg = agg.sort_values(sort_col, ascending=False)
-        return agg.head(n).to_dict("records")
-
-    rb = top_player("RB", "carries", 1)
-    wr = top_player("WR", "targets", 2)
-    te = top_player("TE", "targets", 1)
-
-    def with_per_game(p):
-        if not p:
-            return None
-        g = p["games"]
-        p["carries_per_g"] = round(p["carries"] / g, 1)
-        p["rush_yds_per_g"] = round(p["rushing_yards"] / g, 1)
-        p["targets_per_g"] = round(p["targets"] / g, 1)
-        p["rec_yds_per_g"] = round(p["receiving_yards"] / g, 1)
-        p["total_tds"] = p["rushing_tds"] + p["receiving_tds"]
-        p["td_per_g"] = round(p["total_tds"] / g, 2)
-        return p
-
-    return {
-        "rb1": with_per_game(rb[0]) if rb else None,
-        "wr1": with_per_game(wr[0]) if len(wr) > 0 else None,
-        "wr2": with_per_game(wr[1]) if len(wr) > 1 else None,
-        "te1": with_per_game(te[0]) if te else None,
-    }
+    chart = DEPTH_CHART.get(team, {})
+    out = {}
+    for slot, position in [("rb1", "RB"), ("wr1", "WR"), ("wr2", "WR"), ("te1", "TE")]:
+        name = chart.get(slot)
+        if not name:
+            out[slot] = None
+            continue
+        line = _player_season_line(stats, name, position)
+        if line is None:
+            out[slot] = {"player_display_name": name, "is_rookie": True}
+        else:
+            line["is_rookie"] = False
+            line["team_changed"] = line["prior_team_2025"] != team
+            out[slot] = line
+    return out
 
 
 def compute_position_defense_allowed(stats: pd.DataFrame) -> dict:
@@ -105,13 +137,20 @@ def compute_position_defense_allowed(stats: pd.DataFrame) -> dict:
     return out
 
 
-def project_player_vs_opponent(player: dict, position: str, opponent: str, defense_allowed: dict) -> dict:
+def project_player_vs_opponent(player: dict, position: str, opponent: str, defense_allowed: dict) -> dict | None:
     """
     Matchup-adjusted projection: player's own per-game average, scaled by
     how much more/less yardage this specific opponent allows at that
     position versus the league average. Same "strength of schedule"
     adjustment idea used throughout the team-level model.
+
+    Returns None for a rookie/unproven player -- there's no real 2025
+    season average to adjust, and projecting a number from nothing would
+    be a fabricated stat dressed up as data.
     """
+    if player.get("is_rookie"):
+        return None
+
     pos_data = defense_allowed[position]
     opp_stats = pos_data["by_team"].get(opponent, {"yards_per_g": pos_data["league_avg_yards_per_g"], "tds_per_g": pos_data["league_avg_tds_per_g"]})
     matchup_factor = opp_stats["yards_per_g"] / pos_data["league_avg_yards_per_g"] if pos_data["league_avg_yards_per_g"] else 1.0
@@ -127,7 +166,7 @@ def project_player_vs_opponent(player: dict, position: str, opponent: str, defen
     }
 
 
-def redzone_favorability_score(player: dict, position: str, opponent: str, defense_allowed: dict) -> float:
+def redzone_favorability_score(player: dict, position: str, opponent: str, defense_allowed: dict) -> float | None:
     """
     A qualitative "how favorable is this matchup for scoring" signal, NOT
     a touchdown probability -- TDs are too high-variance for that framing
@@ -135,7 +174,12 @@ def redzone_favorability_score(player: dict, position: str, opponent: str, defen
     their role in their offense's scoring, since there's no literal
     "red zone touches" column in the public data) with how many TDs the
     opponent allows at that position relative to league average.
+
+    Returns None for a rookie/unproven player -- no real TD rate exists
+    to build this signal from.
     """
+    if player.get("is_rookie"):
+        return None
     pos_data = defense_allowed[position]
     opp_tds_per_g = pos_data["by_team"].get(opponent, {}).get("tds_per_g", pos_data["league_avg_tds_per_g"])
     opp_factor = opp_tds_per_g / pos_data["league_avg_tds_per_g"] if pos_data["league_avg_tds_per_g"] else 1.0

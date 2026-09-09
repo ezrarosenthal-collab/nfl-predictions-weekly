@@ -391,13 +391,21 @@ initRecordTicker();
 function slotLabel(slot){ return {rb1:'RB1', wr1:'WR1', wr2:'WR2', te1:'TE1'}[slot] || slot; }
 
 function playerRow(slot, p, color){
-  if(!p) return `<div class="props-player-row"><span class="props-player-slot">${slotLabel(slot)}</span><div class="props-player-line">No qualifying player found</div></div>`;
+  if(!p) return `<div class="props-player-row"><span class="props-player-slot">${slotLabel(slot)}</span><div class="props-player-line">No current starter found</div></div>`;
+  if(p.is_rookie){
+    return `<div class="props-player-row">
+      <span class="props-player-slot">${slotLabel(slot)}</span>
+      <div class="props-player-name" style="color:${color}">${esc(p.player_display_name)}</div>
+      <div class="props-player-line">Rookie — no NFL stats yet</div>
+    </div>`;
+  }
   const stat = p.position === 'RB'
-    ? `${p.carries_per_g} carries/g · ${p.rush_yds_per_g} yds/g (season avg)`
-    : `${p.targets_per_g} targets/g · ${p.rec_yds_per_g} yds/g (season avg)`;
+    ? `${p.carries_per_g} carries/g · ${p.rush_yds_per_g} yds/g (2025 avg)`
+    : `${p.targets_per_g} targets/g · ${p.rec_yds_per_g} yds/g (2025 avg)`;
+  const teamNote = p.team_changed ? ` <span style="color:var(--text-dimmer)">(2025 stats with ${p.prior_team_2025})</span>` : '';
   return `<div class="props-player-row">
     <span class="props-player-slot">${slotLabel(slot)}</span>
-    <div class="props-player-name" style="color:${color}">${esc(p.player_display_name)}</div>
+    <div class="props-player-name" style="color:${color}">${esc(p.player_display_name)}${teamNote}</div>
     <div class="props-player-line">${stat}</div>
     <div class="props-player-line">Projected this matchup: <strong>${p.projected_yards} yds</strong> (opponent allows ${p.opponent_allows_per_g}/g vs league avg ${p.league_avg_allowed_per_g}/g)</div>
   </div>`;
@@ -427,7 +435,7 @@ function openPlayerProps(i){
     const team = side==='home' ? g.home_team : g.away_team;
     for(const slot of ['rb1','wr1','wr2','te1']){
       const p = props[side][slot];
-      if(p) allPlayers.push({...p, team, color, slot});
+      if(p && !p.is_rookie) allPlayers.push({...p, team, color, slot});
     }
   }
   allPlayers.sort((a,b) => b.redzone_favorability - a.redzone_favorability);
