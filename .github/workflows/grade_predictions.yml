@@ -64,5 +64,17 @@ jobs:
           git config user.name "nfl-predictions-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/ docs/
-          git diff --staged --quiet || git commit -m "Grade predictions ($(date -u +%Y-%m-%dT%H:%M))"
-          git diff --staged --quiet || git push
+          if git diff --staged --quiet; then
+            echo "Nothing changed, nothing to push."
+          else
+            git commit -m "Grade predictions ($(date -u +%Y-%m-%dT%H:%M))"
+            # These files are entirely machine-generated -- if another
+            # scheduled workflow pushed in the meantime, always prefer THIS
+            # run's freshly-computed version rather than attempting a real
+            # line-by-line merge (which makes no sense for auto-generated
+            # JSON/HTML and previously caused literal unresolved conflict
+            # markers to get committed into the live site).
+            git fetch origin main
+            git rebase origin/main -X ours || git rebase --abort
+            git push
+          fi

@@ -38,5 +38,11 @@ jobs:
           git config user.name "nfl-predictions-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/ docs/
-          git diff --staged --quiet || git commit -m "Auto-update predictions ($(date -u +%Y-%m-%d))"
-          git push
+          if git diff --staged --quiet; then
+            echo "Nothing changed, nothing to push."
+          else
+            git commit -m "Auto-update predictions ($(date -u +%Y-%m-%d))"
+            git fetch origin main
+            git rebase origin/main -X ours || git rebase --abort
+            git push
+          fi
