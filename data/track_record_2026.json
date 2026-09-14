@@ -1,0 +1,135 @@
+{
+  "season": 2026,
+  "overall": {
+    "correct": 12,
+    "total": 15
+  },
+  "weeks": {
+    "1": {
+      "correct": 12,
+      "total": 15
+    }
+  },
+  "teams": {
+    "SEA": {
+      "correct": 1,
+      "total": 1
+    },
+    "NE": {
+      "correct": 1,
+      "total": 1
+    },
+    "LA": {
+      "correct": 0,
+      "total": 1
+    },
+    "SF": {
+      "correct": 0,
+      "total": 1
+    },
+    "CAR": {
+      "correct": 1,
+      "total": 1
+    },
+    "CHI": {
+      "correct": 1,
+      "total": 1
+    },
+    "CIN": {
+      "correct": 1,
+      "total": 1
+    },
+    "TB": {
+      "correct": 1,
+      "total": 1
+    },
+    "DET": {
+      "correct": 1,
+      "total": 1
+    },
+    "NO": {
+      "correct": 1,
+      "total": 1
+    },
+    "HOU": {
+      "correct": 1,
+      "total": 1
+    },
+    "BUF": {
+      "correct": 1,
+      "total": 1
+    },
+    "IND": {
+      "correct": 1,
+      "total": 1
+    },
+    "BAL": {
+      "correct": 1,
+      "total": 1
+    },
+    "JAX": {
+      "correct": 1,
+      "total": 1
+    },
+    "CLE": {
+      "correct": 1,
+      "total": 1
+    },
+    "PIT": {
+      "correct": 1,
+      "total": 1
+    },
+    "ATL": {
+      "correct": 1,
+      "total": 1
+    },
+    "TEN": {
+      "correct": 0,
+      "total": 1
+    },
+    "NYJ": {
+      "correct": 0,
+      "total": 1
+    },
+    "LAC": {
+      "correct": 0,
+      "total": 1
+    },
+    "ARI": {
+      "correct": 0,
+      "total": 1
+    },
+    "LV": {
+      "correct": 1,
+      "total": 1
+    },
+    "MIA": {
+      "correct": 1,
+      "total": 1
+    },
+    "MIN": {
+      "correct": 1,
+      "total": 1
+    },
+    "GB": {
+      "correct": 1,
+      "total": 1
+    },
+    "PHI": {
+      "correct": 1,
+      "total": 1
+    },
+    "WAS": {
+      "correct": 1,
+      "total": 1
+    },
+    "NYG": {
+      "correct": 1,
+      "total": 1
+    },
+    "DAL": {
+      "correct": 1,
+      "total": 1
+    }
+  }
+}
