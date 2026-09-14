@@ -138,7 +138,16 @@
         "confidence": 2,
         "note": "Market has SEA at 62% fair odds; this model has it at 50/50 after adjustment. Value is on the underdog getting points."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Ty Okada (S) listed as Out (Hamstring)",
+        "Tory Horton (WR) listed as Questionable (Hamstring)",
+        "Nick Emmanwori (S) listed as Questionable (Ankle)"
+      ],
+      "away_team_injuries": [
+        "Ben Brown (C) listed as Out (Knee)",
+        "TreVeyon Henderson (RB) listed as Out (Ankle)"
+      ]
     },
     {
       "home_team": "LA",
@@ -271,7 +280,14 @@
         "confidence": 4,
         "note": "Highest-confidence pick of the week."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Aaron Donald (DE) listed as Out (Not injury related - resting player)"
+      ],
+      "away_team_injuries": [
+        "Alfred Collins (DT) listed as Out (Knee)",
+        "James Thompson Jr. (DT) listed as Questionable (Hamstring)"
+      ]
     },
     {
       "home_team": "CAR",
@@ -400,7 +416,16 @@
       "raw_model_away_wp": 65.1,
       "context": null,
       "bet": null,
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Patrick Jones II (LB) listed as Out (Back)"
+      ],
+      "away_team_injuries": [
+        "Xavier Woods (S) listed as Questionable (Groin)",
+        "Tyson Bagent (QB) listed as Questionable (Back)",
+        "Rome Odunze (WR) listed as Questionable (Calf)",
+        "Ozzy Trapilo (T) listed as Questionable (Knee)"
+      ]
     },
     {
       "home_team": "CIN",
@@ -533,7 +558,16 @@
         "confidence": 3,
         "note": "Healthy Burrow argues for a bigger gap than the raw model shows."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Shemar Stewart (DE) listed as Doubtful (Knee)"
+      ],
+      "away_team_injuries": [
+        "Justin Skule (T) listed as Doubtful (Oblique)",
+        "Christian Rozeboom (LB) listed as Questionable (Foot)",
+        "Sean Tucker (RB) listed as Doubtful (Hamstring)",
+        "Jalen McMillan (WR) listed as Doubtful (Knee)"
+      ]
     },
     {
       "home_team": "DET",
@@ -662,7 +696,16 @@
       "raw_model_away_wp": 25.4,
       "context": null,
       "bet": null,
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Christian Izien (S) listed as Questionable (Groin)"
+      ],
+      "away_team_injuries": [
+        "Cameron Jordan (LB) listed as Out (Hamstring)",
+        "Alvin Kamara (RB) listed as Questionable (Knee)",
+        "Audric Estim\u00e9 (RB) listed as Out (Thigh)",
+        "Oscar Delp (TE) listed as Out (Hamstring)"
+      ]
     },
     {
       "home_team": "HOU",
@@ -791,7 +834,13 @@
       "raw_model_away_wp": 51.8,
       "context": null,
       "bet": null,
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": [
+        "Ty Johnson (RB) listed as Questionable (Hamstring)",
+        "Jordan Hancock (CB) listed as Questionable (Quadricep)",
+        "T.J. Sanders (DE) listed as Questionable (Knee)"
+      ]
     },
     {
       "home_team": "IND",
@@ -924,7 +973,15 @@
         "confidence": 3,
         "note": "Healthy Jackson makes Baltimore a different team than its 2025 numbers show."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Austin Ajiake (LB) listed as Out (Hamstring)"
+      ],
+      "away_team_injuries": [
+        "Nnamdi Madubuike (DT) listed as Out (Neck)",
+        "Devontez Walker (WR) listed as Questionable (Groin)",
+        "Teddye Buchanan (LB) listed as Out (Knee)"
+      ]
     },
     {
       "home_team": "JAX",
@@ -1057,7 +1114,14 @@
         "confidence": 3,
         "note": "Model was already very confident; losing Garrett widens the real gap further."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "LeQuint Allen Jr. (RB) listed as Questionable (Hip)"
+      ],
+      "away_team_injuries": [
+        "Teven Jenkins (G) listed as Out (Back)",
+        "Parker Brailsford (C) listed as Questionable (Thumb)"
+      ]
     },
     {
       "home_team": "PIT",
@@ -1186,7 +1250,18 @@
       "raw_model_away_wp": 39.7,
       "context": null,
       "bet": null,
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Joey Porter Jr. (CB) listed as Questionable (Back)"
+      ],
+      "away_team_injuries": [
+        "Za'Darius Smith (DE) listed as Questionable (Shoulder)",
+        "Tua Tagovailoa (QB) listed as Out (Oblique)",
+        "Michael Penix Jr. (QB) listed as Out (Knee)",
+        "Billy Bowman Jr. (CB) listed as Out (Achilles)",
+        "Cameron Williams (T) listed as Out (Ankle)"
+      ],
+      "away_qb_injury_alert": "Michael Penix Jr. listed as Out (Knee) on this week's official injury report."
     },
     {
       "home_team": "TEN",
@@ -1315,7 +1390,16 @@
       "raw_model_away_wp": 29.4,
       "context": null,
       "bet": null,
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Cedric Gray (LB) listed as Out (Concussion)"
+      ],
+      "away_team_injuries": [
+        "Tim Patrick (WR) listed as Out (Groin)",
+        "Kene Nwangwu (RB) listed as Doubtful (Back)",
+        "Joseph Ossai (DE) listed as Out (Foot)",
+        "D'Angelo Ponds (CB) listed as Doubtful (Calf)"
+      ]
     },
     {
       "home_team": "LAC",
@@ -1448,7 +1532,17 @@
         "confidence": 2,
         "note": "Market's -10.5 already prices the QB change accurately -- no edge to exploit."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Deane Leonard (CB) listed as Out (Abdomen)",
+        "Tuli Tuipulotu (DE) listed as Questionable (Hip)"
+      ],
+      "away_team_injuries": [
+        "Garrett Williams (CB) listed as Out (Achilles)",
+        "Isaiah Adams (G) listed as Out (Knee)",
+        "Dadrion Taylor-Demerson (S) listed as Out (Ribs)",
+        "Jeremiyah Love (RB) listed as Questionable (Ankle)"
+      ]
     },
     {
       "home_team": "LV",
@@ -1581,7 +1675,11 @@
         "confidence": 1,
         "note": "Too much roster turnover on both sides to trust either number."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Brock Bowers (TE) listed as Out (Knee)"
+      ],
+      "away_team_injuries": []
     },
     {
       "home_team": "MIN",
@@ -1714,7 +1812,14 @@
         "confidence": 2,
         "note": "Raw model favors GB heavily purely because MIN's old QB situation was so bad."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": [
+        "Aaron Banks (G) listed as Questionable (Knee)",
+        "Zach Bako-Bewele (T) listed as Questionable (Knee)",
+        "Ty'Ron Hopper (LB) listed as Questionable (Achilles)",
+        "Warren Brinson (DT) listed as Out (Calf)"
+      ]
     },
     {
       "home_team": "PHI",
@@ -1847,7 +1952,12 @@
         "confidence": 2,
         "note": "Model's 84% for Philly is largely an artifact of Daniels' missed time."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Jonathan Greenard (LB) listed as Out (Pectoral)",
+        "Eli Stowers (TE) listed as Out (Hamstring, Quadricep)"
+      ],
+      "away_team_injuries": []
     },
     {
       "home_team": "NYG",
@@ -1976,7 +2086,13 @@
       "raw_model_away_wp": 47.9,
       "context": null,
       "bet": null,
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Malik Nabers (WR) listed as Questionable (Knee)"
+      ],
+      "away_team_injuries": [
+        "Malik Davis (RB) listed as Out (Hip)"
+      ]
     },
     {
       "home_team": "KC",
@@ -2109,7 +2225,12 @@
         "confidence": 2,
         "note": "With Mahomes healthy, KC is better than the raw model's 40% suggests."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Chamarri Conner (S) listed as Out (Knee)",
+        "Josh Simmons (T) listed as Out (Back)"
+      ],
+      "away_team_injuries": []
     }
   ]
 }
