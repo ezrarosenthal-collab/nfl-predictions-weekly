@@ -66,6 +66,8 @@
   .sb-team-pct { font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:32px; }
   .sb-team-pct.dim { color:var(--text-dimmer); }
   .sb-footer { display:flex; justify-content:space-between; align-items:center; padding:12px 20px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-dim); }
+  .spread-pick-row { padding:8px 20px 12px; font-size:12px; color:var(--text-dim); border-top:1px solid var(--border-alt); }
+  .spread-edge { color:var(--text-dimmer); font-size:11px; }
   .sb-chevron { font-size:16px; color:var(--text-dimmer); transition:transform .15s; }
   .sb-chevron.open { transform:rotate(180deg); }
   .teams-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
@@ -312,6 +314,7 @@ function renderCard(g, i) {
         <span>Projected ${g.away_score_est.toFixed(1)} – ${g.home_score_est.toFixed(1)} · O/U ${(g.away_score_est+g.home_score_est).toFixed(1)}</span>
         <i class="sb-chevron" id="chev-${i}">⌄</i>
       </div>
+      ${g.spread_pick ? `<div class="spread-pick-row">Model spread pick: <strong style="color:${g.spread_pick.pick_home ? g.home_color : g.away_color}">${g.spread_pick.pick_home ? g.home_team : g.away_team} ${(() => { const disp = g.spread_pick.pick_home ? -g.spread_pick.market_line : g.spread_pick.market_line; return (disp>=0?'+':'') + disp.toFixed(1); })()}</strong> <span class="spread-edge">(our margin ${g.spread_pick.our_margin>=0?'+':''}${g.spread_pick.our_margin} vs line ${g.spread_pick.market_line>=0?'+':''}${g.spread_pick.market_line})</span></div>` : ''}
     </button>
     <div class="card-body" id="body-${i}">
       ${rawNote ? `<div class="sub-panel">${rawNote}</div>` : ''}
@@ -368,6 +371,25 @@ function openRecordModal(){
     return `<div class="modal-list-row"><span>Week ${w}</span><span>${wr.correct}-${wr.total-wr.correct}</span></div>`;
   }).join('');
   html += `</div>`;
+
+  if (rec.ats_overall && (rec.ats_overall.wins + rec.ats_overall.losses + rec.ats_overall.pushes) > 0) {
+    const ats = rec.ats_overall;
+    const atsDecided = ats.wins + ats.losses;
+    const atsPct = atsDecided ? Math.round((ats.wins/atsDecided)*100) : 0;
+    html += `<div class="modal-section-title">Against the spread</div>
+      <div class="modal-section-note">Our spread pick comes from the same margin the win probability is built on — see each game card for the pick itself. Pushes (landing exactly on the line) don't count as a win or a loss, same as standard sports-betting convention.</div>
+      <div class="record-hero" style="margin-bottom:12px">
+        <div class="record-hero-num">${ats.wins}-${ats.losses}${ats.pushes ? '-'+ats.pushes : ''}</div>
+        <div class="record-hero-sub">${atsPct}% of decided picks${ats.pushes ? ` · ${ats.pushes} push${ats.pushes>1?'es':''}` : ''}</div>
+      </div>
+      <div class="modal-list">`;
+    const atsWeekNums = Object.keys(rec.ats_weeks || {}).map(Number).sort((a,b)=>a-b);
+    html += atsWeekNums.map(w => {
+      const wr = rec.ats_weeks[w];
+      return `<div class="modal-list-row"><span>Week ${w}</span><span>${wr.wins}-${wr.losses}${wr.pushes?'-'+wr.pushes:''}</span></div>`;
+    }).join('');
+    html += `</div>`;
+  }
 
   html += `<div class="modal-section-title">Team accuracy rankings</div>
     <div class="modal-section-note">Every team involved in a correctly-predicted game gets credit — this ranks how reliable the model has been for each team, not their real win-loss record.</div>

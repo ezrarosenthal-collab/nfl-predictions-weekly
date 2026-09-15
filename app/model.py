@@ -95,6 +95,41 @@ def normal_cdf(x: float) -> float:
     return 0.5 * (1.0 + erf(x / sqrt(2)))
 
 
+def spread_pick(home_score_est: float, away_score_est: float, spread_line: float | None) -> dict | None:
+    """
+    Our spread pick for a game, derived directly from the same unified
+    margin the win probability comes from -- not a separate opinion.
+
+    spread_line convention (confirmed against real 2026 odds data, not
+    assumed): POSITIVE means the home team is favored by that many points
+    (e.g. spread_line=3.0 for a home team favored by 3 -- note this is the
+    opposite sign convention from how a sportsbook board displays it,
+    where the favorite shows a negative number).
+
+    Our predicted margin is home_score_est - away_score_est. We pick
+    whichever side of that market line our own margin falls on:
+      - our_margin > spread_line -> we think the home team beats the
+        market's expectation of them -> pick home to cover
+      - our_margin < spread_line -> pick away to cover
+      - exactly equal -> no real edge either way; still returns a pick
+        (defaults to home) but with edge_points = 0, and the UI should
+        treat a razor-thin edge as low-confidence, not hidden
+
+    Returns None if no market spread is available for this game yet.
+    """
+    if spread_line is None:
+        return None
+    our_margin = home_score_est - away_score_est
+    edge_points = our_margin - spread_line
+    pick_home = edge_points >= 0
+    return {
+        "our_margin": round(our_margin, 1),
+        "market_line": spread_line,
+        "edge_points": round(edge_points, 1),
+        "pick_home": pick_home,
+    }
+
+
 @dataclass
 class GamePrediction:
     home_team: str

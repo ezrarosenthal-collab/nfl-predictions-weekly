@@ -104,6 +104,7 @@ def build_week_predictions(season: int, week: int) -> dict:
             league_avg_ppg=league_avg_ppg,
             neutral_site=neutral,
         )
+        market_odds = odds.get_game_odds(g)
         pred_dict = {
             "home_team": home,
             "away_team": away,
@@ -115,7 +116,8 @@ def build_week_predictions(season: int, week: int) -> dict:
             "home_score_est": pred.home_score_est,
             "away_score_est": pred.away_score_est,
             "feature_breakdown": pred.feature_breakdown,
-            "market": odds.get_game_odds(g),
+            "market": market_odds,
+            "spread_pick": model.spread_pick(pred.home_score_est, pred.away_score_est, market_odds.get("spread_line")),
             # Raw stats for every game (not just ones with a manual
             # override) so the site can always show the full season-stats
             # snapshot table and QB info, not just the researched games.
