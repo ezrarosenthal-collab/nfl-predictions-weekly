@@ -181,3 +181,40 @@ def test_build_track_record_includes_ats_fields(tmp_path):
 
     assert record["ats_overall"] == {"wins": 0, "losses": 0, "pushes": 1}
     assert record["ats_weeks"]["1"] == {"wins": 0, "losses": 0, "pushes": 1}
+
+
+def test_load_all_predictions_skips_empty_file_instead_of_crashing(tmp_path):
+    """
+    Regression test for the exact real failure: an auto-generated
+    predictions file left empty mid-recovery from a git collision should
+    be skipped, not crash the whole grading run.
+    """
+    good_path = tmp_path / "predictions_2026_wk1.json"
+    with open(good_path, "w") as f:
+        json.dump({"season": 2026, "week": 1, "games": []}, f)
+
+    empty_path = tmp_path / "predictions_2026_wk2.json"
+    empty_path.write_text("")  # exactly what "select all, delete" leaves behind
+
+    with patch("app.track_record.DATA_DIR", tmp_path):
+        from app.track_record import _load_all_predictions
+        result = _load_all_predictions(2026)
+
+    assert 1 in result
+    assert 2 not in result  # skipped, not crashed
+
+
+def test_load_all_predictions_skips_corrupted_file_instead_of_crashing(tmp_path):
+    good_path = tmp_path / "predictions_2026_wk1.json"
+    with open(good_path, "w") as f:
+        json.dump({"season": 2026, "week": 1, "games": []}, f)
+
+    corrupted_path = tmp_path / "predictions_2026_wk2.json"
+    corrupted_path.write_text('{"season": 2026, <<<<<<< HEAD\n"week": 2}')
+
+    with patch("app.track_record.DATA_DIR", tmp_path):
+        from app.track_record import _load_all_predictions
+        result = _load_all_predictions(2026)
+
+    assert 1 in result
+    assert 2 not in result
