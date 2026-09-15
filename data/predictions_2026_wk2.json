@@ -88,10 +88,10 @@
       "market": {
         "spread_line": 4.5,
         "total_line": 53.5,
-        "moneyline_home": -205.0,
-        "moneyline_away": 170.0,
-        "fair_odds_home": 64.5,
-        "fair_odds_away": 35.5
+        "moneyline_home": -218.0,
+        "moneyline_away": 180.0,
+        "fair_odds_home": 65.7,
+        "fair_odds_away": 34.3
       },
       "home_stats": {
         "ppg": 29.8353,
@@ -147,9 +147,7 @@
         "confidence": 2,
         "note": "Model margin is +0.5 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "ATL",
@@ -228,11 +226,11 @@
       ],
       "market": {
         "spread_line": -1.5,
-        "total_line": 44.5,
-        "moneyline_home": 105.0,
-        "moneyline_away": -125.0,
-        "fair_odds_home": 46.8,
-        "fair_odds_away": 53.2
+        "total_line": 43.5,
+        "moneyline_home": 110.0,
+        "moneyline_away": -130.0,
+        "fair_odds_home": 45.7,
+        "fair_odds_away": 54.3
       },
       "home_stats": {
         "ppg": 19.2118,
@@ -265,9 +263,9 @@
         "int_rate": 0.0224
       },
       "home_qb": {
-        "name": "Michael Penix Jr.",
-        "rate": 86.7,
-        "note": null
+        "name": "Cooper Rush",
+        "rate": null,
+        "note": "Chaotic QB situation: Michael Penix Jr. (ACL recovery) hasn't played, Tua Tagovailoa was named starter but suffered an oblique injury in practice, so Rush made the Week 1 start. Reports suggest the team wants Penix as starter once healthy (target: Week 2-3) -- treat this as unsettled and likely to change week to week."
       },
       "away_qb": {
         "name": "Bryce Young",
@@ -288,9 +286,7 @@
         "confidence": 4,
         "note": "Model margin is +4.2 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "BAL",
@@ -429,9 +425,7 @@
         "confidence": 2,
         "note": "Model margin is -1.3 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "CHI",
@@ -570,9 +564,7 @@
         "confidence": 5,
         "note": "Model margin is +5.5 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "HOU",
@@ -711,9 +703,7 @@
         "confidence": 3,
         "note": "Model margin is +2.2 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "NE",
@@ -792,7 +782,7 @@
       ],
       "market": {
         "spread_line": 5.5,
-        "total_line": 42.5,
+        "total_line": 41.5,
         "moneyline_home": -230.0,
         "moneyline_away": 190.0,
         "fair_odds_home": 66.9,
@@ -852,9 +842,7 @@
         "confidence": 2,
         "note": "Model margin is +1.0 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "NYJ",
@@ -993,9 +981,7 @@
         "confidence": 5,
         "note": "Model margin is -5.2 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "TB",
@@ -1134,9 +1120,7 @@
         "confidence": 3,
         "note": "Model margin is +2.1 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "TEN",
@@ -1275,9 +1259,7 @@
         "confidence": 4,
         "note": "Model margin is -4.8 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "DEN",
@@ -1416,9 +1398,7 @@
         "confidence": 5,
         "note": "Model margin is -10.5 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "LAC",
@@ -1557,9 +1537,7 @@
         "confidence": 1,
         "note": "Model margin is +0.3 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "ARI",
@@ -1698,9 +1676,7 @@
         "confidence": 2,
         "note": "Model margin is -0.9 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "DAL",
@@ -1839,9 +1815,7 @@
         "confidence": 2,
         "note": "Model margin is +1.1 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "SF",
@@ -1919,7 +1893,7 @@
         }
       ],
       "market": {
-        "spread_line": 13.5,
+        "spread_line": 12.5,
         "total_line": 45.5,
         "moneyline_home": -950.0,
         "moneyline_away": 625.0,
@@ -1971,18 +1945,16 @@
       "context": null,
       "spread_pick": {
         "our_margin": 10.8,
-        "market_line": 13.5,
-        "edge_points": -2.7,
+        "market_line": 12.5,
+        "edge_points": -1.7,
         "pick_home": false
       },
       "bet": {
-        "pick": "MIA +13.5",
+        "pick": "MIA +12.5",
         "confidence": 3,
-        "note": "Model margin is -2.7 points from the market line."
+        "note": "Model margin is -1.7 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "KC",
@@ -2121,9 +2093,7 @@
         "confidence": 2,
         "note": "Model margin is -1.3 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "LA",
@@ -2262,9 +2232,7 @@
         "confidence": 1,
         "note": "Model margin is +0.2 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     }
   ]
 }
