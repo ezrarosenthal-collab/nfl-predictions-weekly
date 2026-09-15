@@ -285,7 +285,7 @@ function renderCard(g, i) {
   if (g.home_qb || g.away_qb) {
     const qbBlock = (qb, color) => qb ? `<div class="qb-block">
         <span class="qb-name" style="color:${color}">${esc(qb.name)}</span>
-        <span class="qb-rate">${qb.rate.toFixed(1)} rating</span>
+        <span class="qb-rate">${qb.rate!=null ? qb.rate.toFixed(1)+' rating' : 'No rating on file yet'}</span>
         ${qb.note ? `<p class="qb-note">${esc(qb.note)}</p>` : ''}
       </div>` : '<div class="qb-block"></div>';
     qbHtml = `<div class="sub-panel"><div class="sub-panel-title">Quarterbacks</div>
@@ -311,15 +311,14 @@ function renderCard(g, i) {
         <div class="sb-team-pct" style="color:${g.home_color}">${homeWp.toFixed(0)}%</div>
       </div>
       <div class="sb-footer">
-        <span>Tap for this week's prediction</span>
+        <span>Projected ${g.away_score_est.toFixed(1)} – ${g.home_score_est.toFixed(1)} · O/U ${(g.away_score_est+g.home_score_est).toFixed(1)}</span>
         <i class="sb-chevron" id="chev-${i}">⌄</i>
       </div>
     </button>
     <div class="card-body" id="body-${i}">
       <div class="sub-panel">
-        <div class="sub-panel-title">This Week's Prediction</div>
-        <div style="font-size:13px;color:var(--text-dim);margin-bottom:${g.spread_pick?'8px':'0'}">Projected ${g.away_score_est.toFixed(1)} – ${g.home_score_est.toFixed(1)} · O/U ${(g.away_score_est+g.home_score_est).toFixed(1)}</div>
-        ${g.spread_pick ? `<div style="font-size:12px;color:var(--text-dim)">Model spread pick: <strong style="color:${g.spread_pick.pick_home ? g.home_color : g.away_color}">${g.spread_pick.pick_home ? g.home_team : g.away_team} ${(() => { const disp = g.spread_pick.pick_home ? -g.spread_pick.market_line : g.spread_pick.market_line; return (disp>=0?'+':'') + disp.toFixed(1); })()}</strong> <span class="spread-edge">(our margin ${g.spread_pick.our_margin>=0?'+':''}${g.spread_pick.our_margin} vs line ${g.spread_pick.market_line>=0?'+':''}${g.spread_pick.market_line})</span></div>` : ''}
+        <div class="sub-panel-title">Against The Spread</div>
+        ${g.spread_pick ? `<div style="font-size:12px;color:var(--text-dim)">Model spread pick: <strong style="color:${g.spread_pick.pick_home ? g.home_color : g.away_color}">${g.spread_pick.pick_home ? g.home_team : g.away_team} ${(() => { const disp = g.spread_pick.pick_home ? -g.spread_pick.market_line : g.spread_pick.market_line; return (disp>=0?'+':'') + disp.toFixed(1); })()}</strong> <span class="spread-edge">(our margin ${g.spread_pick.our_margin>=0?'+':''}${g.spread_pick.our_margin} vs line ${g.spread_pick.market_line>=0?'+':''}${g.spread_pick.market_line})</span></div>` : `<div style="font-size:12px;color:var(--text-dimmer)">No market spread available yet</div>`}
       </div>
       ${rawNote ? `<div class="sub-panel">${rawNote}</div>` : ''}
       ${betHtml}

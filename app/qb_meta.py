@@ -4,7 +4,7 @@ but doesn't have a name/rating to attach without this file being updated."""
 
 QB_META = {
     "ARI": {"name": "Jacoby Brissett", "rate": 78.2, "note": "Kyler Murray cut for the season (foot); Brissett starts under new HC Mike LaFleur."},
-    "ATL": {"name": "Michael Penix Jr.", "rate": 86.7, "note": None},
+    "ATL": {"name": "Cooper Rush", "rate": None, "note": "Chaotic QB situation: Michael Penix Jr. (ACL recovery) hasn't played, Tua Tagovailoa was named starter but suffered an oblique injury in practice, so Rush made the Week 1 start. Reports suggest the team wants Penix as starter once healthy (target: Week 2-3) -- treat this as unsettled and likely to change week to week."},
     "BAL": {"name": "Lamar Jackson", "rate": 96.7, "note": "Missed multiple games in 2025 to injury -- trailing stats understate a healthy Jackson."},
     "BUF": {"name": "Josh Allen", "rate": 104.6, "note": None},
     "CAR": {"name": "Bryce Young", "rate": 87.9, "note": None},

@@ -1,10 +1,19 @@
-name: Hourly QB injury check
+name: Hourly injury check + grading
 
-# Lightweight, runs every hour, checks the NFL's official injury reports
-# (via nflverse, the same source used for schedules/play-by-play) for the
-# currently-listed starting QB on each team in this week's games. Does NOT
-# re-download play-by-play or recompute the model -- see
-# scripts/hourly_injury_check.py for why that's intentional.
+# Runs every hour, year-round, and does two things:
+# 1. Checks the NFL's official injury reports for each team's currently-
+#    listed starting QB (see scripts/hourly_injury_check.py).
+# 2. Grades any newly-completed games against real final scores.
+#
+# Grading used to run ONLY on six specific times tied to the normal game
+# schedule (see grade_predictions.yml) -- but that missed a real game
+# (DEN @ KC) that didn't fall cleanly into one of those windows. Rather
+# than guess at more special-case times, grading now also runs here,
+# every single hour, so ANY completed game gets picked up within an hour
+# of finishing, regardless of when it was actually played. The six-time
+# workflow still exists too (an early check right after the normal
+# windows doesn't hurt), but this hourly run is what actually guarantees
+# nothing gets missed.
 
 on:
   schedule:
@@ -30,6 +39,14 @@ jobs:
       - name: Check QB injury status
         run: python scripts/hourly_injury_check.py --season 2026
 
+      - name: Grade any newly-completed games
+        run: python scripts/grade_predictions.py --season 2026
+
+      - name: Re-render site with updated track record
+        run: |
+          WEEK=$(python -c "import sys; sys.path.insert(0,'.'); from app.schedule import current_week; print(current_week(2026))")
+          python scripts/render_html.py --season 2026 --week $WEEK
+
       - name: Commit and push if anything changed
         run: |
           git config user.name "nfl-predictions-bot"
@@ -38,7 +55,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "Nothing changed, nothing to push."
           else
-            git commit -m "Hourly injury check ($(date -u +%Y-%m-%dT%H:%M))"
+            git commit -m "Hourly injury check + grading ($(date -u +%Y-%m-%dT%H:%M))"
             git fetch origin main
             git rebase origin/main -X ours || git rebase --abort
             git push

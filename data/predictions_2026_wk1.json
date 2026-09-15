@@ -1238,9 +1238,9 @@
         "note": null
       },
       "away_qb": {
-        "name": "Michael Penix Jr.",
-        "rate": 86.7,
-        "note": null
+        "name": "Cooper Rush",
+        "rate": null,
+        "note": "Chaotic QB situation: Michael Penix Jr. (ACL recovery) hasn't played, Tua Tagovailoa was named starter but suffered an oblique injury in practice, so Rush made the Week 1 start. Reports suggest the team wants Penix as starter once healthy (target: Week 2-3) -- treat this as unsettled and likely to change week to week."
       },
       "raw_model_home_wp": 60.3,
       "raw_model_away_wp": 39.7,
