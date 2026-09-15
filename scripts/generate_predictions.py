@@ -117,7 +117,6 @@ def build_week_predictions(season: int, week: int) -> dict:
             "away_score_est": pred.away_score_est,
             "feature_breakdown": pred.feature_breakdown,
             "market": market_odds,
-            "spread_pick": model.spread_pick(pred.home_score_est, pred.away_score_est, market_odds.get("spread_line")),
             # Raw stats for every game (not just ones with a manual
             # override) so the site can always show the full season-stats
             # snapshot table and QB info, not just the researched games.
@@ -127,6 +126,25 @@ def build_week_predictions(season: int, week: int) -> dict:
             "away_qb": QB_META.get(away),
         }
         pred_dict = overrides_mod.apply_override(pred_dict, season, week, away, home, override_map)
+
+        # IMPORTANT: compute the spread pick AFTER the override, not before.
+        # An override can change home_score_est/away_score_est (see
+        # overrides.apply_override), and the spread pick must be built from
+        # whatever the FINAL displayed score is -- otherwise the card can
+        # show a "Projected" score reflecting the override, right next to a
+        # "Model spread pick" still computed from the stale, pre-override
+        # margin. That exact contradiction was found in production and is
+        # the reason this line lives here now, not up in the dict literal.
+        pred_dict["spread_pick"] = model.spread_pick(
+            pred_dict["home_score_est"], pred_dict["away_score_est"], market_odds.get("spread_line")
+        )
+
+        # The ONE bet recommendation shown on the card, built entirely from
+        # the spread pick above -- see model.build_auto_bet()'s docstring
+        # for why this replaced a separately hand-written pick/confidence
+        # that could (and did, in production) silently disagree with it.
+        override_note = pred_dict.pop("_override_bet_note", None)
+        pred_dict["bet"] = model.build_auto_bet(pred_dict["spread_pick"], home, away, note=override_note)
 
         watch_notes = []
         for team in (home, away):

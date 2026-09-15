@@ -67,7 +67,7 @@ def apply_override(prediction: dict, season: int, week: int, away: str, home: st
     prediction["raw_model_home_wp"] = prediction["home_win_prob"]
     prediction["raw_model_away_wp"] = prediction["away_win_prob"]
     prediction["context"] = None
-    prediction["bet"] = None
+    prediction["_override_bet_note"] = None
 
     if ov:
         prediction["context"] = ov.get("context")
@@ -93,6 +93,13 @@ def apply_override(prediction: dict, season: int, week: int, away: str, home: st
             prediction["home_score_est"] = round(projected_total / 2 + implied_margin / 2, 1)
             prediction["away_score_est"] = round(projected_total / 2 - implied_margin / 2, 1)
         if ov.get("bet"):
-            prediction["bet"] = ov["bet"]
+            # Only the reasoning text carries through -- NOT the pick or
+            # confidence, which used to be hand-written here and could
+            # silently contradict the model's actual current spread_pick
+            # (a real bug found in production). The pick/confidence shown
+            # on the site are always built fresh from spread_pick, in
+            # scripts/generate_predictions.py, after this function runs --
+            # see app/model.py's build_auto_bet().
+            prediction["_override_bet_note"] = ov["bet"].get("note")
 
     return prediction

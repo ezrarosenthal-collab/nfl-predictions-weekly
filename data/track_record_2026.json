@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
   "season": 2026,
   "overall": {
@@ -134,18 +133,15 @@
     }
   },
   "ats_overall": {
-    "wins": 4,
-    "losses": 10,
+    "wins": 6,
+    "losses": 8,
     "pushes": 1
   },
   "ats_weeks": {
     "1": {
-      "wins": 4,
-      "losses": 10,
+      "wins": 6,
+      "losses": 8,
       "pushes": 1
     }
   }
 }
-=======
-
->>>>>>> 323fd9171adcafdfbf2ad0d8d468c1527c0f2888

@@ -130,6 +130,50 @@ def spread_pick(home_score_est: float, away_score_est: float, spread_line: float
     }
 
 
+def build_auto_bet(pick: dict | None, home_team: str, away_team: str, note: str | None = None) -> dict | None:
+    """
+    Builds the ONE bet recommendation shown on a game card, derived
+    entirely from the current spread_pick -- never a separately
+    hand-written pick string. This exists because of a real, found bug:
+    an earlier version of this project let a manually hand-written pick
+    (from data/overrides.json, written once and never re-synced) sit
+    right next to this automated spread_pick, and the two could silently
+    contradict each other on the same card (e.g. "Cincinnati -3.5" next
+    to "Model spread pick: TB +3.5" once the model's numbers moved).
+
+    `note` is the one thing still allowed to come from hand research
+    (data/overrides.json's "bet.note") -- reasoning text, not a
+    competing prediction, so it can't create the same contradiction.
+
+    Confidence is derived from edge_points (how far our margin is from
+    the market line) rather than a guessed number, for the same reason:
+    a hand-set confidence can't quietly drift out of sync with the real,
+    current edge the way a hand-set pick could.
+    """
+    if pick is None:
+        return None
+
+    picked_team = home_team if pick["pick_home"] else away_team
+    displayed_line = -pick["market_line"] if pick["pick_home"] else pick["market_line"]
+    sign = "+" if displayed_line >= 0 else ""
+    pick_text = f"{picked_team} {sign}{displayed_line:.1f}"
+
+    edge = abs(pick["edge_points"])
+    if edge < 0.5:
+        confidence = 1
+    elif edge < 1.5:
+        confidence = 2
+    elif edge < 3.0:
+        confidence = 3
+    elif edge < 5.0:
+        confidence = 4
+    else:
+        confidence = 5
+
+    default_note = f"Model margin is {pick['edge_points']:+.1f} points from the market line."
+    return {"pick": pick_text, "confidence": confidence, "note": note or default_note}
+
+
 @dataclass
 class GamePrediction:
     home_team: str

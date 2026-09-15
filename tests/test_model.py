@@ -3,7 +3,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from app.model import sigmoid, zscore, predict_game
+from app.model import build_auto_bet, sigmoid, spread_pick, zscore, predict_game
 
 
 def test_sigmoid_midpoint():
@@ -162,3 +162,43 @@ def test_margin_calibration_matches_real_market_behavior():
     assert 57 < wp_at_plus3 < 63, f"a +3 margin should be ~60% (real-market-like), got {wp_at_plus3:.1f}%"
     assert 69 < wp_at_plus7 < 75, f"a +7 margin should be ~72% (real-market-like), got {wp_at_plus7:.1f}%"
     assert 77 < wp_at_plus10 < 83, f"a +10 margin should be ~80% (real-market-like), got {wp_at_plus10:.1f}%"
+
+
+def test_build_auto_bet_none_when_no_spread_pick():
+    assert build_auto_bet(None, "HOME", "AWAY") is None
+
+
+def test_build_auto_bet_pick_text_matches_the_spread_pick_exactly():
+    """
+    The whole point of build_auto_bet: there is now exactly ONE pick
+    shown on a card, always derived from spread_pick. This directly
+    reproduces the real, found bug -- a separately hand-written "bet"
+    pick (from overrides.json) disagreeing with the automated spread
+    pick on the same TB @ CIN card.
+    """
+    pick = spread_pick(home_score_est=30.2, away_score_est=24.0, spread_line=3.5)  # real post-fix TB@CIN numbers
+    bet = build_auto_bet(pick, home_team="CIN", away_team="TB")
+    assert bet["pick"] == "CIN -3.5", (
+        "The bet card's pick must match spread_pick's own read of the game -- "
+        "CIN is favored by more than the 3.5 line here, so CIN must be the pick, "
+        "not a stale, separately-written 'Cincinnati -3.5' or a wrong 'TB +3.5'."
+    )
+
+
+def test_build_auto_bet_confidence_scales_with_edge_size():
+    small_edge = build_auto_bet(spread_pick(24.2, 24.0, spread_line=3.5), "H", "A")  # tiny edge
+    big_edge = build_auto_bet(spread_pick(35.0, 14.0, spread_line=3.5), "H", "A")   # huge edge
+    assert small_edge["confidence"] < big_edge["confidence"]
+
+
+def test_build_auto_bet_uses_override_note_when_provided():
+    pick = spread_pick(30.2, 24.0, spread_line=3.5)
+    bet = build_auto_bet(pick, "CIN", "TB", note="Healthy Burrow argues for a bigger gap.")
+    assert bet["note"] == "Healthy Burrow argues for a bigger gap."
+
+
+def test_build_auto_bet_generates_default_note_without_override():
+    pick = spread_pick(30.2, 24.0, spread_line=3.5)
+    bet = build_auto_bet(pick, "CIN", "TB", note=None)
+    assert bet["note"]  # non-empty, auto-generated
+    assert "Burrow" not in bet["note"]  # definitely not leaking unrelated hand-written text

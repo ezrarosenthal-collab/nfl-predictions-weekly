@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
   "season": 2026,
   "week": 1,
@@ -91,12 +90,6 @@
         "fair_odds_home": 60.0,
         "fair_odds_away": 40.0
       },
-      "spread_pick": {
-        "our_margin": 0.6,
-        "market_line": 3.0,
-        "edge_points": -2.4,
-        "pick_home": false
-      },
       "home_stats": {
         "ppg": 28.4118,
         "papg": 17.1765,
@@ -140,9 +133,15 @@
       "raw_model_home_wp": 52.0,
       "raw_model_away_wp": 48.0,
       "context": "Super Bowl LX rematch. NE traded for A.J. Brown + Romeo Doubs and rebuilt the interior O-line; SEA lost RB Kenneth Walker III (SB MVP) and OC Klint Kubiak. Those roughly cancel out.",
+      "spread_pick": {
+        "our_margin": 0.0,
+        "market_line": 3.0,
+        "edge_points": -3.0,
+        "pick_home": false
+      },
       "bet": {
-        "pick": "New England +3.5",
-        "confidence": 2,
+        "pick": "NE +3.0",
+        "confidence": 4,
         "note": "Market has SEA at 62% fair odds; this model has it at 50/50 after adjustment. Value is on the underdog getting points."
       },
       "qb_watch": null
@@ -230,12 +229,6 @@
         "fair_odds_home": 65.7,
         "fair_odds_away": 34.3
       },
-      "spread_pick": {
-        "our_margin": 7.6,
-        "market_line": 3.5,
-        "edge_points": 4.1,
-        "pick_home": true
-      },
       "home_stats": {
         "ppg": 30.4706,
         "papg": 20.3529,
@@ -279,9 +272,15 @@
       "raw_model_home_wp": 74.0,
       "raw_model_away_wp": 26.0,
       "context": "Rams traded for Myles Garrett + Trent McDuffie and got Aaron Donald out of retirement. SF travels with Kittle, Bosa, and Mike Evans all working back from injury, plus a rotational DL already ruled out.",
+      "spread_pick": {
+        "our_margin": 10.4,
+        "market_line": 3.5,
+        "edge_points": 6.9,
+        "pick_home": true
+      },
       "bet": {
-        "pick": "LA Rams -3.5",
-        "confidence": 4,
+        "pick": "LA -3.5",
+        "confidence": 5,
         "note": "Highest-confidence pick of the week."
       },
       "qb_watch": null
@@ -369,12 +368,6 @@
         "fair_odds_home": 40.0,
         "fair_odds_away": 60.0
       },
-      "spread_pick": {
-        "our_margin": -4.6,
-        "market_line": -3.0,
-        "edge_points": -1.6,
-        "pick_home": false
-      },
       "home_stats": {
         "ppg": 18.2941,
         "papg": 22.3529,
@@ -418,7 +411,17 @@
       "raw_model_home_wp": 34.9,
       "raw_model_away_wp": 65.1,
       "context": null,
-      "bet": null,
+      "spread_pick": {
+        "our_margin": -4.6,
+        "market_line": -3.0,
+        "edge_points": -1.6,
+        "pick_home": false
+      },
+      "bet": {
+        "pick": "CHI -3.0",
+        "confidence": 3,
+        "note": "Model margin is -1.6 points from the market line."
+      },
       "qb_watch": null
     },
     {
@@ -504,12 +507,6 @@
         "fair_odds_home": 64.5,
         "fair_odds_away": 35.5
       },
-      "spread_pick": {
-        "our_margin": 0.6,
-        "market_line": 3.5,
-        "edge_points": -2.9,
-        "pick_home": false
-      },
       "home_stats": {
         "ppg": 24.3529,
         "papg": 28.9412,
@@ -553,8 +550,14 @@
       "raw_model_home_wp": 51.7,
       "raw_model_away_wp": 48.3,
       "context": "Joe Burrow missed 9 games in 2025 to a toe injury requiring surgery -- trailing stats include a large Burrow-less stretch. Bengals also traded for DT Dexter Lawrence and overhauled the defense.",
+      "spread_pick": {
+        "our_margin": 6.2,
+        "market_line": 3.5,
+        "edge_points": 2.7,
+        "pick_home": true
+      },
       "bet": {
-        "pick": "Cincinnati -3.5",
+        "pick": "CIN -3.5",
         "confidence": 3,
         "note": "Healthy Burrow argues for a bigger gap than the raw model shows."
       },
@@ -643,12 +646,6 @@
         "fair_odds_home": 73.4,
         "fair_odds_away": 26.6
       },
-      "spread_pick": {
-        "our_margin": 7.9,
-        "market_line": 7.0,
-        "edge_points": 0.9,
-        "pick_home": true
-      },
       "home_stats": {
         "ppg": 28.2941,
         "papg": 24.2941,
@@ -692,7 +689,17 @@
       "raw_model_home_wp": 74.6,
       "raw_model_away_wp": 25.4,
       "context": null,
-      "bet": null,
+      "spread_pick": {
+        "our_margin": 7.9,
+        "market_line": 7.0,
+        "edge_points": 0.9,
+        "pick_home": true
+      },
+      "bet": {
+        "pick": "DET -7.0",
+        "confidence": 2,
+        "note": "Model margin is +0.9 points from the market line."
+      },
       "qb_watch": null
     },
     {
@@ -778,12 +785,6 @@
         "fair_odds_home": 49.6,
         "fair_odds_away": 50.4
       },
-      "spread_pick": {
-        "our_margin": -0.6,
-        "market_line": -1.5,
-        "edge_points": 0.9,
-        "pick_home": true
-      },
       "home_stats": {
         "ppg": 23.7647,
         "papg": 17.3529,
@@ -827,7 +828,17 @@
       "raw_model_home_wp": 48.2,
       "raw_model_away_wp": 51.8,
       "context": null,
-      "bet": null,
+      "spread_pick": {
+        "our_margin": -0.6,
+        "market_line": -1.5,
+        "edge_points": 0.9,
+        "pick_home": true
+      },
+      "bet": {
+        "pick": "HOU +1.5",
+        "confidence": 2,
+        "note": "Model margin is +0.9 points from the market line."
+      },
       "qb_watch": null
     },
     {
@@ -913,12 +924,6 @@
         "fair_odds_home": 40.7,
         "fair_odds_away": 59.3
       },
-      "spread_pick": {
-        "our_margin": 4.6,
-        "market_line": -3.0,
-        "edge_points": 7.6,
-        "pick_home": true
-      },
       "home_stats": {
         "ppg": 27.4118,
         "papg": 24.2353,
@@ -962,9 +967,15 @@
       "raw_model_home_wp": 65.1,
       "raw_model_away_wp": 34.9,
       "context": "Both starting QBs missed major 2025 time to injury -- Lamar Jackson (multiple games) and Daniel Jones (season-ending Achilles). Baltimore also fired John Harbaugh for Jesse Minter.",
+      "spread_pick": {
+        "our_margin": -3.6,
+        "market_line": -3.0,
+        "edge_points": -0.6,
+        "pick_home": false
+      },
       "bet": {
-        "pick": "Baltimore ML",
-        "confidence": 3,
+        "pick": "BAL -3.0",
+        "confidence": 2,
         "note": "Healthy Jackson makes Baltimore a different team than its 2025 numbers show."
       },
       "qb_watch": null
@@ -1052,12 +1063,6 @@
         "fair_odds_home": 79.1,
         "fair_odds_away": 20.9
       },
-      "spread_pick": {
-        "our_margin": 14.2,
-        "market_line": 8.5,
-        "edge_points": 5.7,
-        "pick_home": true
-      },
       "home_stats": {
         "ppg": 27.8824,
         "papg": 19.7647,
@@ -1101,9 +1106,15 @@
       "raw_model_home_wp": 88.3,
       "raw_model_away_wp": 11.7,
       "context": "Cleveland traded away Myles Garrett, their best defensive player, to the Rams -- makes an already-bad team on the numbers worse, not better.",
+      "spread_pick": {
+        "our_margin": 15.2,
+        "market_line": 8.5,
+        "edge_points": 6.7,
+        "pick_home": true
+      },
       "bet": {
-        "pick": "Jacksonville -7.5",
-        "confidence": 3,
+        "pick": "JAX -8.5",
+        "confidence": 5,
         "note": "Model was already very confident; losing Garrett widens the real gap further."
       },
       "qb_watch": null
@@ -1191,12 +1202,6 @@
         "fair_odds_home": 71.8,
         "fair_odds_away": 28.2
       },
-      "spread_pick": {
-        "our_margin": 3.1,
-        "market_line": 6.5,
-        "edge_points": -3.4,
-        "pick_home": false
-      },
       "home_stats": {
         "ppg": 23.3529,
         "papg": 22.7647,
@@ -1240,7 +1245,17 @@
       "raw_model_home_wp": 60.3,
       "raw_model_away_wp": 39.7,
       "context": null,
-      "bet": null,
+      "spread_pick": {
+        "our_margin": 3.1,
+        "market_line": 6.5,
+        "edge_points": -3.4,
+        "pick_home": false
+      },
+      "bet": {
+        "pick": "ATL +6.5",
+        "confidence": 4,
+        "note": "Model margin is -3.4 points from the market line."
+      },
       "qb_watch": null
     },
     {
@@ -1326,12 +1341,6 @@
         "fair_odds_home": 51.7,
         "fair_odds_away": 48.3
       },
-      "spread_pick": {
-        "our_margin": 6.5,
-        "market_line": 1.5,
-        "edge_points": 5.0,
-        "pick_home": true
-      },
       "home_stats": {
         "ppg": 16.7059,
         "papg": 28.1176,
@@ -1375,7 +1384,17 @@
       "raw_model_home_wp": 70.6,
       "raw_model_away_wp": 29.4,
       "context": null,
-      "bet": null,
+      "spread_pick": {
+        "our_margin": 6.5,
+        "market_line": 1.5,
+        "edge_points": 5.0,
+        "pick_home": true
+      },
+      "bet": {
+        "pick": "TEN -1.5",
+        "confidence": 5,
+        "note": "Model margin is +5.0 points from the market line."
+      },
       "qb_watch": null
     },
     {
@@ -1461,12 +1480,6 @@
         "fair_odds_home": 78.7,
         "fair_odds_away": 21.3
       },
-      "spread_pick": {
-        "our_margin": 5.5,
-        "market_line": 8.5,
-        "edge_points": -3.0,
-        "pick_home": false
-      },
       "home_stats": {
         "ppg": 21.6471,
         "papg": 20.0,
@@ -1510,9 +1523,15 @@
       "raw_model_home_wp": 68.1,
       "raw_model_away_wp": 31.9,
       "context": "Arizona cut Kyler Murray for the season (foot injury) and fired the offensive staff -- Jacoby Brissett starts under a brand-new HC. Trailing stats still include Murray's healthy play.",
+      "spread_pick": {
+        "our_margin": 13.9,
+        "market_line": 8.5,
+        "edge_points": 5.4,
+        "pick_home": true
+      },
       "bet": {
-        "pick": "Pass on this specific line",
-        "confidence": 2,
+        "pick": "LAC -8.5",
+        "confidence": 5,
         "note": "Market's -10.5 already prices the QB change accurately -- no edge to exploit."
       },
       "qb_watch": null
@@ -1600,12 +1619,6 @@
         "fair_odds_home": 60.4,
         "fair_odds_away": 39.6
       },
-      "spread_pick": {
-        "our_margin": -2.6,
-        "market_line": 3.0,
-        "edge_points": -5.6,
-        "pick_home": false
-      },
       "home_stats": {
         "ppg": 14.1765,
         "papg": 25.4118,
@@ -1649,8 +1662,14 @@
       "raw_model_home_wp": 41.1,
       "raw_model_away_wp": 58.9,
       "context": "Both teams have brand-new starting QBs and new head coaches: Tua Tagovailoa signed with Atlanta (Miami now starts Malik Willis); Las Vegas installed Kirk Cousins under new HC Klint Kubiak.",
+      "spread_pick": {
+        "our_margin": 3.0,
+        "market_line": 3.0,
+        "edge_points": 0.0,
+        "pick_home": true
+      },
       "bet": {
-        "pick": "Pass",
+        "pick": "LV -3.0",
         "confidence": 1,
         "note": "Too much roster turnover on both sides to trust either number."
       },
@@ -1739,12 +1758,6 @@
         "fair_odds_home": 53.2,
         "fair_odds_away": 46.8
       },
-      "spread_pick": {
-        "our_margin": -7.0,
-        "market_line": 1.5,
-        "edge_points": -8.5,
-        "pick_home": false
-      },
       "home_stats": {
         "ppg": 20.2353,
         "papg": 19.5882,
@@ -1788,9 +1801,15 @@
       "raw_model_home_wp": 27.8,
       "raw_model_away_wp": 72.2,
       "context": "Minnesota's 2025 stats reflect a broken QB situation -- they've since installed Kyler Murray (cut by Arizona) as starter over J.J. McCarthy.",
+      "spread_pick": {
+        "our_margin": 1.4,
+        "market_line": 1.5,
+        "edge_points": -0.1,
+        "pick_home": false
+      },
       "bet": {
-        "pick": "Minnesota ML",
-        "confidence": 2,
+        "pick": "GB +1.5",
+        "confidence": 1,
         "note": "Raw model favors GB heavily purely because MIN's old QB situation was so bad."
       },
       "qb_watch": null
@@ -1878,12 +1897,6 @@
         "fair_odds_home": 68.1,
         "fair_odds_away": 31.9
       },
-      "spread_pick": {
-        "our_margin": 11.0,
-        "market_line": 6.0,
-        "edge_points": 5.0,
-        "pick_home": true
-      },
       "home_stats": {
         "ppg": 22.2941,
         "papg": 19.1176,
@@ -1927,9 +1940,15 @@
       "raw_model_home_wp": 82.3,
       "raw_model_away_wp": 17.7,
       "context": "Jayden Daniels missed 10 games in 2025 (knee/hamstring/elbow) and was shut down in December -- Washington's 5-12 trailing record reflects a team without its franchise QB for most of the year.",
+      "spread_pick": {
+        "our_margin": 6.2,
+        "market_line": 6.0,
+        "edge_points": 0.2,
+        "pick_home": true
+      },
       "bet": {
-        "pick": "Washington +5.5",
-        "confidence": 2,
+        "pick": "PHI -6.0",
+        "confidence": 1,
         "note": "Model's 84% for Philly is largely an artifact of Daniels' missed time."
       },
       "qb_watch": null
@@ -2017,12 +2036,6 @@
         "fair_odds_home": 40.0,
         "fair_odds_away": 60.0
       },
-      "spread_pick": {
-        "our_margin": 0.6,
-        "market_line": -3.0,
-        "edge_points": 3.6,
-        "pick_home": true
-      },
       "home_stats": {
         "ppg": 22.4118,
         "papg": 25.8235,
@@ -2066,7 +2079,17 @@
       "raw_model_home_wp": 52.1,
       "raw_model_away_wp": 47.9,
       "context": null,
-      "bet": null,
+      "spread_pick": {
+        "our_margin": 0.6,
+        "market_line": -3.0,
+        "edge_points": 3.6,
+        "pick_home": true
+      },
+      "bet": {
+        "pick": "NYG +3.0",
+        "confidence": 4,
+        "note": "Model margin is +3.6 points from the market line."
+      },
       "qb_watch": null
     },
     {
@@ -2152,12 +2175,6 @@
         "fair_odds_home": 54.3,
         "fair_odds_away": 45.7
       },
-      "spread_pick": {
-        "our_margin": -2.5,
-        "market_line": 2.5,
-        "edge_points": -5.0,
-        "pick_home": false
-      },
       "home_stats": {
         "ppg": 21.2941,
         "papg": 19.2941,
@@ -2201,15 +2218,18 @@
       "raw_model_home_wp": 41.8,
       "raw_model_away_wp": 58.2,
       "context": "Patrick Mahomes tore his ACL/LCL in December 2025 and missed the rest of the season -- KC's trailing stats include a backup-QB stretch. Bo Nix is also returning from offseason ankle surgery.",
+      "spread_pick": {
+        "our_margin": 2.5,
+        "market_line": 2.5,
+        "edge_points": 0.0,
+        "pick_home": true
+      },
       "bet": {
-        "pick": "Kansas City ML",
-        "confidence": 2,
+        "pick": "KC -2.5",
+        "confidence": 1,
         "note": "With Mahomes healthy, KC is better than the raw model's 40% suggests."
       },
       "qb_watch": null
     }
   ]
 }
-=======
-
->>>>>>> 323fd9171adcafdfbf2ad0d8d468c1527c0f2888

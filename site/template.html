@@ -311,12 +311,16 @@ function renderCard(g, i) {
         <div class="sb-team-pct" style="color:${g.home_color}">${homeWp.toFixed(0)}%</div>
       </div>
       <div class="sb-footer">
-        <span>Projected ${g.away_score_est.toFixed(1)} – ${g.home_score_est.toFixed(1)} · O/U ${(g.away_score_est+g.home_score_est).toFixed(1)}</span>
+        <span>Tap for this week's prediction</span>
         <i class="sb-chevron" id="chev-${i}">⌄</i>
       </div>
-      ${g.spread_pick ? `<div class="spread-pick-row">Model spread pick: <strong style="color:${g.spread_pick.pick_home ? g.home_color : g.away_color}">${g.spread_pick.pick_home ? g.home_team : g.away_team} ${(() => { const disp = g.spread_pick.pick_home ? -g.spread_pick.market_line : g.spread_pick.market_line; return (disp>=0?'+':'') + disp.toFixed(1); })()}</strong> <span class="spread-edge">(our margin ${g.spread_pick.our_margin>=0?'+':''}${g.spread_pick.our_margin} vs line ${g.spread_pick.market_line>=0?'+':''}${g.spread_pick.market_line})</span></div>` : ''}
     </button>
     <div class="card-body" id="body-${i}">
+      <div class="sub-panel">
+        <div class="sub-panel-title">This Week's Prediction</div>
+        <div style="font-size:13px;color:var(--text-dim);margin-bottom:${g.spread_pick?'8px':'0'}">Projected ${g.away_score_est.toFixed(1)} – ${g.home_score_est.toFixed(1)} · O/U ${(g.away_score_est+g.home_score_est).toFixed(1)}</div>
+        ${g.spread_pick ? `<div style="font-size:12px;color:var(--text-dim)">Model spread pick: <strong style="color:${g.spread_pick.pick_home ? g.home_color : g.away_color}">${g.spread_pick.pick_home ? g.home_team : g.away_team} ${(() => { const disp = g.spread_pick.pick_home ? -g.spread_pick.market_line : g.spread_pick.market_line; return (disp>=0?'+':'') + disp.toFixed(1); })()}</strong> <span class="spread-edge">(our margin ${g.spread_pick.our_margin>=0?'+':''}${g.spread_pick.our_margin} vs line ${g.spread_pick.market_line>=0?'+':''}${g.spread_pick.market_line})</span></div>` : ''}
+      </div>
       ${rawNote ? `<div class="sub-panel">${rawNote}</div>` : ''}
       ${betHtml}
       ${injuryAlertHtml}
@@ -361,10 +365,21 @@ function openRecordModal(){
   const pct = rec.overall.total ? Math.round((rec.overall.correct/rec.overall.total)*100) : 0;
   let html = `<div class="record-hero">
     <div class="record-hero-num">${rec.overall.correct}-${rec.overall.total-rec.overall.correct}</div>
-    <div class="record-hero-sub">${pct}% correct · ${rec.overall.total} games graded</div>
+    <div class="record-hero-sub">${pct}% correct · ${rec.overall.total} games graded (picking the winner)</div>
   </div>`;
 
-  html += `<div class="modal-section-title">By week</div><div class="modal-list">`;
+  const hasAts = rec.ats_overall && (rec.ats_overall.wins + rec.ats_overall.losses + rec.ats_overall.pushes) > 0;
+  if (hasAts) {
+    const ats = rec.ats_overall;
+    const atsDecided = ats.wins + ats.losses;
+    const atsPct = atsDecided ? Math.round((ats.wins/atsDecided)*100) : 0;
+    html += `<div class="record-hero" style="margin-top:-4px">
+      <div class="record-hero-num">${ats.wins}-${ats.losses}${ats.pushes ? '-'+ats.pushes : ''}</div>
+      <div class="record-hero-sub">${atsPct}% of decided picks against the spread${ats.pushes ? ` · ${ats.pushes} push${ats.pushes>1?'es':''}` : ''}</div>
+    </div>`;
+  }
+
+  html += `<div class="modal-section-title">By week — picking the winner</div><div class="modal-list">`;
   const weekNums = Object.keys(rec.weeks).map(Number).sort((a,b)=>a-b);
   html += weekNums.map(w => {
     const wr = rec.weeks[w];
@@ -372,16 +387,9 @@ function openRecordModal(){
   }).join('');
   html += `</div>`;
 
-  if (rec.ats_overall && (rec.ats_overall.wins + rec.ats_overall.losses + rec.ats_overall.pushes) > 0) {
-    const ats = rec.ats_overall;
-    const atsDecided = ats.wins + ats.losses;
-    const atsPct = atsDecided ? Math.round((ats.wins/atsDecided)*100) : 0;
-    html += `<div class="modal-section-title">Against the spread</div>
+  if (hasAts) {
+    html += `<div class="modal-section-title">By week — against the spread</div>
       <div class="modal-section-note">Our spread pick comes from the same margin the win probability is built on — see each game card for the pick itself. Pushes (landing exactly on the line) don't count as a win or a loss, same as standard sports-betting convention.</div>
-      <div class="record-hero" style="margin-bottom:12px">
-        <div class="record-hero-num">${ats.wins}-${ats.losses}${ats.pushes ? '-'+ats.pushes : ''}</div>
-        <div class="record-hero-sub">${atsPct}% of decided picks${ats.pushes ? ` · ${ats.pushes} push${ats.pushes>1?'es':''}` : ''}</div>
-      </div>
       <div class="modal-list">`;
     const atsWeekNums = Object.keys(rec.ats_weeks || {}).map(Number).sort((a,b)=>a-b);
     html += atsWeekNums.map(w => {
