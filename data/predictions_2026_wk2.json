@@ -148,8 +148,16 @@
         "note": "Model margin is +0.5 points from the market line."
       },
       "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "home_team_injuries": [
+        "Ty Johnson (RB) listed as Questionable (Hamstring)",
+        "Cole Bishop (S) listed as Questionable (Knee, Groin)",
+        "T.J. Sanders (DE) listed as Questionable (Knee, Illness)"
+      ],
+      "away_team_injuries": [
+        "D.J. Reed (CB) listed as Questionable (Foot)",
+        "Christian Mahogany (G) listed as Out (Hip)",
+        "Blake Miller (T) listed as Out (Knee)"
+      ]
     },
     {
       "home_team": "ATL",
