@@ -168,7 +168,17 @@
         "confidence": 1,
         "note": "Model margin is -0.3 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Ty Johnson (RB) listed as Questionable (Hamstring)",
+        "Cole Bishop (S) listed as Questionable (Knee, Groin)",
+        "T.J. Sanders (DE) listed as Questionable (Knee, Illness)"
+      ],
+      "away_team_injuries": [
+        "D.J. Reed (CB) listed as Questionable (Foot)",
+        "Christian Mahogany (G) listed as Out (Hip)",
+        "Blake Miller (T) listed as Out (Knee)"
+      ]
     },
     {
       "home_team": "ATL",
@@ -328,7 +338,9 @@
         "confidence": 5,
         "note": "Model margin is +5.6 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "BAL",
@@ -488,7 +500,9 @@
         "confidence": 1,
         "note": "Model margin is -0.3 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "CHI",
@@ -648,7 +662,9 @@
         "confidence": 5,
         "note": "Model margin is +5.8 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "HOU",
@@ -808,7 +824,9 @@
         "confidence": 3,
         "note": "Model margin is +2.9 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "NE",
@@ -968,7 +986,9 @@
         "confidence": 1,
         "note": "Model margin is +0.3 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "NYJ",
@@ -1128,7 +1148,9 @@
         "confidence": 5,
         "note": "Model margin is -7.8 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "TB",
@@ -1288,7 +1310,9 @@
         "confidence": 3,
         "note": "Model margin is +2.6 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "TEN",
@@ -1448,7 +1472,9 @@
         "confidence": 5,
         "note": "Model margin is -5.7 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "DEN",
@@ -1608,7 +1634,9 @@
         "confidence": 5,
         "note": "Model margin is -11.1 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "LAC",
@@ -1768,7 +1796,9 @@
         "confidence": 2,
         "note": "Model margin is +1.0 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "ARI",
@@ -1928,7 +1958,9 @@
         "confidence": 3,
         "note": "Model margin is -2.1 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "DAL",
@@ -2088,7 +2120,9 @@
         "confidence": 2,
         "note": "Model margin is +0.7 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "SF",
@@ -2248,7 +2282,9 @@
         "confidence": 3,
         "note": "Model margin is -2.9 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "KC",
@@ -2408,7 +2444,9 @@
         "confidence": 1,
         "note": "Model margin is -0.3 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     },
     {
       "home_team": "LA",
@@ -2568,7 +2606,9 @@
         "confidence": 1,
         "note": "Model margin is +0.4 points from the market line."
       },
-      "qb_watch": null
+      "qb_watch": null,
+      "home_team_injuries": [],
+      "away_team_injuries": []
     }
   ]
 }
