@@ -25,6 +25,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app import injury_watch, schedule  # noqa: E402
+from app.json_utils import load_json_safely  # noqa: E402
 from app.qb_meta import QB_META  # noqa: E402
 from scripts.render_html import render  # noqa: E402
 
@@ -37,13 +38,12 @@ def main():
     week = schedule.current_week(args.season)
     predictions_path = Path(f"data/predictions_{args.season}_wk{week}.json")
 
-    if not predictions_path.exists():
-        print(f"[hourly_injury_check] {predictions_path} doesn't exist yet -- "
-              f"nothing to check until the weekly pipeline has run at least once.")
+    predictions = load_json_safely(predictions_path)
+    if predictions is None:
+        print(f"[hourly_injury_check] {predictions_path} doesn't exist, is empty, or is "
+              f"corrupted -- nothing to check until the weekly pipeline writes a valid file. "
+              f"(If this persists, check for a leftover git conflict in that file.)")
         return
-
-    with open(predictions_path) as f:
-        predictions = json.load(f)
 
     print(f"[hourly_injury_check] Checking {len(predictions['games'])} games "
           f"({len(predictions['games']) * 2} teams) for week {week}...")

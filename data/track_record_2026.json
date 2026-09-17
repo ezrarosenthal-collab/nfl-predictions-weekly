@@ -1,13 +1,13 @@
 {
   "season": 2026,
   "overall": {
-    "correct": 13,
-    "total": 16
+    "correct": 12,
+    "total": 15
   },
   "weeks": {
     "1": {
-      "correct": 13,
-      "total": 16
+      "correct": 12,
+      "total": 15
     }
   },
   "teams": {
@@ -130,24 +130,16 @@
     "DAL": {
       "correct": 1,
       "total": 1
-    },
-    "KC": {
-      "correct": 1,
-      "total": 1
-    },
-    "DEN": {
-      "correct": 1,
-      "total": 1
     }
   },
   "ats_overall": {
-    "wins": 7,
+    "wins": 6,
     "losses": 8,
     "pushes": 1
   },
   "ats_weeks": {
     "1": {
-      "wins": 7,
+      "wins": 6,
       "losses": 8,
       "pushes": 1
     }
