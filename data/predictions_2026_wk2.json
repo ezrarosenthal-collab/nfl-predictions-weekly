@@ -107,12 +107,21 @@
         }
       ],
       "market": {
+<<<<<<< HEAD
         "spread_line": 5.5,
         "total_line": 54.5,
         "moneyline_home": -238.0,
         "moneyline_away": 195.0,
         "fair_odds_home": 67.5,
         "fair_odds_away": 32.5
+=======
+        "spread_line": 4.5,
+        "total_line": 53.5,
+        "moneyline_home": -218.0,
+        "moneyline_away": 180.0,
+        "fair_odds_home": 65.7,
+        "fair_odds_away": 34.3
+>>>>>>> 9e01a0d420a10dc1c4e68e97284abae4f2f640a4
       },
       "home_stats": {
         "ppg": 29.8353,
@@ -168,7 +177,21 @@
         "confidence": 1,
         "note": "Model margin is -0.3 points from the market line."
       },
+<<<<<<< HEAD
       "qb_watch": null
+=======
+      "qb_watch": null,
+      "home_team_injuries": [
+        "Ty Johnson (RB) listed as Questionable (Hamstring)",
+        "Cole Bishop (S) listed as Questionable (Knee, Groin)",
+        "T.J. Sanders (DE) listed as Questionable (Knee, Illness)"
+      ],
+      "away_team_injuries": [
+        "D.J. Reed (CB) listed as Questionable (Foot)",
+        "Christian Mahogany (G) listed as Out (Hip)",
+        "Blake Miller (T) listed as Out (Knee)"
+      ]
+>>>>>>> 9e01a0d420a10dc1c4e68e97284abae4f2f640a4
     },
     {
       "home_team": "ATL",
@@ -267,12 +290,21 @@
         }
       ],
       "market": {
+<<<<<<< HEAD
         "spread_line": -2.5,
         "total_line": 43.5,
         "moneyline_home": 130.0,
         "moneyline_away": -155.0,
         "fair_odds_home": 41.7,
         "fair_odds_away": 58.3
+=======
+        "spread_line": -1.5,
+        "total_line": 43.5,
+        "moneyline_home": 110.0,
+        "moneyline_away": -130.0,
+        "fair_odds_home": 45.7,
+        "fair_odds_away": 54.3
+>>>>>>> 9e01a0d420a10dc1c4e68e97284abae4f2f640a4
       },
       "home_stats": {
         "ppg": 19.2118,
@@ -909,10 +941,17 @@
       "market": {
         "spread_line": 5.5,
         "total_line": 41.5,
+<<<<<<< HEAD
         "moneyline_home": -225.0,
         "moneyline_away": 185.0,
         "fair_odds_home": 66.4,
         "fair_odds_away": 33.6
+=======
+        "moneyline_home": -230.0,
+        "moneyline_away": 190.0,
+        "fair_odds_home": 66.9,
+        "fair_odds_away": 33.1
+>>>>>>> 9e01a0d420a10dc1c4e68e97284abae4f2f640a4
       },
       "home_stats": {
         "ppg": 25.0588,
@@ -2187,12 +2226,21 @@
         }
       ],
       "market": {
+<<<<<<< HEAD
         "spread_line": 13.5,
         "total_line": 44.5,
         "moneyline_home": -900.0,
         "moneyline_away": 600.0,
         "fair_odds_home": 86.3,
         "fair_odds_away": 13.7
+=======
+        "spread_line": 12.5,
+        "total_line": 45.5,
+        "moneyline_home": -950.0,
+        "moneyline_away": 625.0,
+        "fair_odds_home": 86.8,
+        "fair_odds_away": 13.2
+>>>>>>> 9e01a0d420a10dc1c4e68e97284abae4f2f640a4
       },
       "home_stats": {
         "ppg": 25.9647,
@@ -2238,15 +2286,25 @@
       "raw_model_away_wp": 18.6,
       "context": null,
       "spread_pick": {
+<<<<<<< HEAD
         "our_margin": 10.6,
         "market_line": 13.5,
         "edge_points": -2.9,
+=======
+        "our_margin": 10.8,
+        "market_line": 12.5,
+        "edge_points": -1.7,
+>>>>>>> 9e01a0d420a10dc1c4e68e97284abae4f2f640a4
         "pick_home": false
       },
       "bet": {
-        "pick": "MIA +13.5",
+        "pick": "MIA +12.5",
         "confidence": 3,
+<<<<<<< HEAD
         "note": "Model margin is -2.9 points from the market line."
+=======
+        "note": "Model margin is -1.7 points from the market line."
+>>>>>>> 9e01a0d420a10dc1c4e68e97284abae4f2f640a4
       },
       "qb_watch": null
     },
