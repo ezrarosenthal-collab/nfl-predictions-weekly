@@ -33,10 +33,13 @@ LEAGUE = {
     "def_explosive_rate": {"mean": 0.126, "std": 0.018},
     "third_down_pct": {"mean": 0.398, "std": 0.046},
     "redzone_td_rate": {"mean": 0.189, "std": 0.027},
+    "redzone_trips_per_g": {"mean": 3.978, "std": 0.677},
     "sack_rate_allowed": {"mean": 0.069, "std": 0.021},
     "int_rate": {"mean": 0.020, "std": 0.007},
     "ypp_margin": {"mean": 0.0, "std": 0.71},
     "cpoe": {"mean": 0.58, "std": 3.38},
+    "havoc_rate": {"mean": 0.0754, "std": 0.0108},
+    "yards_after_catch": {"mean": 5.201, "std": 0.560},
     "off_epa_per_play": {"mean": 0.0, "std": 0.08},
     "def_epa_per_play": {"mean": 0.0, "std": 0.08},
 }
@@ -46,8 +49,9 @@ def _dummy_team(**overrides):
     base = dict(
         team="TST", ppg=22.9, papg=22.9, point_diff_per_g=0.0, epa_margin=0.0,
         turnover_margin=0, off_explosive_rate=0.126, def_explosive_rate=0.126,
-        third_down_pct=0.398, redzone_td_rate=0.189, sack_rate_allowed=0.069,
-        int_rate=0.020, ypp_margin=0.0, cpoe=0.58, off_epa_per_play=0.0,
+        third_down_pct=0.398, redzone_td_rate=0.189, redzone_trips_per_g=3.978,
+        sack_rate_allowed=0.069, int_rate=0.020, ypp_margin=0.0, cpoe=0.58,
+        havoc_rate=0.0754, yards_after_catch=5.201, off_epa_per_play=0.0,
         def_epa_per_play=0.0,
     )
     base.update(overrides)

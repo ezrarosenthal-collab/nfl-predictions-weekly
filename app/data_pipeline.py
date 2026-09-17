@@ -27,7 +27,7 @@ PBP_COLUMNS = [
     "fumble_lost", "third_down_converted", "third_down_failed", "yardline_100",
     "touchdown", "pass_touchdown", "rush_touchdown", "qb_hit", "pass_attempt",
     "complete_pass", "air_yards", "penalty", "drive", "posteam_type", "down",
-    "cpoe", "passer_player_name",
+    "cpoe", "passer_player_name", "fumble_forced", "yards_after_catch",
 ]
 
 

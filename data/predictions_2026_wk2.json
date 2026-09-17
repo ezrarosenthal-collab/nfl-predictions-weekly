@@ -16,10 +16,10 @@
       "kickoff": "2026-09-17",
       "time_et": "20:15",
       "location": "Home",
-      "home_win_prob": 66.2,
-      "away_win_prob": 33.8,
-      "home_score_est": 33.5,
-      "away_score_est": 28.5,
+      "home_win_prob": 67.1,
+      "away_win_prob": 32.9,
+      "home_score_est": 33.6,
+      "away_score_est": 28.4,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -64,6 +64,13 @@
           "favors": "away"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": -0.0264,
+          "favors": "away"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -83,15 +90,29 @@
           "weight": 0.22,
           "weighted_diff": -0.1206,
           "favors": "away"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": 0.1663,
+          "favors": "home"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": 0.0139,
+          "favors": "home"
         }
       ],
       "market": {
-        "spread_line": 4.5,
-        "total_line": 53.5,
-        "moneyline_home": -205.0,
-        "moneyline_away": 170.0,
-        "fair_odds_home": 64.5,
-        "fair_odds_away": 35.5
+        "spread_line": 5.5,
+        "total_line": 54.5,
+        "moneyline_home": -238.0,
+        "moneyline_away": 195.0,
+        "fair_odds_home": 67.5,
+        "fair_odds_away": 32.5
       },
       "home_stats": {
         "ppg": 29.8353,
@@ -133,23 +154,21 @@
         "rate": 105.5,
         "note": "New OC (Drew Petzing) and a rebuilt O-line (Sewell to LT)."
       },
-      "raw_model_home_wp": 66.2,
-      "raw_model_away_wp": 33.8,
+      "raw_model_home_wp": 67.1,
+      "raw_model_away_wp": 32.9,
       "context": null,
       "spread_pick": {
-        "our_margin": 5.0,
-        "market_line": 4.5,
-        "edge_points": 0.5,
-        "pick_home": true
+        "our_margin": 5.2,
+        "market_line": 5.5,
+        "edge_points": -0.3,
+        "pick_home": false
       },
       "bet": {
-        "pick": "BUF -4.5",
-        "confidence": 2,
-        "note": "Model margin is +0.5 points from the market line."
+        "pick": "DET +5.5",
+        "confidence": 1,
+        "note": "Model margin is -0.3 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "ATL",
@@ -157,10 +176,10 @@
       "kickoff": "2026-09-20",
       "time_et": "13:00",
       "location": "Home",
-      "home_win_prob": 58.7,
-      "away_win_prob": 41.3,
-      "home_score_est": 24.6,
-      "away_score_est": 21.9,
+      "home_win_prob": 60.2,
+      "away_win_prob": 39.8,
+      "home_score_est": 24.8,
+      "away_score_est": 21.7,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -205,6 +224,13 @@
           "favors": "home"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": -0.2538,
+          "favors": "away"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -224,15 +250,29 @@
           "weight": 0.22,
           "weighted_diff": -0.1144,
           "favors": "away"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": 0.271,
+          "favors": "home"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": 0.2105,
+          "favors": "home"
         }
       ],
       "market": {
-        "spread_line": -1.5,
-        "total_line": 44.5,
-        "moneyline_home": 105.0,
-        "moneyline_away": -125.0,
-        "fair_odds_home": 46.8,
-        "fair_odds_away": 53.2
+        "spread_line": -2.5,
+        "total_line": 43.5,
+        "moneyline_home": 130.0,
+        "moneyline_away": -155.0,
+        "fair_odds_home": 41.7,
+        "fair_odds_away": 58.3
       },
       "home_stats": {
         "ppg": 19.2118,
@@ -265,32 +305,30 @@
         "int_rate": 0.0224
       },
       "home_qb": {
-        "name": "Michael Penix Jr.",
-        "rate": 86.7,
-        "note": null
+        "name": "Cooper Rush",
+        "rate": null,
+        "note": "Chaotic QB situation: Michael Penix Jr. (ACL recovery) hasn't played, Tua Tagovailoa was named starter but suffered an oblique injury in practice, so Rush made the Week 1 start. Reports suggest the team wants Penix as starter once healthy (target: Week 2-3) -- treat this as unsettled and likely to change week to week."
       },
       "away_qb": {
         "name": "Bryce Young",
         "rate": 87.9,
         "note": null
       },
-      "raw_model_home_wp": 58.7,
-      "raw_model_away_wp": 41.3,
+      "raw_model_home_wp": 60.2,
+      "raw_model_away_wp": 39.8,
       "context": null,
       "spread_pick": {
-        "our_margin": 2.7,
-        "market_line": -1.5,
-        "edge_points": 4.2,
+        "our_margin": 3.1,
+        "market_line": -2.5,
+        "edge_points": 5.6,
         "pick_home": true
       },
       "bet": {
-        "pick": "ATL +1.5",
-        "confidence": 4,
-        "note": "Model margin is +4.2 points from the market line."
+        "pick": "ATL +2.5",
+        "confidence": 5,
+        "note": "Model margin is +5.6 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "BAL",
@@ -298,10 +336,10 @@
       "kickoff": "2026-09-20",
       "time_et": "13:00",
       "location": "Home",
-      "home_win_prob": 72.7,
-      "away_win_prob": 27.3,
-      "home_score_est": 28.7,
-      "away_score_est": 21.5,
+      "home_win_prob": 75.6,
+      "away_win_prob": 24.4,
+      "home_score_est": 29.2,
+      "away_score_est": 21.0,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -346,6 +384,13 @@
           "favors": "away"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": 0.2062,
+          "favors": "home"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -365,15 +410,29 @@
           "weight": 0.22,
           "weighted_diff": 0.073,
           "favors": "home"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": 0.0005,
+          "favors": "home"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": 0.3302,
+          "favors": "home"
         }
       ],
       "market": {
         "spread_line": 8.5,
         "total_line": 46.5,
-        "moneyline_home": -410.0,
-        "moneyline_away": 320.0,
-        "fair_odds_home": 77.2,
-        "fair_odds_away": 22.8
+        "moneyline_home": -380.0,
+        "moneyline_away": 300.0,
+        "fair_odds_home": 76.0,
+        "fair_odds_away": 24.0
       },
       "home_stats": {
         "ppg": 28.1529,
@@ -415,23 +474,21 @@
         "rate": 88.7,
         "note": "New starter after a rookie-year QB competition."
       },
-      "raw_model_home_wp": 72.7,
-      "raw_model_away_wp": 27.3,
+      "raw_model_home_wp": 75.6,
+      "raw_model_away_wp": 24.4,
       "context": null,
       "spread_pick": {
-        "our_margin": 7.2,
+        "our_margin": 8.2,
         "market_line": 8.5,
-        "edge_points": -1.3,
+        "edge_points": -0.3,
         "pick_home": false
       },
       "bet": {
         "pick": "NO +8.5",
-        "confidence": 2,
-        "note": "Model margin is -1.3 points from the market line."
+        "confidence": 1,
+        "note": "Model margin is -0.3 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "CHI",
@@ -439,10 +496,10 @@
       "kickoff": "2026-09-20",
       "time_et": "13:00",
       "location": "Home",
-      "home_win_prob": 82.0,
-      "away_win_prob": 18.0,
-      "home_score_est": 33.6,
-      "away_score_est": 22.6,
+      "home_win_prob": 80.7,
+      "away_win_prob": 19.3,
+      "home_score_est": 33.2,
+      "away_score_est": 22.9,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -487,6 +544,13 @@
           "favors": "away"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": -0.0053,
+          "favors": "away"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -506,15 +570,29 @@
           "weight": 0.22,
           "weighted_diff": 0.781,
           "favors": "home"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": -0.3924,
+          "favors": "away"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": 0.0854,
+          "favors": "home"
         }
       ],
       "market": {
-        "spread_line": 5.5,
-        "total_line": 49.5,
-        "moneyline_home": -238.0,
-        "moneyline_away": 195.0,
-        "fair_odds_home": 67.5,
-        "fair_odds_away": 32.5
+        "spread_line": 4.5,
+        "total_line": 47.5,
+        "moneyline_home": -198.0,
+        "moneyline_away": 164.0,
+        "fair_odds_home": 63.7,
+        "fair_odds_away": 36.3
       },
       "home_stats": {
         "ppg": 32.5529,
@@ -556,23 +634,21 @@
         "rate": 75.3,
         "note": "New starter -- signed after Arizona cut him, winning the job over J.J. McCarthy."
       },
-      "raw_model_home_wp": 82.0,
-      "raw_model_away_wp": 18.0,
+      "raw_model_home_wp": 80.7,
+      "raw_model_away_wp": 19.3,
       "context": null,
       "spread_pick": {
-        "our_margin": 11.0,
-        "market_line": 5.5,
-        "edge_points": 5.5,
+        "our_margin": 10.3,
+        "market_line": 4.5,
+        "edge_points": 5.8,
         "pick_home": true
       },
       "bet": {
-        "pick": "CHI -5.5",
+        "pick": "CHI -4.5",
         "confidence": 5,
-        "note": "Model margin is +5.5 points from the market line."
+        "note": "Model margin is +5.8 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "HOU",
@@ -580,10 +656,10 @@
       "kickoff": "2026-09-20",
       "time_et": "13:00",
       "location": "Home",
-      "home_win_prob": 66.8,
-      "away_win_prob": 33.2,
-      "home_score_est": 30.1,
-      "away_score_est": 24.9,
+      "home_win_prob": 67.4,
+      "away_win_prob": 32.6,
+      "home_score_est": 30.2,
+      "away_score_est": 24.8,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -628,6 +704,13 @@
           "favors": "away"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": 0.0212,
+          "favors": "home"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -647,15 +730,29 @@
           "weight": 0.22,
           "weighted_diff": 0.3811,
           "favors": "home"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": 0.1485,
+          "favors": "home"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": -0.0788,
+          "favors": "away"
         }
       ],
       "market": {
-        "spread_line": 3.0,
+        "spread_line": 2.5,
         "total_line": 46.5,
-        "moneyline_home": -148.0,
-        "moneyline_away": 124.0,
-        "fair_odds_home": 57.2,
-        "fair_odds_away": 42.8
+        "moneyline_home": -142.0,
+        "moneyline_away": 120.0,
+        "fair_odds_home": 56.3,
+        "fair_odds_away": 43.7
       },
       "home_stats": {
         "ppg": 25.2118,
@@ -697,23 +794,21 @@
         "rate": 91.0,
         "note": "Missed 9 games in 2025 (turf toe surgery) -- trailing stats reflect a Burrow-less stretch."
       },
-      "raw_model_home_wp": 66.8,
-      "raw_model_away_wp": 33.2,
+      "raw_model_home_wp": 67.4,
+      "raw_model_away_wp": 32.6,
       "context": null,
       "spread_pick": {
-        "our_margin": 5.2,
-        "market_line": 3.0,
-        "edge_points": 2.2,
+        "our_margin": 5.4,
+        "market_line": 2.5,
+        "edge_points": 2.9,
         "pick_home": true
       },
       "bet": {
-        "pick": "HOU -3.0",
+        "pick": "HOU -2.5",
         "confidence": 3,
-        "note": "Model margin is +2.2 points from the market line."
+        "note": "Model margin is +2.9 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "NE",
@@ -721,10 +816,10 @@
       "kickoff": "2026-09-20",
       "time_et": "13:00",
       "location": "Home",
-      "home_win_prob": 70.6,
-      "away_win_prob": 29.4,
-      "home_score_est": 23.2,
-      "away_score_est": 16.7,
+      "home_win_prob": 68.7,
+      "away_win_prob": 31.3,
+      "home_score_est": 22.9,
+      "away_score_est": 17.1,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -769,6 +864,13 @@
           "favors": "home"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": 0.2115,
+          "favors": "home"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -788,15 +890,29 @@
           "weight": 0.22,
           "weighted_diff": -0.4366,
           "favors": "away"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": -0.3226,
+          "favors": "away"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": -0.2307,
+          "favors": "away"
         }
       ],
       "market": {
         "spread_line": 5.5,
-        "total_line": 42.5,
-        "moneyline_home": -230.0,
-        "moneyline_away": 190.0,
-        "fair_odds_home": 66.9,
-        "fair_odds_away": 33.1
+        "total_line": 41.5,
+        "moneyline_home": -225.0,
+        "moneyline_away": 185.0,
+        "fair_odds_home": 66.4,
+        "fair_odds_away": 33.6
       },
       "home_stats": {
         "ppg": 25.0588,
@@ -838,23 +954,21 @@
         "rate": 93.8,
         "note": null
       },
-      "raw_model_home_wp": 70.6,
-      "raw_model_away_wp": 29.4,
+      "raw_model_home_wp": 68.7,
+      "raw_model_away_wp": 31.3,
       "context": null,
       "spread_pick": {
-        "our_margin": 6.5,
+        "our_margin": 5.8,
         "market_line": 5.5,
-        "edge_points": 1.0,
+        "edge_points": 0.3,
         "pick_home": true
       },
       "bet": {
         "pick": "NE -5.5",
-        "confidence": 2,
-        "note": "Model margin is +1.0 points from the market line."
+        "confidence": 1,
+        "note": "Model margin is +0.3 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "NYJ",
@@ -862,10 +976,10 @@
       "kickoff": "2026-09-20",
       "time_et": "13:00",
       "location": "Home",
-      "home_win_prob": 20.7,
-      "away_win_prob": 79.3,
-      "home_score_est": 17.8,
-      "away_score_est": 27.5,
+      "home_win_prob": 17.2,
+      "away_win_prob": 82.8,
+      "home_score_est": 17.0,
+      "away_score_est": 28.3,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -910,6 +1024,13 @@
           "favors": "away"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": -0.4495,
+          "favors": "away"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -929,15 +1050,29 @@
           "weight": 0.22,
           "weighted_diff": -0.0956,
           "favors": "away"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": -0.1218,
+          "favors": "away"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": -0.2128,
+          "favors": "away"
         }
       ],
       "market": {
-        "spread_line": -4.5,
+        "spread_line": -3.5,
         "total_line": 44.5,
-        "moneyline_home": 170.0,
-        "moneyline_away": -205.0,
-        "fair_odds_home": 35.5,
-        "fair_odds_away": 64.5
+        "moneyline_home": 160.0,
+        "moneyline_away": -192.0,
+        "fair_odds_home": 36.9,
+        "fair_odds_away": 63.1
       },
       "home_stats": {
         "ppg": 18.7176,
@@ -979,23 +1114,21 @@
         "rate": 102.5,
         "note": null
       },
-      "raw_model_home_wp": 20.7,
-      "raw_model_away_wp": 79.3,
+      "raw_model_home_wp": 17.2,
+      "raw_model_away_wp": 82.8,
       "context": null,
       "spread_pick": {
-        "our_margin": -9.7,
-        "market_line": -4.5,
-        "edge_points": -5.2,
+        "our_margin": -11.3,
+        "market_line": -3.5,
+        "edge_points": -7.8,
         "pick_home": false
       },
       "bet": {
-        "pick": "GB -4.5",
+        "pick": "GB -3.5",
         "confidence": 5,
-        "note": "Model margin is -5.2 points from the market line."
+        "note": "Model margin is -7.8 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "TB",
@@ -1003,10 +1136,10 @@
       "kickoff": "2026-09-20",
       "time_et": "13:00",
       "location": "Home",
-      "home_win_prob": 81.4,
-      "away_win_prob": 18.6,
-      "home_score_est": 26.2,
-      "away_score_est": 15.6,
+      "home_win_prob": 82.5,
+      "away_win_prob": 17.5,
+      "home_score_est": 26.5,
+      "away_score_est": 15.4,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -1051,6 +1184,13 @@
           "favors": "home"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": 0.4336,
+          "favors": "home"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -1070,15 +1210,29 @@
           "weight": 0.22,
           "weighted_diff": 0.4483,
           "favors": "home"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": -0.2691,
+          "favors": "away"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": 0.0961,
+          "favors": "home"
         }
       ],
       "market": {
         "spread_line": 8.5,
-        "total_line": 40.5,
-        "moneyline_home": -410.0,
-        "moneyline_away": 320.0,
-        "fair_odds_home": 77.2,
-        "fair_odds_away": 22.8
+        "total_line": 41.5,
+        "moneyline_home": -455.0,
+        "moneyline_away": 350.0,
+        "fair_odds_home": 78.7,
+        "fair_odds_away": 21.3
       },
       "home_stats": {
         "ppg": 23.2824,
@@ -1120,23 +1274,21 @@
         "rate": 70.0,
         "note": "Traded away Myles Garrett (their best defender) to the Rams this offseason."
       },
-      "raw_model_home_wp": 81.4,
-      "raw_model_away_wp": 18.6,
+      "raw_model_home_wp": 82.5,
+      "raw_model_away_wp": 17.5,
       "context": null,
       "spread_pick": {
-        "our_margin": 10.6,
+        "our_margin": 11.1,
         "market_line": 8.5,
-        "edge_points": 2.1,
+        "edge_points": 2.6,
         "pick_home": true
       },
       "bet": {
         "pick": "TB -8.5",
         "confidence": 3,
-        "note": "Model margin is +2.1 points from the market line."
+        "note": "Model margin is +2.6 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "TEN",
@@ -1144,10 +1296,10 @@
       "kickoff": "2026-09-20",
       "time_et": "13:00",
       "location": "Home",
-      "home_win_prob": 16.0,
-      "away_win_prob": 84.0,
-      "home_score_est": 13.8,
-      "away_score_est": 25.6,
+      "home_win_prob": 14.4,
+      "away_win_prob": 85.6,
+      "home_score_est": 13.4,
+      "away_score_est": 26.1,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -1192,6 +1344,13 @@
           "favors": "away"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": -0.4548,
+          "favors": "away"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -1211,15 +1370,29 @@
           "weight": 0.22,
           "weighted_diff": 0.0072,
           "favors": "home"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": -0.026,
+          "favors": "away"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": 0.0522,
+          "favors": "home"
         }
       ],
       "market": {
         "spread_line": -7.0,
         "total_line": 39.5,
-        "moneyline_home": 245.0,
-        "moneyline_away": -305.0,
-        "fair_odds_home": 27.8,
-        "fair_odds_away": 72.2
+        "moneyline_home": 250.0,
+        "moneyline_away": -310.0,
+        "fair_odds_home": 27.4,
+        "fair_odds_away": 72.6
       },
       "home_stats": {
         "ppg": 15.3647,
@@ -1261,23 +1434,21 @@
         "rate": 96.3,
         "note": null
       },
-      "raw_model_home_wp": 16.0,
-      "raw_model_away_wp": 84.0,
+      "raw_model_home_wp": 14.4,
+      "raw_model_away_wp": 85.6,
       "context": null,
       "spread_pick": {
-        "our_margin": -11.8,
+        "our_margin": -12.7,
         "market_line": -7.0,
-        "edge_points": -4.8,
+        "edge_points": -5.7,
         "pick_home": false
       },
       "bet": {
         "pick": "PHI -7.0",
-        "confidence": 4,
-        "note": "Model margin is -4.8 points from the market line."
+        "confidence": 5,
+        "note": "Model margin is -5.7 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "DEN",
@@ -1285,10 +1456,10 @@
       "kickoff": "2026-09-20",
       "time_et": "16:05",
       "location": "Home",
-      "home_win_prob": 25.2,
-      "away_win_prob": 74.8,
-      "home_score_est": 17.1,
-      "away_score_est": 25.1,
+      "home_win_prob": 23.7,
+      "away_win_prob": 76.3,
+      "home_score_est": 16.8,
+      "away_score_est": 25.4,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -1333,6 +1504,13 @@
           "favors": "away"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": -0.2961,
+          "favors": "away"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -1352,15 +1530,29 @@
           "weight": 0.22,
           "weighted_diff": -0.1134,
           "favors": "away"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": -0.1464,
+          "favors": "away"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": 0.158,
+          "favors": "home"
         }
       ],
       "market": {
         "spread_line": 2.5,
-        "total_line": 44.5,
-        "moneyline_home": -135.0,
-        "moneyline_away": 114.0,
-        "fair_odds_home": 55.1,
-        "fair_odds_away": 44.9
+        "total_line": 45.5,
+        "moneyline_home": -148.0,
+        "moneyline_away": 124.0,
+        "fair_odds_home": 57.2,
+        "fair_odds_away": 42.8
       },
       "home_stats": {
         "ppg": 20.8706,
@@ -1402,23 +1594,21 @@
         "rate": 91.1,
         "note": null
       },
-      "raw_model_home_wp": 25.2,
-      "raw_model_away_wp": 74.8,
+      "raw_model_home_wp": 23.7,
+      "raw_model_away_wp": 76.3,
       "context": null,
       "spread_pick": {
-        "our_margin": -8.0,
+        "our_margin": -8.6,
         "market_line": 2.5,
-        "edge_points": -10.5,
+        "edge_points": -11.1,
         "pick_home": false
       },
       "bet": {
         "pick": "JAX +2.5",
         "confidence": 5,
-        "note": "Model margin is -10.5 points from the market line."
+        "note": "Model margin is -11.1 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "LAC",
@@ -1426,10 +1616,10 @@
       "kickoff": "2026-09-20",
       "time_et": "16:05",
       "location": "Home",
-      "home_win_prob": 72.9,
-      "away_win_prob": 27.1,
-      "home_score_est": 21.3,
-      "away_score_est": 14.0,
+      "home_win_prob": 73.5,
+      "away_win_prob": 26.5,
+      "home_score_est": 21.4,
+      "away_score_est": 13.9,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -1474,6 +1664,13 @@
           "favors": "away"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": 0.3332,
+          "favors": "home"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -1493,15 +1690,29 @@
           "weight": 0.22,
           "weighted_diff": 0.4117,
           "favors": "home"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": -0.1917,
+          "favors": "away"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": -0.0287,
+          "favors": "away"
         }
       ],
       "market": {
-        "spread_line": 7.0,
+        "spread_line": 6.5,
         "total_line": 43.5,
-        "moneyline_home": -310.0,
-        "moneyline_away": 250.0,
-        "fair_odds_home": 72.6,
-        "fair_odds_away": 27.4
+        "moneyline_home": -305.0,
+        "moneyline_away": 245.0,
+        "fair_odds_home": 72.2,
+        "fair_odds_away": 27.8
       },
       "home_stats": {
         "ppg": 20.1176,
@@ -1543,23 +1754,21 @@
         "rate": 81.5,
         "note": "New starter (signed in 2026) and new HC Klint Kubiak -- 2025 stats are the prior regime's."
       },
-      "raw_model_home_wp": 72.9,
-      "raw_model_away_wp": 27.1,
+      "raw_model_home_wp": 73.5,
+      "raw_model_away_wp": 26.5,
       "context": null,
       "spread_pick": {
-        "our_margin": 7.3,
-        "market_line": 7.0,
-        "edge_points": 0.3,
+        "our_margin": 7.5,
+        "market_line": 6.5,
+        "edge_points": 1.0,
         "pick_home": true
       },
       "bet": {
-        "pick": "LAC -7.0",
-        "confidence": 1,
-        "note": "Model margin is +0.3 points from the market line."
+        "pick": "LAC -6.5",
+        "confidence": 2,
+        "note": "Model margin is +1.0 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "ARI",
@@ -1567,10 +1776,10 @@
       "kickoff": "2026-09-20",
       "time_et": "16:25",
       "location": "Home",
-      "home_win_prob": 32.7,
-      "away_win_prob": 67.3,
-      "home_score_est": 18.8,
-      "away_score_est": 24.2,
+      "home_win_prob": 32.1,
+      "away_win_prob": 67.9,
+      "home_score_est": 18.7,
+      "away_score_est": 24.3,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -1615,6 +1824,13 @@
           "favors": "home"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": 0.2909,
+          "favors": "home"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -1634,15 +1850,29 @@
           "weight": 0.22,
           "weighted_diff": 0.3056,
           "favors": "home"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": -0.2189,
+          "favors": "away"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": -0.1743,
+          "favors": "away"
         }
       ],
       "market": {
-        "spread_line": -4.5,
+        "spread_line": -3.5,
         "total_line": 41.5,
-        "moneyline_home": 185.0,
-        "moneyline_away": -225.0,
-        "fair_odds_home": 33.6,
-        "fair_odds_away": 66.4
+        "moneyline_home": 180.0,
+        "moneyline_away": -218.0,
+        "fair_odds_home": 34.3,
+        "fair_odds_away": 65.7
       },
       "home_stats": {
         "ppg": 21.9059,
@@ -1684,23 +1914,21 @@
         "rate": 97.9,
         "note": "Lost RB Kenneth Walker III (SB LX MVP) and OC Klint Kubiak (now Raiders HC)."
       },
-      "raw_model_home_wp": 32.7,
-      "raw_model_away_wp": 67.3,
+      "raw_model_home_wp": 32.1,
+      "raw_model_away_wp": 67.9,
       "context": null,
       "spread_pick": {
-        "our_margin": -5.4,
-        "market_line": -4.5,
-        "edge_points": -0.9,
+        "our_margin": -5.6,
+        "market_line": -3.5,
+        "edge_points": -2.1,
         "pick_home": false
       },
       "bet": {
-        "pick": "SEA -4.5",
-        "confidence": 2,
-        "note": "Model margin is -0.9 points from the market line."
+        "pick": "SEA -3.5",
+        "confidence": 3,
+        "note": "Model margin is -2.1 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "DAL",
@@ -1708,10 +1936,10 @@
       "kickoff": "2026-09-20",
       "time_et": "16:25",
       "location": "Home",
-      "home_win_prob": 64.8,
-      "away_win_prob": 35.2,
-      "home_score_est": 30.6,
-      "away_score_est": 26.0,
+      "home_win_prob": 67.0,
+      "away_win_prob": 33.0,
+      "home_score_est": 30.9,
+      "away_score_est": 25.7,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -1756,6 +1984,13 @@
           "favors": "home"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": 0.3385,
+          "favors": "home"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -1775,15 +2010,29 @@
           "weight": 0.22,
           "weighted_diff": -0.0452,
           "favors": "away"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": 0.0203,
+          "favors": "home"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": 0.0114,
+          "favors": "home"
         }
       ],
       "market": {
-        "spread_line": 3.5,
+        "spread_line": 4.5,
         "total_line": 50.5,
-        "moneyline_home": -225.0,
-        "moneyline_away": 185.0,
-        "fair_odds_home": 66.4,
-        "fair_odds_away": 33.6
+        "moneyline_home": -218.0,
+        "moneyline_away": 180.0,
+        "fair_odds_home": 65.7,
+        "fair_odds_away": 34.3
       },
       "home_stats": {
         "ppg": 26.1647,
@@ -1825,23 +2074,21 @@
         "rate": 85.5,
         "note": "Missed 10 games in 2025 (knee/hamstring/elbow), shut down in December."
       },
-      "raw_model_home_wp": 64.8,
-      "raw_model_away_wp": 35.2,
+      "raw_model_home_wp": 67.0,
+      "raw_model_away_wp": 33.0,
       "context": null,
       "spread_pick": {
-        "our_margin": 4.6,
-        "market_line": 3.5,
-        "edge_points": 1.1,
+        "our_margin": 5.2,
+        "market_line": 4.5,
+        "edge_points": 0.7,
         "pick_home": true
       },
       "bet": {
-        "pick": "DAL -3.5",
+        "pick": "DAL -4.5",
         "confidence": 2,
-        "note": "Model margin is +1.1 points from the market line."
+        "note": "Model margin is +0.7 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "SF",
@@ -1849,10 +2096,10 @@
       "kickoff": "2026-09-20",
       "time_et": "16:25",
       "location": "Home",
-      "home_win_prob": 81.7,
-      "away_win_prob": 18.3,
-      "home_score_est": 27.4,
-      "away_score_est": 16.6,
+      "home_win_prob": 81.4,
+      "away_win_prob": 18.6,
+      "home_score_est": 27.3,
+      "away_score_est": 16.7,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -1897,6 +2144,13 @@
           "favors": "home"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": 0.3861,
+          "favors": "home"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -1916,15 +2170,29 @@
           "weight": 0.22,
           "weighted_diff": 0.1901,
           "favors": "home"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": -0.2369,
+          "favors": "away"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": -0.223,
+          "favors": "away"
         }
       ],
       "market": {
         "spread_line": 13.5,
-        "total_line": 45.5,
-        "moneyline_home": -950.0,
-        "moneyline_away": 625.0,
-        "fair_odds_home": 86.8,
-        "fair_odds_away": 13.2
+        "total_line": 44.5,
+        "moneyline_home": -900.0,
+        "moneyline_away": 600.0,
+        "fair_odds_home": 86.3,
+        "fair_odds_away": 13.7
       },
       "home_stats": {
         "ppg": 25.9647,
@@ -1966,23 +2234,21 @@
         "rate": 87.3,
         "note": "New starter -- Tua Tagovailoa signed with Atlanta this offseason."
       },
-      "raw_model_home_wp": 81.7,
-      "raw_model_away_wp": 18.3,
+      "raw_model_home_wp": 81.4,
+      "raw_model_away_wp": 18.6,
       "context": null,
       "spread_pick": {
-        "our_margin": 10.8,
+        "our_margin": 10.6,
         "market_line": 13.5,
-        "edge_points": -2.7,
+        "edge_points": -2.9,
         "pick_home": false
       },
       "bet": {
         "pick": "MIA +13.5",
         "confidence": 3,
-        "note": "Model margin is -2.7 points from the market line."
+        "note": "Model margin is -2.9 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "KC",
@@ -1990,10 +2256,10 @@
       "kickoff": "2026-09-20",
       "time_et": "20:20",
       "location": "Home",
-      "home_win_prob": 67.1,
-      "away_win_prob": 32.9,
-      "home_score_est": 26.5,
-      "away_score_est": 21.3,
+      "home_win_prob": 70.1,
+      "away_win_prob": 29.9,
+      "home_score_est": 27.0,
+      "away_score_est": 20.8,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -2038,6 +2304,13 @@
           "favors": "away"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": 0.074,
+          "favors": "home"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -2057,15 +2330,29 @@
           "weight": 0.22,
           "weighted_diff": 0.0895,
           "favors": "home"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": 0.082,
+          "favors": "home"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": 0.3724,
+          "favors": "home"
         }
       ],
       "market": {
         "spread_line": 6.5,
-        "total_line": 47.5,
-        "moneyline_home": -305.0,
-        "moneyline_away": 245.0,
-        "fair_odds_home": 72.2,
-        "fair_odds_away": 27.8
+        "total_line": 46.5,
+        "moneyline_home": -290.0,
+        "moneyline_away": 235.0,
+        "fair_odds_home": 71.4,
+        "fair_odds_away": 28.6
       },
       "home_stats": {
         "ppg": 23.2353,
@@ -2107,23 +2394,21 @@
         "rate": 92.6,
         "note": "Tore his Achilles late in 2025 -- backups finished the season, dragging trailing stats down."
       },
-      "raw_model_home_wp": 67.1,
-      "raw_model_away_wp": 32.9,
+      "raw_model_home_wp": 70.1,
+      "raw_model_away_wp": 29.9,
       "context": null,
       "spread_pick": {
-        "our_margin": 5.2,
+        "our_margin": 6.2,
         "market_line": 6.5,
-        "edge_points": -1.3,
+        "edge_points": -0.3,
         "pick_home": false
       },
       "bet": {
         "pick": "IND +6.5",
-        "confidence": 2,
-        "note": "Model margin is -1.3 points from the market line."
+        "confidence": 1,
+        "note": "Model margin is -0.3 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     },
     {
       "home_team": "LA",
@@ -2131,10 +2416,10 @@
       "kickoff": "2026-09-21",
       "time_et": "20:15",
       "location": "Home",
-      "home_win_prob": 73.0,
-      "away_win_prob": 27.0,
-      "home_score_est": 28.4,
-      "away_score_est": 21.2,
+      "home_win_prob": 73.4,
+      "away_win_prob": 26.6,
+      "home_score_est": 28.5,
+      "away_score_est": 21.1,
       "feature_breakdown": [
         {
           "key": "strength",
@@ -2179,6 +2464,13 @@
           "favors": "home"
         },
         {
+          "key": "redzone_trips",
+          "label": "Red Zone Trips / Game",
+          "weight": 0.25,
+          "weighted_diff": 0.2062,
+          "favors": "home"
+        },
+        {
           "key": "cpoe",
           "label": "Completion % Over Expected",
           "weight": 0.3,
@@ -2198,11 +2490,25 @@
           "weight": 0.22,
           "weighted_diff": -0.0982,
           "favors": "away"
+        },
+        {
+          "key": "havoc",
+          "label": "Havoc Rate (Defensive Disruption)",
+          "weight": 0.15,
+          "weighted_diff": -0.0762,
+          "favors": "away"
+        },
+        {
+          "key": "yac",
+          "label": "Yards After Catch",
+          "weight": 0.12,
+          "weighted_diff": -0.0499,
+          "favors": "away"
         }
       ],
       "market": {
         "spread_line": 7.0,
-        "total_line": 48.5,
+        "total_line": 47.5,
         "moneyline_home": -355.0,
         "moneyline_away": 280.0,
         "fair_odds_home": 74.8,
@@ -2248,23 +2554,21 @@
         "rate": 88.0,
         "note": null
       },
-      "raw_model_home_wp": 73.0,
-      "raw_model_away_wp": 27.0,
+      "raw_model_home_wp": 73.4,
+      "raw_model_away_wp": 26.6,
       "context": null,
       "spread_pick": {
-        "our_margin": 7.2,
+        "our_margin": 7.4,
         "market_line": 7.0,
-        "edge_points": 0.2,
+        "edge_points": 0.4,
         "pick_home": true
       },
       "bet": {
         "pick": "LA -7.0",
         "confidence": 1,
-        "note": "Model margin is +0.2 points from the market line."
+        "note": "Model margin is +0.4 points from the market line."
       },
-      "qb_watch": null,
-      "home_team_injuries": [],
-      "away_team_injuries": []
+      "qb_watch": null
     }
   ]
 }

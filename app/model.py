@@ -37,9 +37,12 @@ class TeamComponents:
     explosive: float
     third_down: float
     redzone: float
+    redzone_trips: float
     cpoe: float
     sack_protect: float
     ball_security: float
+    havoc: float
+    yac: float
     off_epa_standalone: float
     def_epa_standalone: float
 
@@ -51,9 +54,12 @@ class TeamComponents:
             + self.explosive * WEIGHTS["explosive"]
             + self.third_down * WEIGHTS["third_down"]
             + self.redzone * WEIGHTS["redzone"]
+            + self.redzone_trips * WEIGHTS["redzone_trips"]
             + self.cpoe * WEIGHTS["cpoe"]
             + self.sack_protect * WEIGHTS["sack_protect"]
             + self.ball_security * WEIGHTS["ball_security"]
+            + self.havoc * WEIGHTS["havoc"]
+            + self.yac * WEIGHTS["yac"]
             # off/def EPA standalone are intentionally excluded -- see config.py
         )
 
@@ -76,9 +82,12 @@ def score_team(stats: dict, league: dict) -> tuple[float, TeamComponents]:
         explosive=z("off_explosive_rate") - z("def_explosive_rate"),
         third_down=z("third_down_pct"),
         redzone=z("redzone_td_rate"),
+        redzone_trips=z("redzone_trips_per_g"),
         cpoe=z("cpoe"),
         sack_protect=-z("sack_rate_allowed"),
         ball_security=-z("int_rate"),
+        havoc=z("havoc_rate"),
+        yac=z("yards_after_catch"),
         off_epa_standalone=z("off_epa_per_play"),  # display-only -- weight is 0, see config.py
         def_epa_standalone=z("def_epa_per_play"),
     )
@@ -253,9 +262,12 @@ def predict_game(
         "explosive": "Explosive Play Rate",
         "third_down": "Third Down Conversion %",
         "redzone": "Red Zone TD Rate",
+        "redzone_trips": "Red Zone Trips / Game",
         "cpoe": "Completion % Over Expected",
         "sack_protect": "Pass Protection (Sack Rate Allowed)",
         "ball_security": "Ball Security (INT Rate)",
+        "havoc": "Havoc Rate (Defensive Disruption)",
+        "yac": "Yards After Catch",
     }
     breakdown = []
     for key, label in labels.items():
